@@ -10,7 +10,10 @@ project(${PROJECT_NAME})
 
 # 修改测试文件
 set(hash "hash_test.cpp")
-file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${hash}")
+set(tuple "tuple_test.cpp")
+set(list "list_test.cpp")
+set(map "map_test.cpp")
+file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${map}")
 add_executable(${PROJECT_NAME}
         ${SRC}
         )
