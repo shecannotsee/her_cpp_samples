@@ -27,12 +27,13 @@ int main() {
       cv.notify_all();
     };
 
-    std::thread t1(work),t2(work),t3(work),t4(leader);
-
+    std::thread t1(work),t2(work),t3(work);//,t4(leader);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout<<"not\n";
+    cv.notify_all();
 
     t1.join();t2.join();
-    t3.join();t4.join();
-
+    t3.join();//t4.join();
   }
 
   std::cout<<"end.\n";
