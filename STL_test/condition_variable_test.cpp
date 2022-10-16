@@ -28,6 +28,7 @@ int main() {
     };
 
     std::thread t1(work),t2(work),t3(work);//,t4(leader);
+    // 保证先wait再notify
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout<<"not\n";
     cv.notify_all();
