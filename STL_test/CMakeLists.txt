@@ -13,7 +13,8 @@ set(hash "hash_test.cpp")
 set(tuple "tuple_test.cpp")
 set(list "list_test.cpp")
 set(map "map_test.cpp")
-file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${map}")
+set(condition_variable "condition_variable_test.cpp")
+file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${condition_variable}")
 add_executable(${PROJECT_NAME}
         ${SRC}
         )
