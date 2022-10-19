@@ -13,6 +13,7 @@
 
 namespace method1{
 
+// TODO:Unable to run correctly
 void getConfig(std::vector<std::string>& t) {
   std::vector<sheIni::Section> config;
   /* get config from file */ {
@@ -46,6 +47,7 @@ void getConfig(std::vector<std::string>& t) {
 
 void main() {
   std::vector<std::string> _p_ = {"mysql","ip","port","today","eat_dinner"};
+  getConfig(_p_);
   for (std::string& e:_p_) std::cout<<e<<",";
   std::cout<<std::endl;
 };
