@@ -11,6 +11,7 @@
 #include "spdlog/sinks/rotating_file_sink.h"// support for rotating_logger_mt
 #include "spdlog/sinks/daily_file_sink.h"// support for daily_logger_mt
 
+// base test
 namespace method1 {
 void main() {
   // Create a daily logger - a new file is created every day on 2:30am
@@ -37,6 +38,7 @@ void main() {
 }
 };//namespace method1
 
+// log type test
 namespace method2 {
 void main() {
   /* cmd out */ {
@@ -67,6 +69,7 @@ void main() {
 };
 };//namespace method2
 
+// log flush test
 namespace method3 {
 void main() {
   //flush test
@@ -87,6 +90,7 @@ void main() {
 };
 };//namespace method3
 
+// level test
 namespace method4 {
 void main() {
   // global level is info,info can wirite info,warn,error,critical
