@@ -90,7 +90,7 @@ void main() {
 };
 };//namespace method3
 
-// level test
+// level and flush test
 namespace method4 {
 void main() {
   // global level is info,info can wirite info,warn,error,critical
