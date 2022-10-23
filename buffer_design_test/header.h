@@ -35,16 +35,24 @@ void main() {
   char buff[1024];/* init */ {
     memset(buff, 0x00, sizeof(buff));
   }
+  // 将包头加入到缓冲区
   memcpy(buff+0,&data_head,sizeof(data_head));
-  memcpy(buff+sizeof(data_head),data.c_str()+0,data.size());
+  // 将真实数据加入到缓冲区
+  memcpy(buff+sizeof(data_head),//param1:从包头结束往后加
+         data.c_str()+0,  // param2:数据头(考虑到数据过长可能拆分,故+0)
+         data.size());  // param3:实际的数据长度(可能会做拆开发送,所以这里并不一定是数据的总长度)
 
   /* recv */ {
     package_stream head;
+    // 获取此次缓冲区中的包头信息(若拆包,则会在buffer里进行偏移)
     memcpy(&head,buff, sizeof(package_stream));
-    char* display = new char[head.length];
-    memcpy(display, buff+ sizeof(package_stream), head.length);
+    char* display = new char[head.length];// 临时的接受数据的变量,若拆包,实际长度会有变化
+    // 根据包头获取实际数据并放入接收buffer中
+    memcpy(display, //接收buffer
+           buff+ sizeof(package_stream), // 真实数据的起始位置
+           head.length);// 数据的长度
     std::cout<<"recv : ["<<display<<"]"<<std::endl;
-    std::string test(display,head.length);
+    std::string test(display,head.length); //简单做一个char*到std::string的转换
     delete[] display;display = nullptr;
     std::cout<<"str test:["<<test<<"]"<<std::endl;
   }
