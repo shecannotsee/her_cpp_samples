@@ -14,7 +14,7 @@ void baseInit(MYSQL& mysql) {
     exit(1);
   }
   if (NULL == mysql_real_connect(&mysql,"127.0.0.1",
-                                 "root","123456",
+                                 "root","",
                                  "test_environment",0,
                                  NULL,0)) {
     printf("%d : error : %s\n", __LINE__, mysql_error(&mysql));
