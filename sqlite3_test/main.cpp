@@ -1,14 +1,14 @@
 //
 // Created by shecannotsee on 2022/9/28.
 //
-#include <stdio.h>
-#include <string.h>
 #include <iostream>
-#include <string>
+#include "header.h"
 
-#include <sqlite3.h>
+int main(){
+  std::cout<<"sqlite3 test start.\n";
 
-int main(int argc, char **argv){
+  method1::main();
 
+  std::cout<<"sqlite3 test end.\n";
   return 0;
 }
