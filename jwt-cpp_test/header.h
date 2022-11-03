@@ -48,15 +48,18 @@ void main() noexcept {
   /* token认证 */ {
     std::cout<<"\ntoken 认证:\n";
     // 1.生成验证令牌
-    auto verifier = jwt::verify()
+    jwt::verifier<jwt::default_clock, jwt::traits::kazuho_picojson> verifier{jwt::default_clock{}};
+    verifier =
+//    auto verifier =
+        jwt::verify()
         .allow_algorithm(jwt::algorithm::hs256{"secret"}) // 验证算法
         .with_claim("user",jwt::claim(std::string("carry"))) // 验证token中需要有k-v : "user":"carry"
         .with_issuer("auth01"); // 验证颁发者
     std::cout<<"令牌条件为:1.默认算法;  2.颁发者为auth01;  3.字段需要有user:carry\n";
 
     auto token = jwt::create()
-        /*1*/.set_issuer("auth01") // default,token签发人
-        /*2*/.set_type("JWS") // default
+      /*1*/.set_issuer("auth01") // default,token签发人
+      /*2*/.set_type("JWS") // default
         /*3*/.set_issued_at(std::chrono::system_clock::now()) // 设置有效时间
              .set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{10}) // 按秒来处理,3600s = 1hour
         /*4*/.set_payload_claim("user", jwt::claim(std::string("carry")))  //jwt PAYLOAD:DATA other k-v
