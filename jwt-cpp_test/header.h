@@ -13,7 +13,7 @@ namespace method1 {
 
 void main() noexcept {
   /* 解析token,不依赖openssl,仅需要jwt-cpp库即可 */ {
-    std::cout<<"解析token test:\n";
+    std::cout<<"\n解析token test:\n";
     std::string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
     auto decoded = jwt::decode(token);
     for(auto& e : decoded.get_payload_json())
@@ -21,7 +21,7 @@ void main() noexcept {
   };
 
   /* 生成token,依赖需要添加openssl,因为涉及到一些加密解密算法 */ {
-    std::cout<<"生成token test:\n";
+    std::cout<<"\n生成token test:\n";
     auto token = jwt::create()
     /*1*/.set_issuer("auth0") // default,token签发人
     /*2*/.set_type("JWS") // default
@@ -46,7 +46,7 @@ void main() noexcept {
   };
 
   /* token认证 */ {
-    std::cout<<"token 认证:\n";
+    std::cout<<"\ntoken 认证:\n";
     // 1.生成验证令牌
     auto verifier = jwt::verify()
         .allow_algorithm(jwt::algorithm::hs256{"secret"}) // 验证算法
@@ -73,7 +73,7 @@ v:
       // throw;
     };
     std::cout<<"no throw\n";
-    sleep(5);
+    sleep(5);//由于token时效设置的10s,所以在此处进行认证时,前两次认证会成功,后续的认证会失败,因为token已经过了时效
     goto v;
   };
 };
