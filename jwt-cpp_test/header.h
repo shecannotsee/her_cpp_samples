@@ -60,10 +60,10 @@ void main() noexcept {
     auto token = jwt::create()
       /*1*/.set_issuer("auth01") // default,token签发人
       /*2*/.set_type("JWS") // default
-        /*3*/.set_issued_at(std::chrono::system_clock::now()) // 设置有效时间
-             .set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{10}) // 按秒来处理,3600s = 1hour
-        /*4*/.set_payload_claim("user", jwt::claim(std::string("carry")))  //jwt PAYLOAD:DATA other k-v
-             .sign(jwt::algorithm::hs256{"secret"}); // default
+      /*3*/.set_issued_at(std::chrono::system_clock::now()) // 设置有效时间
+           .set_expires_at(std::chrono::system_clock::now() + std::chrono::seconds{10}) // 按秒来处理,3600s = 1hour
+      /*4*/.set_payload_claim("user", jwt::claim(std::string("carry")))  //jwt PAYLOAD:DATA other k-v
+           .sign(jwt::algorithm::hs256{"secret"}); // default
     std::cout<<"生成token信息为:1.默认算法  2.颁发者为auth01  3.字段有user:carry  4.时效为10s  5.类型为JWS\n";
 v:
     // 该认证函数通过抛出异常来处理验证失败的问题
