@@ -30,11 +30,21 @@ void main() {
     nlohmann::json json = nlohmann::json::parse(str1);
     std::cout<<"json[\"happy\"] :"<<json["happy"]<<std::endl;
     std::cout<<"json[\"pi\"] :"<<json["pi"]<<std::endl;
-    auto a = json["unknown"];
+    std::cout<<"json[\"unknown\"]:"<<json["unknown"]<<std::endl;
+    std::cout<<"json.at(\"unknown\"):"<<json.at("unknown")<<std::endl;
     if(json["unknown"].empty())
       std::cout<<"no json key is unknown.\n";
     else
       std::cout<<"has json-key is unknown\n";
+  };
+  /* push array */ {
+    std::cout<<"\npush array test:\n";
+    nlohmann::json json;
+    nlohmann::json data1 = nlohmann::json::parse("{ \"happy\": true, \"pi\": 3.141 }");
+    json["data"].push_back(data1);
+    data1["pi"] = 2.2222;
+    json["data"].push_back(data1);
+    std::cout<<"after push array :"<<json.dump(4)<<std::endl;
   };
 
 };
@@ -47,10 +57,10 @@ void main() {
     std::ifstream json_file("../user_request.json");// 注意读取文件的位置
     nlohmann::json json_request;
     json_file>>json_request;
-    std::cout<<json_request<<std::endl;
-    for (auto e : json_request) {
-    }
-
+    std::cout<<json_request.dump(4)<<std::endl;
+    nlohmann::json user;
+    user["name"] = "Carry";
+    user["age"]  = 25;
   };
 };
 
