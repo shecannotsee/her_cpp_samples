@@ -39,12 +39,16 @@ void main() {
   };
   /* push array */ {
     std::cout<<"\npush array test:\n";
-    nlohmann::json json;
     nlohmann::json data1 = nlohmann::json::parse("{ \"happy\": true, \"pi\": 3.141 }");
+    nlohmann::json json;
     json["data"].push_back(data1);
     data1["pi"] = 2.2222;
     json["data"].push_back(data1);
     std::cout<<"after push array :"<<json.dump(4)<<std::endl;
+    std::cout<<"json data[] size :"<<json["data"].size()<<std::endl;
+    for (auto& e:json["data"]) {
+      std::cout<<e["happy"]<<","<<e["pi"]<<std::endl;
+    }
   };
 
 };
