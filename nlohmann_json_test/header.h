@@ -70,4 +70,12 @@ void main() {
 
 };// namespace method2
 
+namespace method3 {
+void main() {
+  nlohmann::json data1 = nlohmann::json::parse("{ \"happy\": true, \"pi\": 3 }");
+  std::string a = data1["pi"].dump();
+  std::cout<<"method3 :["<<a<<"]"<<std::endl;
+};
+};// namespace method3
+
 #endif //SQLITE3_TEST_HEADER_H
