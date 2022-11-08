@@ -50,6 +50,24 @@ void main() {
       std::cout<<e["happy"]<<","<<e["pi"]<<std::endl;
     }
   };
+  /* get data from json array */ {
+    std::cout<<"\nget data from json array\n";
+    std::string str1 = "{ \"open\": [1,2,3,4] }";
+    nlohmann::json json = nlohmann::json::parse(str1);
+    std::cout<<"json"<<json["open"].dump()<<std::endl;
+    for (auto& e:json["open"]){
+      std::cout<<e<<std::endl;
+    };
+    nlohmann::json json2 = nlohmann::json::parse(json["open"].dump());
+    std::cout<<"json2 dump :"<<json2.dump()<<std::endl;
+    for (auto& e:json2) {
+      if (typeid(std::string)==typeid(e.dump()))
+        std::cout<<"e means std::string";
+      else
+        std::cout<<"e not std::string";
+      std::cout<<e<<std::endl;
+    }
+  };
 
 };
 };// namespace method1
