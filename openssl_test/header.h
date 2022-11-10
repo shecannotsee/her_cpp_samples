@@ -12,6 +12,7 @@
 #include <openssl/aes.h>
 #include <openssl/evp.h>
 
+// 接口已弃用,该示例无法通过
 namespace aes_cbc_test1 {
 
 /*
@@ -62,6 +63,7 @@ void main() {
 
 };// namespace aes_cbc_test1
 
+// 接口已弃用,该示例无法通过
 namespace aes_cbc_test2 {
 const int MSG_LEN = 128;
 //, int olen)可能会设置buf长度
@@ -138,6 +140,7 @@ void main() {
 
 };// namespace aes_cbc_test2
 
+// 可用接口示例
 namespace aes_cbc_test3 {
 void main() {
   // key的长度对应算法的选用
@@ -185,6 +188,7 @@ void main() {
 
 };// namespace aes_cbc_test3
 
+// 可用接口修改
 namespace aes_cbc_test4 {
 std::unique_ptr<unsigned char[]> string_to_uchar(std::string str) {
   std::unique_ptr<unsigned char[]> ret = std::make_unique<unsigned char[]>(str.size());
