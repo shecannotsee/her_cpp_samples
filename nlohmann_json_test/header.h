@@ -80,6 +80,18 @@ void main() {
     nlohmann::json json_request;
     json_file>>json_request;
     std::cout<<json_request.dump(4)<<std::endl;
+    std::map<std::string, std::string> hash;
+    for (auto& e:json_request["rules"] ) {
+      std::cout<<e["id"].dump()<<"."<<e["name"].dump()<<std::endl;
+      if (e["id"]=="1") {
+        std::cout<<"111111:"<<e["name"]<<std::endl;
+      }
+      hash.insert(std::make_pair(e["id"].dump(),e["name"].dump()));
+    }
+    std::cout<<"get rules  id ==1 name:"<<hash["\"1\""]<<std::endl;
+    for (auto e:hash) {
+      std::cout<<e.first<<":"<<e.second<<std::endl;
+    }
     nlohmann::json user;
     user["name"] = "Carry";
     user["age"]  = 25;
