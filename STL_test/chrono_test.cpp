@@ -34,6 +34,16 @@ int main() {
        <<"]ms , 1s = 1000ms"<<std::endl;
   }
 
+  /* base-4 */ {
+    auto start = std::chrono::system_clock::now();
+    sleep(2);
+    auto end = std::chrono::system_clock::now();
+    std::cout<<"sleep(2) has spent ["<<
+             (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1>>>(end)-
+                 std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1>>>(start)).count()/* return ms,1s=1000ms*/
+             <<"]s , 1s = 1s"<<std::endl;
+  }
+
   /* data */ {
     std::cout<<"=================data format=================\n";
     auto now = std::chrono::system_clock::now();
