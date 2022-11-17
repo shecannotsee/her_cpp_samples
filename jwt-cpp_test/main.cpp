@@ -6,7 +6,8 @@
 
 int main() {
   std::cout<<"jwt-cpp test start.\n";
-  method1::main();
+//  method1::main();
+  method2::main();
   std::cout<<"end.\n";
   return 0;
 };

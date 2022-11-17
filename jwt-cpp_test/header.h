@@ -65,6 +65,7 @@ void main() noexcept {
       /*4*/.set_payload_claim("user", jwt::claim(std::string("carry")))  //jwt PAYLOAD:DATA other k-v
            .sign(jwt::algorithm::hs256{"secret"}); // default
     std::cout<<"生成token信息为:1.默认算法  2.颁发者为auth01  3.字段有user:carry  4.时效为10s  5.类型为JWS\n";
+    std::cout<<token<<std::endl;
 v:
     // 该认证函数通过抛出异常来处理验证失败的问题
     try {
@@ -82,5 +83,33 @@ v:
 };
 
 };// namespace method1
+
+
+namespace method2 {
+void main() {
+  auto token = jwt::create()
+      .set_issuer("WPHS")
+      .set_type("JWS")
+      .set_payload_claim("name", jwt::claim(std::string("admin")))
+      .sign(jwt::algorithm::hs256{"secret"});
+
+  if (typeid(token)== typeid(std::string)) {
+    std::cout<<"token is:" <<token<<std::endl;
+  }
+
+  jwt::verifier<jwt::default_clock, jwt::traits::kazuho_picojson> verifier{jwt::default_clock{}};
+  verifier = jwt::verify()
+      .allow_algorithm(jwt::algorithm::hs256{"secret"})
+      .with_claim("name", jwt::claim(std::string("admin")))
+      .with_issuer("WPHS");
+
+  try {
+    verifier.verify(jwt::decode(token));
+    std::cout<<"verify success.\n";
+  } catch (std::exception ec) {
+    std::cout<<ec.what()<<std::endl;
+  }
+}
+};// namespace method2
 
 #endif //URL_MAP_TEST_JWT_CPP_TEST_HEADER_H_
