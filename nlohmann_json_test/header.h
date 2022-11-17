@@ -141,6 +141,14 @@ void main() {
   else
     std::cout<<"has json-key is unknown\n";// step into
 
+  nlohmann::json json = nlohmann::json::parse("{ \"happy\": \"true\", \"pi\": \"3.141\" }");
+  if (json["happy"].dump() == "true") {
+    std::cout<<"==\n";
+  } else {
+    std::cout<<"["<<json["happy"].dump()<<"]\n";
+    std::cout<<"["<<json["happy"].get<std::string>()<<"]\n";
+  }
+
 }
 }// namespace method4
 
