@@ -108,4 +108,40 @@ void main() {
 };
 };// namespace method3
 
+// 规范化使用测试
+namespace method4 {
+void main() {
+  std::string str_right = "{ \"happy\": true, \"pi\": 3.141 }";
+  std::string str_error = "{ \"happy\"xxxx: true, \"pi\": 3.141 }";
+
+  // 解析错误json字符串异常处理
+  try {
+    nlohmann::json  json_1 = nlohmann::json::parse(str_error);
+    std::cout<<"right json str.\n";
+  } catch (std::exception ec) {
+    std::cout<<"error json str.\n";
+    std::cout<<ec.what()<<std::endl;
+  }
+
+  // 解析后处理
+  nlohmann::json  json_1 = nlohmann::json::parse(str_right);
+  std::cout<<"json key unknown :" <<json_1["unknown"] <<std::endl;
+  std::cout<<"json key happy   :" <<json_1["happy"]   <<std::endl;
+  std::cout<<"json key pi      :" <<json_1["pi"]      <<std::endl;
+
+  if(json_1["unknown"].empty())
+    std::cout<<"no json key is unknown.\n";
+  else
+    std::cout<<"has json-key is unknown\n";
+
+
+  json_1["unknown"] = "123";
+  if(json_1["unknown"].empty())
+    std::cout<<"no json key is unknown.\n";
+  else
+    std::cout<<"has json-key is unknown\n";
+
+}
+}// namespace method4
+
 #endif //SQLITE3_TEST_HEADER_H
