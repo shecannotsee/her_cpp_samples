@@ -23,6 +23,19 @@ message(STATUS "testcode's path:${testcode}")# /Users/shecannotsee/Desktop/AllCo
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
 project(${PROJECT_NAME})
 
+############################################################
+# Auto Add torch(pytorch) include,lib and target_link_libraries
+set(Torch_DIR ${libtorch}/share/cmake/Torch)
+find_package(Torch REQUIRED PATHS ${Torch_DIR})
+
+# auto add opencv
+set(Opencv_DIR ${opencv}/build)
+find_package(OpenCV REQUIRED PATHS ${Opencv_DIR})
+if(Opencv_FOUND)
+    message(STATUS "The Opecv lib is found!")
+endif()
+############################################################
+
 # include
 include_directories(
         ${LOCAL_INCLUDE}
