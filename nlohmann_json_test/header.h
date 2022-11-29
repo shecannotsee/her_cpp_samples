@@ -96,6 +96,26 @@ void main() {
     user["name"] = "Carry";
     user["age"]  = 25;
   };
+
+  /**/ {
+    std::cout<<"\nget json from temp.json test:\n";
+    std::ifstream json_file("/home/shecannotsee/Desktop/temp/temp.json");// 注意读取文件的位置
+    nlohmann::json json_request;
+    json_file>>json_request;
+    std::cout<<json_request["http-flv"]["servers"]<<std::endl;
+    for (auto& servers:json_request["http-flv"]["servers"]) {
+      std::cout<<servers<<std::endl;
+      for (auto applications:servers["applications"]) {
+        std::cout<<"applications:::::"<<applications<<std::endl;
+        if (applications["name"].get<std::string>() == "live") {
+          std::cout<<"name:::::"<<applications["live"]["streams"]<<std::endl;
+          for (auto streams:applications["live"]["streams"]) {
+            std::cout<<"name【"<<streams["name"]<<"】"<<std::endl;
+          }
+        }
+      }
+    }
+  }
 };
 
 };// namespace method2

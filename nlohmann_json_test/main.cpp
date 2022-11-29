@@ -8,9 +8,9 @@
 int main() {
   std::cout<<"nlohmann test start.\n";
 //  method1::main();
-//  method2::main();
+  method2::main();
 //  method3::main();
-  method4::main();
+//  method4::main();
   std::cout<<"end.\n";
   return 0;
 };
