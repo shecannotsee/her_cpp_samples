@@ -36,6 +36,8 @@ link_directories(
         ${GRPC_LIB}
 )
 
+###############################################################
+#
 # aux_source_directory(. SOURCE)
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/src/*")
 file(GLOB_RECURSE FRAMEWORK "${CMAKE_SOURCE_DIR}/src/*")
@@ -44,6 +46,22 @@ add_executable(${PROJECT_NAME}
         # ${FRAMEWORK}
         ../grpc_test/client/main.cpp
 )
+
+#############################################################
+# Compatibility test
+set(target "WPHS")
+#set(target "test")
+if (target STREQUAL "test")
+    file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/test/*")
+elseif(target STREQUAL "WPHS")
+    file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/src/*")
+else()
+    message(STATUS "CMakeLists.txt error")
+endif ()
+add_executable(${PROJECT_NAME}
+        ${SRC}
+        )
+#################################################################
 
 # 链接库
 target_link_libraries(${PROJECT_NAME} pthread)
