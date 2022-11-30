@@ -35,7 +35,7 @@ void main_r_void() {
 };
 
 int main_r_int() {
-  testing::InitGoogleTest();;
+  testing::InitGoogleTest();
   return RUN_ALL_TESTS();// 运行所有测试单元
 }
 
