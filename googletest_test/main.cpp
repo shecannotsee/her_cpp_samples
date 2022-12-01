@@ -7,7 +7,7 @@
 int main() {
   std::cout<<"googletest test start.\n";
   method1::main_r_void();
-  method1::main_r_int();
+//  method1::main_r_int();
   std::cout<<"googletest test end.\n";
   return 0;
 };
