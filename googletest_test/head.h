@@ -45,16 +45,18 @@ void main_r_void() {
     std::cout<<"=========== bool test end. ===========\n";
   }
   /* 程序崩溃或者异常测试 */ {
-    std::cout<<"\n########### error test: ###########\n";
-    EXPECT_DEATH([]{
-        exit(1);
-      }, "123");
-    EXPECT_EXIT([]{
-        exit(1);
-      },::testing::ExitedWithCode(0),"quit");// ASSERT_EXIT
-    EXPECT_THROW([]{
-//      throw "error";
-      },std::exception);
+    // TODO:需要添加使用示例
+//    std::cout<<"\n########### error test: ###########\n";
+//    EXPECT_DEATH({
+//        std::cout<<"xxxx"<<std::endl;
+//        exit(1);
+//      }, "123");
+//    EXPECT_EXIT({
+//        exit(0);
+//      },::testing::ExitedWithCode(0),"quit");// ASSERT_EXIT
+//    EXPECT_THROW([]{
+//        throw "error";
+//      },std::exception);
     std::cout<<"=========== error test end. ===========\n";
   }
   /* ASSERT_*测试 */ {
