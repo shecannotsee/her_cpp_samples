@@ -18,7 +18,7 @@ class MyTable : public Fl_Table {
     static char s[40];
     switch (context) {
       case CONTEXT_STARTPAGE:                   // before page is drawn..
-        fl_font(FL_HELVETICA, 16);              // set the font for our drawing operations
+        fl_font(FL_HELVETICA, 16);              // 设置绘图操作的字体
         return;
       case CONTEXT_COL_HEADER:// 当前单元格是一个列标题单元格
         fl_push_clip(X, Y, W, H);
