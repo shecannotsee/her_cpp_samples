@@ -9,55 +9,62 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <cstring>
 
 #include <unistd.h>
 
 namespace getCpu {
 
-double get_cpu_usage(int cpu_id) {
-  // 打开/proc/stat文件
-  std::ifstream stat_file("/proc/stat");
-  if (!stat_file.is_open()) {
-    std::cerr << "Failed to open /proc/stat" << std::endl;
-    return 0.0;
-  }
+// 定义一个cpu occupy的结构体，用来存放CPU的信息
+typedef struct CPUPACKED {
+  char name[20];       //定义一个char类型的数组名name有20个元素
+  unsigned int user;   //定义一个无符号的int类型的user
+  unsigned int nice;   //定义一个无符号的int类型的nice
+  unsigned int system; //定义一个无符号的int类型的system
+  unsigned int idle;   //定义一个无符号的int类型的idle
+  unsigned int lowait;
+  unsigned int irq;
+  unsigned int softirq;
+} CPU_OCCUPY;
 
-  // 读取文件中的内容
-  std::string line;
-  while (std::getline(stat_file, line)) {
-    // 如果找到了指定的核心
-    if (line.find("cpu" + std::to_string(cpu_id) + " ") == 0) {
-      // 解析该行内容
-      std::istringstream iss(line);
-      std::vector<unsigned long long> values(10);
-      for (int i = 0; i < 10; i++) {
-        iss >> values[i];
-      }
-
-      // 计算核心的使用情况
-      if (values[1] + values[2] + values[3] == 0)
-      {
-        return 0.0;
-      }
-      else {
-        return (values[1] + values[2] + values[3]) /
-            static_cast<double>(values[1] + values[2] + values[3] + values[4]);
-      }
-    }
-  }
-
-  return 0.0;
+// 该函数，利用上述公式。计算出两段时间的之间的CPU占用率
+// 输入为：当前时刻和上一采样时刻cpu的信息
+double getCpuUse(CPU_OCCUPY *o, CPU_OCCUPY *n) {
+  std::cout << "test" << std::endl;
+  unsigned long od, nd;
+  od = (unsigned long)(o->user + o->nice + o->system + o->idle + o->lowait + o->irq + o->softirq); //第一次(用户+优先级+系统+空闲)的时间再赋给od
+  nd = (unsigned long)(n->user + n->nice + n->system + n->idle + n->lowait + n->irq + n->softirq); //第二次(用户+优先级+系统+空闲)的时间再赋给od
+  double sum = nd - od;
+  double idle = n->idle - o->idle;
+  return (sum - idle) / sum;
 }
 
 void main() {
-  // 获取CPU的核心数
-  int ncpus = sysconf(_SC_NPROCESSORS_ONLN);
-  std::cout << "Number of CPUs: " << ncpus << std::endl;
-
-  // 获取每个核心的使用情况
-  for (int i = 0; i < ncpus; i++)
+  CPU_OCCUPY old_cpu_occupy;
+  while (true)
   {
-    std::cout << "CPU " << i << ": " << get_cpu_usage(i) << std::endl;
+    FILE *fd;       // 定义打开文件的指针
+    char buff[256]; // 定义个数组，用来存放从文件中读取CPU的信息
+    CPU_OCCUPY cpu_occupy;
+    std::string cpu_use = "";
+
+    fd = fopen("/proc/stat", "r");
+
+    if (fd != NULL)
+    {
+      // 读取第一行的信息，cpu整体信息
+      fgets(buff, sizeof(buff), fd);
+      if (strstr(buff, "cpu") != NULL) // 返回与"cpu"在buff中的地址，如果没有，返回空指针
+      {
+        // 从字符串格式化输出
+        sscanf(buff, "%s %u %u %u %u %u %u %u", cpu_occupy.name, &cpu_occupy.user, &cpu_occupy.nice, &cpu_occupy.system, &cpu_occupy.idle, &cpu_occupy.lowait, &cpu_occupy.irq, &cpu_occupy.softirq);
+        // cpu的占用率 = （当前时刻的任务占用cpu总时间-前一时刻的任务占用cpu总时间）/ （当前时刻 - 前一时刻的总时间）
+        cpu_use = std::to_string(getCpuUse(&old_cpu_occupy, &cpu_occupy) * 100) + "%";
+        old_cpu_occupy = cpu_occupy;
+      }
+    }
+    std::cout << cpu_use << std::endl; // 打印cpu的占用率
+    sleep(1);                          // 延时1s；
   }
 
 };
