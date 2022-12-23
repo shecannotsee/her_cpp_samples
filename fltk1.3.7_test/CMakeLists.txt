@@ -25,4 +25,5 @@ add_executable(${PROJECT_NAME} ${SRC})
 # 链接库
 target_link_libraries(${PROJECT_NAME} "-pthread"
         fltk "-lX11" dl
+        "-lfltk_gl" "-lGL" # opengl
 )
