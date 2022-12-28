@@ -15,3 +15,7 @@ And you can use this CMakeLists.txt now.
 
 
 
+g++ main.cpp -o main 
+-I/usr/local/include/glog \
+-L/usr/local/lib \
+-lglog
