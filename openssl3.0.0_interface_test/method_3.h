@@ -72,8 +72,8 @@ void main() {
     }
     // 释放加密上下文
     EVP_CIPHER_CTX_free(ctx);
-    memcpy(mid_data,out,strlen((char*)mid_data));
-    std::cout<<"mid_data["<<mid_data<<"]"<<std::endl;
+    memcpy(ciphertext,out,ciphertext_len);
+    std::cout<<"密文(ciphertext)为["<<ciphertext<<"]"<<std::endl;
   };
 
 
@@ -89,14 +89,14 @@ void main() {
     int outl;
 
     // 加密第一块数据
-    EVP_CipherUpdate(ctx, out, &outl, mid_data, 10);
+    EVP_CipherUpdate(ctx, out, &outl, ciphertext, 10);
 
     std::cout << "加密第一块数据after EVP_EncryptUpdate[" << outl << "]" << std::endl;
     // 加密第二块数据
-    EVP_CipherUpdate(ctx, out, &outl, mid_data + 10, 10);
+    EVP_CipherUpdate(ctx, out, &outl, ciphertext + 10, 10);
     std::cout << "加密第二块数据after EVP_EncryptUpdate[" << outl << "]" << std::endl;
     // 加密第三块数据
-    EVP_CipherUpdate(ctx, out, &outl, mid_data + 20, 6);
+    EVP_CipherUpdate(ctx, out, &outl, ciphertext + 20, 6);
     std::cout << "加密第三块数据after EVP_EncryptUpdate[" << outl << "]" << std::endl;
     // 完成加密过程
     EVP_CipherFinal(ctx, out, &outl);
