@@ -13,35 +13,38 @@
 
 namespace method_1 {
 
+// std::string 转 unsigned char*
 std::unique_ptr<unsigned char[]> string_to_uchar(std::string str) {
   std::unique_ptr<unsigned char[]> ret = std::make_unique<unsigned char[]>(str.size());
   for (int i=0; i<str.size(); i++) {
     ret[i] = static_cast<unsigned char>(str[i]);
   }
   return ret;
-}
+};
+
+// unsigned char* 转 std::string
 std::string uchar_to_string(unsigned char* uchar, int len) {
   std::string ret;
   for (int i=0; i<len; i++) {
     ret += static_cast<char>(uchar[i]);
   }
   return ret;
-}
+};
 
 void main() {
-  std::string str_key  = "sihan12345612345";
-  std::string str_iv   = "1234567890123456";
+  std::string str_key  = "sihan12345612345"; // 加密的密钥，16字节，128位
+  std::string str_iv   = "1234567890123456"; // 初始向量，16字节，128位
   std::unique_ptr<unsigned char[]> key  = string_to_uchar(str_key);
   std::unique_ptr<unsigned char[]> iv   = string_to_uchar(str_iv);
 
-
+  // 待加密字符串
   std::string str_data = "123456";//加密用
   std::unique_ptr<unsigned char[]> data = string_to_uchar(str_data);
   std::cout<<"str_data.size() :"<<str_data.size()<<std::endl;
   int data_len = (str_data.size()/AES_BLOCK_SIZE+1)*AES_BLOCK_SIZE;
   std::cout<<"cal data_len    :"<<data_len<<std::endl;
 
-  std::string mid;//解密用
+  std::string mid;//解密用，中间的字节流
   /* 加密 */ {
     int len = str_data.size();
     int len_format = (len/AES_BLOCK_SIZE+1)*AES_BLOCK_SIZE;

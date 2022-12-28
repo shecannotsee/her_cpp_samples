@@ -5,6 +5,7 @@
 #include <iostream>
 #include "method_1.h"
 #include "method_2.h"
+#include "method_3.h"
 
 int main() {
   std::cout<<"openssl test start.\n";
