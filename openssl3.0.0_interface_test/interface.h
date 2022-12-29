@@ -19,7 +19,7 @@
 // aes cbc 128接口代码
 namespace interface {
 
-static const int aes_cbc_128_bytes = 16;
+static const int aes_cbc_128_bytes = 16;// 16bytes = 128 bits
 
 std::unique_ptr<unsigned char[]> string_to_uchar(std::string str) {
   std::unique_ptr<unsigned char[]> ret = std::make_unique<unsigned char[]>(str.size());
