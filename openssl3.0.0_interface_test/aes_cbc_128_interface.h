@@ -2,8 +2,8 @@
 // Created by shecannotsee on 2022/12/29.
 //
 
-#ifndef OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_INTERFACE_H_
-#define OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_INTERFACE_H_
+#ifndef OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_AES_CBC_128_INTERFACE_H_
+#define OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_AES_CBC_128_INTERFACE_H_
 
 #include <string.h>
 
@@ -17,7 +17,7 @@
 
 
 // aes cbc 128接口代码
-namespace interface {
+namespace aes_cbc_128_interface {
 
 static const int aes_cbc_128_bytes = 16;// 16bytes = 128 bits
 
@@ -167,10 +167,8 @@ void main() {
 
   }
 
-
-
 };
 
-};// namespace interface
+};// namespace aes_cbc_128_interface
 
-#endif //OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_INTERFACE_H_
+#endif //OPENSSL_3_0_0_TEST_OPENSSL3_0_0_INTERFACE_TEST_AES_CBC_128_INTERFACE_H_
