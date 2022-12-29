@@ -43,7 +43,7 @@ void main() {
     std::cout<<rdMin.get()<<std::endl;
   }
   for (int i=0; i<100/*2^34溢出*/; i++) {
-    std::cout<<rdMin.get()<<std::endl;
+    std::cout<<rdMax.get()<<std::endl;
   }
 };
 
