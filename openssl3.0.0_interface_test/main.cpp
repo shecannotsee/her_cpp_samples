@@ -10,10 +10,10 @@
 
 int main() {
   std::cout<<"openssl test start.\n";
-  method_1::main();
+//  method_1::main();
 //  method_2::main();
-//  method_3::main();
-  interface::main();
+  method_3::main();
+//  interface::main();
   std::cout<<"openssl test end.\n";
   return 0;
 };
