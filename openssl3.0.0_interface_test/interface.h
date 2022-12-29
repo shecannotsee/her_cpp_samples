@@ -139,9 +139,9 @@ namespace CiphertextToPlaintext/*解密*/ {
 
 void main() {
   std::cout<<"interface test"<<std::endl;
-  std::string plaintext = "shecannotsee";
-  std::string cipher    = "1234567890123456";
-  std::string iv        = "shecannotseeZZZZ";
+  std::string plaintext = "shecannotsee";// 明文
+  std::string cipher    = "1234567890123456";// 密钥
+  std::string iv        = "shecannotseeZZZZ";// 初始向量
 
   std::cout<<"";
   std::string ciphertext = PlaintextToCiphertext::method(plaintext, cipher, iv);
