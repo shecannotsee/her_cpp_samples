@@ -7,6 +7,7 @@
 #include "method_2.h"
 #include "method_3.h"
 #include "aes_cbc_128_interface.h"
+#include "rsa_method_1.h"
 
 int main() {
   std::cout<<"openssl test start.\n";
