@@ -7,8 +7,10 @@
 
 #include <cstdio>
 #include <string>
+#include <vector>
 #include "extend.h"
 #include "bignumber.h"
+#include "callingPython.h"
 
 namespace method_1 {
 
@@ -27,35 +29,30 @@ void main() {
 
   int CommonKey[2] = {n,e};
   int PrivateKey[2] = {n,d};
-  /*加密*/ {
+  // 秘文是小于n的一个整数,故用一个数组存储
+  std::vector<std::string> cipher;
+  /* 使用公钥加密 */ {
     // 对m进行加密,m必须小于n
-    // m^e = c (mod n) ; c为加密后的内容,等价于; c = (m^e) mod n
+    // m^e = c (mod n) ; c为加密后的内容,等价于下行
+    // c = (m^e) mod n
     std::string plaintext = "shecannotsee";
-    std::string cipher    = std::string(plaintext.size(),0x00);
-    /* 调用python模块来进行大数计算 */ {
-      using std::to_string;
-      std::string cmd = "python3 ../rsa_bigNumber_cal.py " + to_string(65) + " " + to_string(17) + " " + to_string(3233);
-      FILE* pipe = popen(cmd.c_str(), "r");
-      if (!pipe) {
-        std::cout << "Error: popen()" << std::endl;
-        return;
-      }
-      char buffer[256];
-      while(fgets(buffer, sizeof(buffer), pipe) != NULL) {
-        std::cout << buffer;
-      }
-      std::cout << "buffer:" <<buffer<<std::endl;
-      std::cout<<"len:"<<strlen(buffer)<<std::endl;
-      pclose(pipe);
-    };
-    /* 调用大数库来计算 */ {
-
-    };
-
+    for (const char& ch : plaintext) {
+      cipher.push_back(cal((int)ch,CommonKey[1],CommonKey[0]));
+    }
   };
 
-  /*解密*/ {
+  /* 使用私钥解密 */ {
     // m = (c^d) mod n
+    std::string original_plaintext;
+    for (const std::string& str : cipher) {
+      char t;
+      t = std::atoi(
+              cal(std::atoi(str.c_str()),
+                  PrivateKey[1],
+                  PrivateKey[0]).c_str());
+      original_plaintext.push_back(t);
+    }
+    std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
   };
 
 };
