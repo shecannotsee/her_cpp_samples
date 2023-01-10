@@ -8,11 +8,21 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <chrono>
 #include "extend.h"
 #include "bignumber.h"
 #include "callingPython.h"
 
 namespace method_1 {
+
+void demo() {
+  auto start = std::chrono::system_clock::now();
+  auto end = std::chrono::system_clock::now();
+  std::cout<<"sleep(2) has spent ["<<
+  (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
+  std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
+  <<"]ms , 1s = 1000ms"<<std::endl;
+};
 
 void main() {
   // step_0:选两个质数
@@ -29,21 +39,30 @@ void main() {
 
   int CommonKey[2] = {n,e};
   int PrivateKey[2] = {n,d};
-  // 秘文是小于n的一个整数,故用一个数组存储
+  // 秘文是小于n的一个整数,故用一个字符串数组存储用来兼容以后可能出现的长数值情况
   std::vector<std::string> cipher;
   /* 使用公钥加密 */ {
     // 对m进行加密,m必须小于n
     // m^e = c (mod n) ; c为加密后的内容,等价于下行
     // c = (m^e) mod n
     std::string plaintext = "shecannotsee";
+
+    auto start = std::chrono::system_clock::now();
     for (const char& ch : plaintext) {
       cipher.push_back(cal((int)ch,CommonKey[1],CommonKey[0]));
     }
+    auto end = std::chrono::system_clock::now();
+    std::cout<<"The encryption process took time ["<<
+             (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
+              std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
+             <<"]ms , 1s = 1000ms"<<std::endl;
+
   };
 
   /* 使用私钥解密 */ {
     // m = (c^d) mod n
     std::string original_plaintext;
+    auto start = std::chrono::system_clock::now();
     for (const std::string& str : cipher) {
       char t;
       t = std::atoi(
@@ -52,6 +71,11 @@ void main() {
                   PrivateKey[0]).c_str());
       original_plaintext.push_back(t);
     }
+    auto end = std::chrono::system_clock::now();
+    std::cout<<"The decryption process took time ["<<
+             (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
+              std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
+             <<"]ms , 1s = 1000ms"<<std::endl;
     std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
   };
 
