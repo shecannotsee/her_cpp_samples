@@ -9,6 +9,7 @@
 // 该函数返回一个整数e,e大于1并且小于n的欧拉函数,并且满足e与n的欧拉函数互质
 int getE(int prime_number_1, int prime_number_2) {
   int Euler_function_by_n = (prime_number_1-1)*(prime_number_2-1);
+  // TODO:需要添加合适的算法用来计算,该返回值只是针对指定数值进行特定返回
   int ret = 17;
   return ret;
 };
@@ -17,6 +18,7 @@ int getE(int prime_number_1, int prime_number_2) {
 // 返回d,使得d满足[e x d - 1 = k * Euler_function_by_n]
 int getModularMultiplicativeInverse(int e, int Euler_function_by_n) {
   // (d,k)=(2753,-15)
+  // TODO:需要添加合适的算法用来计算,该返回值只是针对指定数值进行特定返回
   int ret = 2753;
   return ret;
 };
