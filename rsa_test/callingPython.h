@@ -9,6 +9,9 @@
 #include <string>
 #include <iostream>
 
+// @param arg_1:在加密的时候是[明文],解密的时候是[]
+// @param arg_2:在加密的时候是[与两质数的欧拉函数互质的一个数e],解密的时候是[e对于两质数的欧拉函数的模反元素]
+// @param prime_product:两个质数的乘积
 std::string cal(int arg_1,int arg_2,int prime_product) {
   using std::to_string;
   std::string cmd =
