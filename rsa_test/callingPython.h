@@ -29,8 +29,8 @@ std::string cal(int arg_1,int arg_2,int prime_product) {
     //std::cout << buffer;
   }
   pclose(pipe);
-  std::cout << "buffer:" <<buffer<<std::endl;
-  std::cout<<"len:"<<strlen(buffer)<<std::endl;
+//  std::cout << "buffer:" <<buffer<<std::endl;
+//  std::cout<<"len:"<<strlen(buffer)<<std::endl;
   return std::string(buffer,strlen(buffer));
 };
 
