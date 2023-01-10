@@ -6,6 +6,7 @@
 #define OPENSSL_3_0_0_TEST_METHOD_4_RSA_H
 
 #include <iostream>
+#include <chrono>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>
@@ -114,10 +115,16 @@ void main() {
 
   encrypt = (char*)malloc(RSA_size(public_key));
   // 加密开始
+  auto start = std::chrono::system_clock::now();
   int encrypt_length = public_encrypt(strlen(message) + 1, (unsigned char*)message, (unsigned char*)encrypt, public_key, RSA_PKCS1_OAEP_PADDING);
   if(encrypt_length == -1) {
     LOG("An error occurred in public_encrypt() method");
   }
+  auto end = std::chrono::system_clock::now();
+  std::cout<<"加密花费 ["<<
+           (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
+            std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
+           <<"]ms , 1s = 1000ms"<<std::endl;
   // 加密结束
   LOG("Data has been encrypted.");
 
@@ -126,7 +133,13 @@ void main() {
 
   decrypt = (char *)malloc(encrypt_length);
   // 解密开始
+  auto start2 = std::chrono::system_clock::now();
   int decrypt_length = private_decrypt(encrypt_length, (unsigned char*)encrypt, (unsigned char*)decrypt, private_key, RSA_PKCS1_OAEP_PADDING);
+  auto end2 = std::chrono::system_clock::now();
+  std::cout<<"解密花费 ["<<
+           (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end2)-
+            std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start2)).count()/* return ms,1s=1000ms*/
+           <<"]ms , 1s = 1000ms"<<std::endl;
   // 解密结束
   if(decrypt_length == -1) {
     LOG("An error occurred in private_decrypt() method");
