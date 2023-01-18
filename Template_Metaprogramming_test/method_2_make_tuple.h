@@ -5,10 +5,19 @@
 #ifndef TEMPLATE_METAPROGRAMMING_TEST_METHOD_2_MAKE_TUPLE_H
 #define TEMPLATE_METAPROGRAMMING_TEST_METHOD_2_MAKE_TUPLE_H
 
+#include <string>
+#include <vector>
+
+
 namespace method_2_make_tuple {
 
-void main() {
+bool contains(std::string name,std::vector<std::string> t) {
+  return false;
+}
 
+void main() {
+  std::vector<std::string> t{"int","bool","float"};
+  contains("double",t);
 };
 
 };// namespace method_2_make_tuple
