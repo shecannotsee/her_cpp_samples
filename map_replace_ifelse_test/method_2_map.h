@@ -7,11 +7,26 @@
 
 #include <string>
 #include <unordered_map>
+#include <functional>
+#include <type_traits>
 
 namespace method_2_map {
 
+enum class if_branch : unsigned int {
+  b_1 = 1,
+  b_2,
+  b_3,
+  b_4,
+  b_5
+};
+
 void main() {
-  std::unordered_map<std::string, std::string> hash;
+  std::unordered_map<if_branch, std::string> hashMapError;
+  hashMapError.insert(std::make_pair(if_branch::b_1, "function_1"));
+
+  std::unordered_map<std::underlying_type<if_branch>::type , std::string> hashMap;
+  hashMap.insert(std::make_pair(static_cast<std::underlying_type<if_branch>::type>(if_branch::b_1),"function"));
+
 
 };
 
