@@ -36,7 +36,7 @@ struct strip_pointer<T*> {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 void print(T t) {
-  using T_without_pointer = typename strip_pointer<T>::type;
+  using T_without_pointer = typename strip_pointer<T>::type;// typename意味着它一定是一个类型,便于让编译器作出判断
   // /*判断传入类型是否为指针*/
   if constexpr(/*或者使用std::is_pointer<T>::value*/is_pointer<T>::value && std::is_floating_point<T_without_pointer>::value) {
     std::cout<<"Is pointer:["<<*t<<"]\n";
