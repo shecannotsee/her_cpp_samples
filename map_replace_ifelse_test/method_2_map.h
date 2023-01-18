@@ -24,6 +24,9 @@ void main() {
   std::unordered_map<if_branch, std::string> hashMapError;
   hashMapError.insert(std::make_pair(if_branch::b_1, "function_1"));
 
+  std::unordered_map<unsigned int, std::string> hash_;
+  hash_.insert(std::make_pair(static_cast<unsigned int>(if_branch::b_1), "function_1"));
+
   std::unordered_map<std::underlying_type<if_branch>::type , std::string> hashMap;
   hashMap.insert(std::make_pair(static_cast<std::underlying_type<if_branch>::type>(if_branch::b_1),"function"));
 
