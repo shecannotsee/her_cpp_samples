@@ -7,7 +7,7 @@ ${path}/sheTestcode
 -> cd libraries/
 -> ls
 googletest
--> cd googletest
+-> cd googletest-1.12.1
 -> ls
 include lib ...
 ```
