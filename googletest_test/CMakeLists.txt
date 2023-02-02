@@ -13,7 +13,7 @@ message(STATUS "sheTestcode's path:${sheTestcode}")
 get_filename_component(sheTestcode_f ${sheTestcode} DIRECTORY)
 message(STATUS "sheTestcode_f's path:${sheTestcode_f}")
 
-set(googletest "${sheTestcode_f}/libraries/googletest-v1.12.1")
+set(googletest "${sheTestcode_f}/libraries/googletest-1.12.1")
 ############################################################
 
 # include
