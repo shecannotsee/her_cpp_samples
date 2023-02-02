@@ -16,13 +16,12 @@ static void BM_SomeFunction(benchmark::State& state) {
     [](){int i=0;};
   }
 }
-void main() {
-// Register the function as a benchmark
-//  BENCHMARK(BM_SomeFunction);
-// Run the benchmark
-};
 BENCHMARK(BM_SomeFunction);
-BENCHMARK_MAIN();
+
+void main(int argc, char** argv) {
+  benchmark::Initialize(&argc, argv);
+  benchmark::RunSpecifiedBenchmarks();
+};
 
 
 };// namespace method_1_base
