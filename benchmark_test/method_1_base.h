@@ -18,7 +18,7 @@ static void BM_SomeFunction(benchmark::State& state) {
 }
 void main() {
 // Register the function as a benchmark
-  BENCHMARK(BM_SomeFunction);
+//  BENCHMARK(BM_SomeFunction);
 // Run the benchmark
 };
 BENCHMARK(BM_SomeFunction);
