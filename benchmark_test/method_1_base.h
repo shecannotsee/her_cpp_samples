@@ -19,9 +19,9 @@ static void BM_SomeFunction(benchmark::State& state) {
 BENCHMARK(BM_SomeFunction);
 
 void main(int argc, char** argv) {
-  // init
+  // init i
   benchmark::Initialize(&argc, argv);
-  // run
+  // run r
   benchmark::RunSpecifiedBenchmarks();
 };
 
