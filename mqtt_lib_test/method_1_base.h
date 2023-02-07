@@ -28,7 +28,7 @@ void processing_results(int return_code, const string& method_name) {
 
 void main() {
 //////////////////////////////////////////mqtt同步发布///////////////////////////////////////////////////////////////////
-  string server_url = "tcp://mqtt.eclipseprojects.io:1883";
+  string server_url = "tcp://localhost:1883";
   char msg[] = "Hello World!";
   string topic_name = "MQTT Examples";
   string client_id = "ExampleClientPub";
