@@ -59,15 +59,19 @@ void main() {
   };
 
   long timeout = 10000;
-  cout<<"Waiting for up to ["<<(timeout/1000)<<"] seconds for publication of ["<<msg<<"]\n";
-  cout<<"on topic ["<<topic_name<<"] for client with ClientID: ["<<client_id<<"]\n";
+  /* log */ {
+    cout << "Waiting for up to [" << (timeout / 1000) << "] seconds for publication of [" << msg << "]\n";
+    cout << "on topic [" << topic_name << "] for client with ClientID: [" << client_id << "]\n";
+  }
 
-  return_code = MQTTClient_waitForCompletion(client, token, 10000L); {
+  return_code = MQTTClient_waitForCompletion(client, token, timeout); {
     processing_results(return_code, "MQTTClient_waitForCompletion");
   }
-  cout<<"Message with delivery token ["<<token<<"] delivered\n";
+  /* log */ {
+    cout<<"Message with delivery token ["<<token<<"] delivered\n";
+  }
 
-  return_code = MQTTClient_disconnect(client, 10000); {
+  return_code = MQTTClient_disconnect(client, static_cast<int>(timeout)); {
     processing_results(return_code, "MQTTClient_disconnect");
   }
 
