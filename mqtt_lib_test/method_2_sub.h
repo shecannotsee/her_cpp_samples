@@ -14,7 +14,7 @@ using ::std::string;
 using ::std::cout;
 using ::std::endl;
 // 使用方法1中的结果处理函数
-using ::method_1_base::processing_results;
+using ::method_1_publish_sync::processing_results;
 
 volatile MQTTClient_deliveryToken deliveredtoken;
 
@@ -62,9 +62,9 @@ void main() {
   };
   /* log */ {
     cout<<"Subscribing to topic ["<<topic_name<<"]"<<endl;
-    cout<<"for client ["<<client_id<<"] using QoS["<<method_1_base::Message_pass_at_least_once<<"]"<<endl;
+    cout<<"for client ["<<client_id<<"] using QoS["<<method_1_publish_sync::Message_pass_at_least_once<<"]"<<endl;
   };
-  return_code = MQTTClient_subscribe(client, topic_name.c_str(), method_1_base::Message_pass_at_least_once); {
+  return_code = MQTTClient_subscribe(client, topic_name.c_str(), method_1_publish_sync::Message_pass_at_least_once); {
     processing_results(return_code, "MQTTClient_subscribe");
   };
 
