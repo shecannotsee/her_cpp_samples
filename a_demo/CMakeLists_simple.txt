@@ -6,6 +6,10 @@ set(PROJECT_NAME "xxxxx")
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
 project(${PROJECT_NAME})
 
+# 目录获取
+get_filename_component(a_demo_father_dir ${CMAKE_SOURCE_DIR} DIRECTORY)
+message(STATUS "a_demo_father_dir's path:${a_demo_father_dir}")
+
 # include
 include_directories()
 # lib
