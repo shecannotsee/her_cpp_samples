@@ -10,14 +10,14 @@
 
 int main() {
   std::cout<<"mqtt lib test.\n";
-  auto sub_future = std::async(std::launch::async, method_2_sub::main);
-  auto pub_future = std::async(std::launch::async,method_1_publish_sync::main);
+//  auto sub_future       = std::async(std::launch::async, method_2_sub::main);
+//  auto pub_sync_future  = std::async(std::launch::async, method_1_publish_sync::main);
+//  auto pub_async_future = std::async(std::launch::async, method_3_publish_async::main);
+//
+//  pub_sync_future.wait();
+//  pub_async_future.wait();
 //  sub_future.wait();
-//  pub_future.get();
-
-  pub_future.wait();
-  std::cout<<"\n";
-  sub_future.get();
+  method_3_publish_async::main();
 
   std::cout<<"mqtt lib test.\n";
   return 0;
