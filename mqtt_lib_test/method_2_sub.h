@@ -68,10 +68,21 @@ void main() {
   return_code = MQTTClient_subscribe(client, topic_name.c_str(), Message_pass_at_least_once); {
     processing_results(return_code, "MQTTClient_subscribe");
   };
+  /* quit */ {
+    cout<< "Press Q<Enter> to quit\n\n";
+    int ch;
+    do {
+      ch = getchar();
+    } while (ch!='Q' && ch != 'q');
+  }
+  return_code = MQTTClient_unsubscribe(client, topic_name.c_str()); {
+    processing_results(return_code, "MQTTClient_unsubscribe");
+  };
+  return_code = MQTTClient_disconnect(client, 10000); {
+    processing_results(return_code, "MQTTClient_disconnect");
+  };
 
-
-
-
+  MQTTClient_destroy(&client);
 };
 
 };// namespace method_2_sub
