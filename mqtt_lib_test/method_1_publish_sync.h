@@ -32,7 +32,7 @@ void processing_results(int return_code, const string& method_name) {
 void main() {
 //////////////////////////////////////////mqtt同步发布///////////////////////////////////////////////////////////////////
   string server_url = "tcp://localhost:1883";
-  char msg[] = "Hello World!";
+  char msg[] = "Hello World!----from push sync";
   string topic_name = "MQTT Examples";
   string client_id = "client_to_push_data_sync";
 
@@ -48,15 +48,14 @@ void main() {
     pubmsg.retained = false;// please the notes
   };
   MQTTClient_deliveryToken token;
+
   int return_code = 0;
   return_code = MQTTClient_create(&client,server_url.c_str(),client_id.c_str(), MQTTCLIENT_PERSISTENCE_NONE,NULL); {
     processing_results(return_code,"MQTTClient_create");
   };
-
   return_code = MQTTClient_connect(client, &conn_opts); {
     processing_results(return_code,"MQTTClient_connect");
   };
-
   return_code = MQTTClient_publishMessage(client, topic_name.c_str(), &pubmsg, &token); {
     processing_results(return_code,"MQTTClient_publishMessage");
   };
