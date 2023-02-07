@@ -41,7 +41,7 @@ void connlost(void *context, char *cause) {
 
 void main() {
 //////////////////////////////////////mqtt异步订阅///////////////////////////////////////////////////////////////////////
-  string address = "tcp://localhost:1883";
+  string server_url = "tcp://localhost:1883";
   string topic_name = "MQTT Examples";
   string client_id = "client_to_need_data";
 
@@ -52,7 +52,7 @@ void main() {
   };
   int return_code = 0;
 
-  return_code = MQTTClient_create(&client, address.c_str(), client_id.c_str(), MQTTCLIENT_PERSISTENCE_NONE, NULL); {
+  return_code = MQTTClient_create(&client, server_url.c_str(), client_id.c_str(), MQTTCLIENT_PERSISTENCE_NONE, NULL); {
     processing_results(return_code, "MQTTClient_create");
   }
   return_code = MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered); {
