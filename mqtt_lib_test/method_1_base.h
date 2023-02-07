@@ -26,16 +26,19 @@ void processing_results(int return_code, const string& method_name) {
   }
 };
 
-
 void main() {
 //////////////////////////////////////////mqtt同步发布///////////////////////////////////////////////////////////////////
+  string server_url = "tcp://mqtt.eclipseprojects.io:1883";
+  char msg[] = "Hello World!";
+  string topic_name = "MQTT Examples";
+  string client_id = "ExampleClientPub";
+
   MQTTClient client;
   MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer; {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
   };
   MQTTClient_message pubmsg = MQTTClient_message_initializer; {
-    char msg[] = "Hello World!";
     pubmsg.payload = static_cast<void*>(msg);
     pubmsg.payloadlen = static_cast<int>((int)strlen(msg));
     pubmsg.qos = Message_pass_at_least_once;// please the notes
@@ -43,8 +46,7 @@ void main() {
   };
   MQTTClient_deliveryToken token;
   int return_code = 0;
-  return_code = MQTTClient_create(&client,"tcp://mqtt.eclipseprojects.io:1883","ExampleClientPub",
-                                 MQTTCLIENT_PERSISTENCE_NONE,NULL); {
+  return_code = MQTTClient_create(&client,server_url.c_str(),client_id.c_str(),MQTTCLIENT_PERSISTENCE_NONE,NULL); {
     processing_results(return_code,"MQTTClient_create");
   };
 
@@ -52,16 +54,18 @@ void main() {
     processing_results(return_code,"MQTTClient_connect");
   };
 
-  return_code = MQTTClient_publishMessage(client, "MQTT Examples", &pubmsg, &token); {
+  return_code = MQTTClient_publishMessage(client, topic_name.c_str(), &pubmsg, &token); {
     processing_results(return_code,"MQTTClient_publishMessage");
   };
 
+  long timeout = 10000;
+  cout<<"Waiting for up to ["<<(timeout/1000)<<"] seconds for publication of ["<<msg<<"]\n";
+  cout<<"on topic ["<<topic_name<<"] for client with ClientID: ["<<client_id<<"]\n";
 
-  printf("Waiting for up to %d seconds for publication of [%s]\n"
-         "on topic %s for client with ClientID: %s\n",
-         (int)(10000L/1000), "Hello World!", "MQTT Examples", "ExampleClientPub");
-  return_code = MQTTClient_waitForCompletion(client, token, 10000L);
-  printf("Message with delivery token %d delivered\n", token);
+  return_code = MQTTClient_waitForCompletion(client, token, 10000L); {
+    processing_results(return_code, "MQTTClient_waitForCompletion");
+  }
+  cout<<"Message with delivery token ["<<token<<"] delivered\n";
 
   return_code = MQTTClient_disconnect(client, 10000); {
     processing_results(return_code, "MQTTClient_disconnect");
