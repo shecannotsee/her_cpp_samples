@@ -41,7 +41,7 @@ void main() {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
   };
-  MQTTClient_message pubmsg = MQTTClient_message_initializer; {
+  MQTTClient_message pubmsg = MQTTClient_message_initializer;/* init */ {
     pubmsg.payload = static_cast<void*>(msg);
     pubmsg.payloadlen = static_cast<int>((int)strlen(msg));
     pubmsg.qos = Message_pass_at_least_once;// please the notes
