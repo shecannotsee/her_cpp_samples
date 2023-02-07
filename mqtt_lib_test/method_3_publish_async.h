@@ -39,7 +39,7 @@ void connlost(void *context, char *cause) {
 void main() {
 ///////////////////////////////////////mqtt异步发布//////////////////////////////////////////////////////////////////////
   string server_url = "tcp://localhost:1883";
-  char msg[] = "Hello World!";
+  char msg[] = "Hello World!----from push async";
   string topic_name = "MQTT Examples";
   string client_id = "client_to_push_data_async";
 
