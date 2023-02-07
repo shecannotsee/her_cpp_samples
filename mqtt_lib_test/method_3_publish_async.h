@@ -77,6 +77,9 @@ void main() {
   };
   while (deliveredtoken != token) {
     sleep(10);
+    return_code = MQTTClient_publishMessage(client, topic_name.c_str(), &pubmsg, &token); {
+      processing_results(return_code, "MQTTClient_publishMessage");
+    };
   };
 
   MQTTClient_destroy(&client);
