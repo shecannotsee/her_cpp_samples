@@ -34,7 +34,7 @@ void main() {
   string server_url = "tcp://localhost:1883";
   char msg[] = "Hello World!";
   string topic_name = "MQTT Examples";
-  string client_id = "client_to_push_data";
+  string client_id = "client_to_push_data_sync";
 
   MQTTClient client;
   MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer; {
