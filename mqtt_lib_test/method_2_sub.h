@@ -41,9 +41,8 @@ void connlost(void *context, char *cause) {
 void main() {
 //////////////////////////////////////mqtt异步订阅///////////////////////////////////////////////////////////////////////
   string address = "tcp://localhost:1883";
-  char msg[] = "Hello World!";
   string topic_name = "MQTT Examples";
-  string client_id = "ExampleClientSub";
+  string client_id = "client_to_need_data";
 
   MQTTClient client;
   MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;/* init */{
@@ -64,7 +63,6 @@ void main() {
   /* log */ {
     cout<<"Subscribing to topic ["<<topic_name<<"]"<<endl;
     cout<<"for client ["<<client_id<<"] using QoS["<<method_1_base::Message_pass_at_least_once<<"]"<<endl;
-    cout<<"Press Q<Enter> to quit\n\n";
   };
   return_code = MQTTClient_subscribe(client, topic_name.c_str(), method_1_base::Message_pass_at_least_once); {
     processing_results(return_code, "MQTTClient_subscribe");

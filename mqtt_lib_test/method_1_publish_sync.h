@@ -2,15 +2,15 @@
 // Created by shecannotsee on 2023/2/7.
 //
 
-#ifndef MQTT_LIB_TEST_MQTT_LIB_METHOD_1_BASE_TEST_H_
-#define MQTT_LIB_TEST_MQTT_LIB_METHOD_1_BASE_TEST_H_
+#ifndef MQTT_LIB_TEST_MQTT_LIB_METHOD_1_PUBLISH_SYNC_H_
+#define MQTT_LIB_TEST_MQTT_LIB_METHOD_1_PUBLISH_SYNC_H_
 
 #include <string.h>
 #include <iostream>
 #include <string>
 #include <MQTTClient.h>
 
-namespace method_1_base {
+namespace method_1_publish_sync {
 using ::std::cout;
 using ::std::endl;
 using ::std::string;
@@ -34,7 +34,7 @@ void main() {
   string server_url = "tcp://localhost:1883";
   char msg[] = "Hello World!";
   string topic_name = "MQTT Examples";
-  string client_id = "ExampleClientPub";
+  string client_id = "client_to_push_data";
 
   MQTTClient client;
   MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer; {
@@ -81,6 +81,6 @@ void main() {
   MQTTClient_destroy(&client);
 };
 
-};// namespace method_1_base
+};// namespace method_1_publish_sync
 
-#endif //MQTT_LIB_TEST_MQTT_LIB_METHOD_1_BASE_TEST_H_
+#endif //MQTT_LIB_TEST_MQTT_LIB_METHOD_1_PUBLISH_SYNC_H_
