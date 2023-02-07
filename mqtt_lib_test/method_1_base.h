@@ -24,6 +24,9 @@ void processing_results(int return_code, const string& method_name) {
     cout<<"Failed to["<<method_name<<"],return code"<<return_code<<endl;
     exit(EXIT_FAILURE);
   }
+  else {
+//    cout<<method_name<<" success"<<endl;
+  }
 };
 
 void main() {
@@ -46,7 +49,7 @@ void main() {
   };
   MQTTClient_deliveryToken token;
   int return_code = 0;
-  return_code = MQTTClient_create(&client,server_url.c_str(),client_id.c_str(),MQTTCLIENT_PERSISTENCE_NONE,NULL); {
+  return_code = MQTTClient_create(&client,server_url.c_str(),client_id.c_str(), MQTTCLIENT_PERSISTENCE_NONE,NULL); {
     processing_results(return_code,"MQTTClient_create");
   };
 
