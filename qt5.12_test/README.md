@@ -7,6 +7,12 @@ ${path}/sheTestcode
 -> cd libraries/
 -> ls
 qt-5.12
+-> cd qt-5.12/lib/fonts/
+-> ls
+DejaVuMathTeXGyre.ttf
 ```
 And you can use this CMakeLists.txt now.
+
+tips:You can download DejaVuMathTeXGyre.ttf from https://dejavu-fonts.github.io
+
 
