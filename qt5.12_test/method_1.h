@@ -5,6 +5,8 @@
 #ifndef QT5_12_TEST_QT5_12_TEST_METHOD_1_H_
 #define QT5_12_TEST_QT5_12_TEST_METHOD_1_H_
 
+#include <iostream>
+
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
@@ -26,7 +28,6 @@ int main(int argc, char** argv) {
   window.show();
 
   return app.exec();
-
 };
 
 };// namespace method_1 {
