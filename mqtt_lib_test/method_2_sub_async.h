@@ -2,8 +2,8 @@
 // Created by shecannotsee on 2023/2/7.
 //
 
-#ifndef MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_H_
-#define MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_H_
+#ifndef MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_ASYNC_H_
+#define MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_ASYNC_H_
 
 #include <iostream>
 #include <string>
@@ -87,4 +87,4 @@ void main() {
 
 };// namespace method_2_sub
 
-#endif //MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_H_
+#endif //MQTT_LIB_TEST_MQTT_LIB_TEST_METHOD_2_SUB_ASYNC_H_

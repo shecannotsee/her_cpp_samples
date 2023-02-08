@@ -5,12 +5,12 @@
 #include <iostream>
 #include <future>
 #include "method_1_publish_sync.h"
-#include "method_2_sub.h"
+#include "method_2_sub_async.h"
 #include "method_3_publish_async.h"
 
 int main() {
   std::cout<<"mqtt lib test.\n";
-//  auto sub_future       = std::async(std::launch::async, method_2_sub::main);
+//  auto sub_future       = std::async(std::launch::async, method_2_sub_async::main);
 //  auto pub_sync_future  = std::async(std::launch::async, method_1_publish_sync::main);
 //  auto pub_async_future = std::async(std::launch::async, method_3_publish_async::main);
 //
