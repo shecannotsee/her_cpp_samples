@@ -10,10 +10,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtCore5Compat/QTextCodec>
 
 namespace method_1 {
 
 int main(int argc, char** argv) {
+//  QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
   QApplication app(argc, argv);
 
   QMainWindow window;
@@ -23,7 +25,8 @@ int main(int argc, char** argv) {
   QWidget *centralWidget = new QWidget;
   window.setCentralWidget(centralWidget);
 
-  QPushButton *button = new QPushButton("Click Me!", centralWidget);
+  QPushButton *button = new QPushButton("Click Me!你好", centralWidget);
+  button->setText("123 english 你哈");
 
   window.show();
 
