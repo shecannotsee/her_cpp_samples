@@ -9,6 +9,8 @@
 
 namespace method_1 {
 
+enum state : unsigned char { s1, s2, s3, s4 };
+
 void main() {
   test_class tool(7);
   tool.set_data(6);
