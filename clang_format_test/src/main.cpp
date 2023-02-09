@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <method_1.h>
 
 int main() {
   std::cout<<"test start.\n";
