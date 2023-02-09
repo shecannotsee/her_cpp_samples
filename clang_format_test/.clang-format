@@ -1,53 +1,11 @@
-BasedOnStyle: Google
 
 # Allow double brackets such as std::vector<std::vector<int>>.
-Standard: Cpp11
+Standard : c++11
 
-# Indent 2 spaces at a time.
-IndentWidth: 2
+# 指定缩进宽度
+IndentWidth : 2
 
-# Keep lines under 120 columns long.
-ColumnLimit: 120
+# 对齐连续变量和注释
+AlignConsecutiveAssignments : true
 
-# Always break before braces
-BreakBeforeBraces: Custom
-BraceWrapping:
-  AfterCaseLabel: true
-  AfterClass: true
-  AfterControlStatement: true
-  AfterEnum: true
-  AfterFunction: true
-  AfterNamespace: true
-  AfterStruct: true
-  AfterUnion: true
-  BeforeCatch: true
-  BeforeElse: true
-  IndentBraces: false
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false
 
-  # Keeps extern "C" blocks unindented.
-  AfterExternBlock: false
-
-# Indent case labels.
-IndentCaseLabels: true
-
-PointerAlignment: Right
-
-AlignOperands: true
-AlignConsecutiveAssignments: true
-
-# Use 2 space negative offset for access modifiers
-AccessModifierOffset: -2
-
-AllowShortCaseLabelsOnASingleLine: false
-
-# Useful for spacing out functions in classes
-KeepEmptyLinesAtTheStartOfBlocks: true
-
-# Indent nested PP directives.
-IndentPPDirectives: AfterHash
-
-# Include blocks style
-IncludeBlocks: Preserve
