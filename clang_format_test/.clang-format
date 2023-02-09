@@ -9,11 +9,10 @@ UseTab : false             # 使用空格而不是Tab来缩进代码
 IndentWidth : 2            # 指定缩进宽度
 
 # 代码块格式设置
-BreakBeforeBraces : Attach               # 设置前括号不换行。
+BreakBeforeBraces : Attach                # 设置前括号不换行,该项可改为自定义项
 SpaceBeforeParens : ControlStatements     # 设置自动与之前一个字符空出来一个空格。
 AllowShortFunctionsOnASingleLine : None   # 设置简单函数将不会省略为一行
 AlwaysBreakAfterReturnType : None         # 函数返回值是否换行定义
-#BreakBeforeBraces: Allman
 
 
 # 代码书写细节
