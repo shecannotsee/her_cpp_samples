@@ -75,57 +75,57 @@ void main() {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
 
+    // 连接成功所对应的回调函数
     auto onConnect = [](void* context, MQTTAsync_successData* response) -> void {
+      cout << "Successful connection\n";
+
       MQTTAsync client = (MQTTAsync)context;
-      MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;
-      MQTTAsync_message pubmsg = MQTTAsync_message_initializer;
+      MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* init */ {
+        /* ==========onSend & onSendFailure 的依赖========== */
+        static auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) {
+          printf("Disconnect failed\n");
+          finished = 1;
+        };
+        static auto onDisconnect = [](void* context, MQTTAsync_successData* response) {
+          printf("Successful disconnection\n");
+          finished = 1;
+        };
+        /* ==========onSend & onSendFailure 的依赖========== */
+        // 发送消息成功对应的回调函数
+        auto onSend = [](void* context, MQTTAsync_successData* response) -> void {
+          MQTTAsync client = (MQTTAsync)context;
+          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
 
-      printf("Successful connection\n");
-      /* ==========onSend & onSendFailure 的依赖========== */
-      static auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) {
-        printf("Disconnect failed\n");
-        finished = 1;
-      };
-      static auto onDisconnect = [](void* context, MQTTAsync_successData* response) {
-        printf("Successful disconnection\n");
-        finished = 1;
-      };
-      /* ==========onSend & onSendFailure 的依赖========== */
-      // 发送成功对应的回调函数
-      auto onSend = [](void* context, MQTTAsync_successData* response) -> void {
-        MQTTAsync client = (MQTTAsync)context;
-        MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
+          printf("Message with token value %d delivery confirmed\n", response->token);
+          opts.onSuccess = onDisconnect;
+          opts.onFailure = onDisconnectFailure;
+          opts.context = client;
+          processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
 
-        printf("Message with token value %d delivery confirmed\n", response->token);
-        opts.onSuccess = onDisconnect;
-        opts.onFailure = onDisconnectFailure;
+        };
+        // 发送消息失败对应的回调函数
+        auto onSendFailure = [](void* context, MQTTAsync_failureData* response) ->void {
+          MQTTAsync client = (MQTTAsync)context;
+          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
+          int rc;
+
+          printf("Message send failed token %d error code %d\n", response->token, response->code);
+          opts.onSuccess = onDisconnect;
+          opts.onFailure = onDisconnectFailure;
+          opts.context = client;
+          processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
+        };
+        opts.onSuccess = onSend;
+        opts.onFailure = onSendFailure;
         opts.context = client;
-        processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
-
       };
-      opts.onSuccess = onSend;
-      // 发送失败对应的回调函数
-      auto onSendFailure = [](void* context, MQTTAsync_failureData* response) ->void {
-        MQTTAsync client = (MQTTAsync)context;
-        MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
-        int rc;
-
-        printf("Message send failed token %d error code %d\n", response->token, response->code);
-        opts.onSuccess = onDisconnect;
-        opts.onFailure = onDisconnectFailure;
-        opts.context = client;
-        if ((rc = MQTTAsync_disconnect(client, &opts)) != MQTTASYNC_SUCCESS)
-        {
-          printf("Failed to start disconnect, return code %d\n", rc);
-          exit(EXIT_FAILURE);
-        }
+      MQTTAsync_message pubmsg = MQTTAsync_message_initializer;/* init */ {
+        pubmsg.payload = msg;
+        pubmsg.payloadlen = (int)strlen(msg);
+        pubmsg.qos = 1;
+        pubmsg.retained = 0;
       };
-      opts.onFailure = onSendFailure;
-      opts.context = client;
-      pubmsg.payload = msg;
-      pubmsg.payloadlen = (int)strlen(msg);
-      pubmsg.qos = 1;
-      pubmsg.retained = 0;
+
       processing_results(MQTTAsync_sendMessage(client, topic_name.c_str(), &pubmsg, &opts), "MQTTAsync_sendMessage");
     };
     conn_opts.onSuccess = onConnect;
