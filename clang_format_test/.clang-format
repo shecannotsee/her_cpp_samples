@@ -1,3 +1,4 @@
+# TODO: 1.该模板无法处理冒号构造函数的格式 2.无法将枚举值换行处理 3.无法自动给函数结束添加换行符
 BasedOnStyle: Google
 
 # Allow double brackets such as std::vector<std::vector<int>>.
