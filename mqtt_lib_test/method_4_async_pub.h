@@ -129,7 +129,7 @@ void main() {
 
         opts.context = client;
       };
-      MQTTAsync_message pubmsg = MQTTAsync_message_initializer;/* init */ {
+      MQTTAsync_message pubmsg = MQTTAsync_message_initializer;/* msg init */ {
         pubmsg.payload = msg;
         pubmsg.payloadlen = (int)strlen(msg);
         pubmsg.qos = 1;
