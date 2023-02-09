@@ -1,11 +1,17 @@
+BasedOnStyle: Google
 
 # Allow double brackets such as std::vector<std::vector<int>>.
 Standard : c++11
 
-# 指定缩进宽度
-IndentWidth : 2
+IndentWidth : 2  # 指定缩进宽度
+ColumnLimit: 120 # 指定代码行的最大长度
+
+BreakBeforeBraces: Attach # 设置前括号不换行。
+SpaceBeforeParens: ControlStatements # 设置自动与之前一个字符空出来一个空格。
 
 # 对齐连续变量和注释
 AlignConsecutiveAssignments : true
+# 指定指针和引用的对齐方式
+PointerAlignment: Left
 
 

@@ -7,11 +7,9 @@
 
 #include <test_class/test_class.h>
 
-namespace method_1
-{
+namespace method_1 {
 
-void main()
-{
+void main() {
   test_class tool(7);
   tool.set_data(6);
   tool.get_data();
