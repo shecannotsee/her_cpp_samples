@@ -7,6 +7,23 @@ ${path}/sheTestcode
 -> cd libraries/
 -> ls
 qt-5.12
+-> tree -L 2
+.
+└── qt-5.12
+    ├── bin
+    ├── doc
+    ├── fonts
+    ├── include
+    ├── lib
+    ├── libexec
+    ├── metatypes
+    ├── mkspecs
+    ├── modules
+    ├── phrasebooks
+    ├── plugins
+    ├── qml
+    └── translations
+
 -> cd qt-5.12/lib/fonts/
 -> ls
 DejaVuMathTeXGyre.ttf
