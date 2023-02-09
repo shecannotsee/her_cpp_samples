@@ -141,7 +141,7 @@ void main() {
 
     // 连接失败对应的回调函数
     auto onConnectFailure = [](void* context, MQTTAsync_failureData* response) -> void {
-      cout<<"Connect failed, return code ["<< response->code <<endl;
+      cout<<"Connect failed, return code ["<< response->code <<"]\n";
       finished = 1;
     };
     conn_opts.onFailure = onConnectFailure;
