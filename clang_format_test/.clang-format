@@ -3,15 +3,24 @@ BasedOnStyle: Google
 # Allow double brackets such as std::vector<std::vector<int>>.
 Standard : c++11
 
-IndentWidth : 2  # 指定缩进宽度
-ColumnLimit: 120 # 指定代码行的最大长度
+# 全局设置
+ColumnLimit : 120          # 指定代码行的最大长度
+UseTab : false             # 使用空格而不是Tab来缩进代码
+IndentWidth : 2            # 指定缩进宽度
 
-BreakBeforeBraces: Attach # 设置前括号不换行。
-SpaceBeforeParens: ControlStatements # 设置自动与之前一个字符空出来一个空格。
+# 代码块格式设置
+BreakBeforeBraces : Attach               # 设置前括号不换行。
+SpaceBeforeParens : ControlStatements     # 设置自动与之前一个字符空出来一个空格。
+AllowShortFunctionsOnASingleLine : None   # 设置简单函数将不会省略为一行
+AlwaysBreakAfterReturnType : None         # 函数返回值是否换行定义
+#BreakBeforeBraces: Allman
 
-# 对齐连续变量和注释
-AlignConsecutiveAssignments : true
-# 指定指针和引用的对齐方式
-PointerAlignment: Left
+
+# 代码书写细节
+AccessModifierOffset : -1           # 设置 public 和 private 只缩进一个空格
+AlignConsecutiveAssignments : true  # 对齐连续变量和注释
+PointerAlignment : Left             # 指定指针和引用的对齐方式
+
+
 
 
