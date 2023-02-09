@@ -16,7 +16,7 @@ class test_class {
   ~test_class() = default;
 
  public:
-  void set_data(const int& aaa) noexcept;
+  void set_data(const int&) noexcept;
   int get_data();
 };
 
