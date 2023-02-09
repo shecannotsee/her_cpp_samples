@@ -71,16 +71,15 @@ void main() {
   }
 
   /* 连接选项设置 */
-  MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* init */ {
+  MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* set */ {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
 
     // 连接成功所对应的回调函数
     auto onConnect = [](void* context, MQTTAsync_successData* response) -> void {
       cout << "Successful connection\n";
-
       MQTTAsync client = (MQTTAsync)context;
-      MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* init */ {
+      MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* set */ {
         /* ==========onSend & onSendFailure 的依赖========== */
         static auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) {
           printf("Disconnect failed\n");
@@ -93,30 +92,32 @@ void main() {
         /* ==========onSend & onSendFailure 的依赖========== */
         // 发送消息成功对应的回调函数
         auto onSend = [](void* context, MQTTAsync_successData* response) -> void {
+          cout << "Message with token value ["<< response->token <<"] delivery confirmed\n" << endl;
           MQTTAsync client = (MQTTAsync)context;
-          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
+          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
+            opts.onSuccess = onDisconnect;
+            opts.onFailure = onDisconnectFailure;
+            opts.context = client;
+          };
 
-          printf("Message with token value %d delivery confirmed\n", response->token);
-          opts.onSuccess = onDisconnect;
-          opts.onFailure = onDisconnectFailure;
-          opts.context = client;
           processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
 
-        };
-        // 发送消息失败对应的回调函数
-        auto onSendFailure = [](void* context, MQTTAsync_failureData* response) ->void {
-          MQTTAsync client = (MQTTAsync)context;
-          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;
-          int rc;
-
-          printf("Message send failed token %d error code %d\n", response->token, response->code);
-          opts.onSuccess = onDisconnect;
-          opts.onFailure = onDisconnectFailure;
-          opts.context = client;
-          processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
         };
         opts.onSuccess = onSend;
+
+        // 发送消息失败对应的回调函数
+        auto onSendFailure = [](void* context, MQTTAsync_failureData* response) ->void {
+          cout << "Message send failed token ["<< response->token <<"] error code ["<< response->code <<"]\n";
+          MQTTAsync client = (MQTTAsync)context;
+          MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
+            opts.onSuccess = onDisconnect;
+            opts.onFailure = onDisconnectFailure;
+            opts.context = client;
+          }
+          processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
+        };
         opts.onFailure = onSendFailure;
+
         opts.context = client;
       };
       MQTTAsync_message pubmsg = MQTTAsync_message_initializer;/* init */ {
@@ -125,7 +126,6 @@ void main() {
         pubmsg.qos = 1;
         pubmsg.retained = 0;
       };
-
       processing_results(MQTTAsync_sendMessage(client, topic_name.c_str(), &pubmsg, &opts), "MQTTAsync_sendMessage");
     };
     conn_opts.onSuccess = onConnect;
