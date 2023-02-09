@@ -64,11 +64,12 @@ void main() {
       // not expecting any messages
       return 1;
     };
+
     return_code = MQTTAsync_setCallbacks(client, NULL, connlost, messageArrived, NULL);
     processing_results(return_code, "MQTTAsync_setCallbacks");
   }
 
-  // 连接选项设置
+  /* 连接选项设置 */
   MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* init */ {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
@@ -77,7 +78,7 @@ void main() {
       MQTTAsync client = (MQTTAsync)context;
       MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;
       MQTTAsync_message pubmsg = MQTTAsync_message_initializer;
-      int rc;
+      int return_code;
 
       printf("Successful connection\n");
       /* onSend & onSendFailure 的依赖*/
@@ -127,21 +128,20 @@ void main() {
       pubmsg.payloadlen = (int)strlen(msg);
       pubmsg.qos = 1;
       pubmsg.retained = 0;
-      if ((rc = MQTTAsync_sendMessage(client, topic_name.c_str(), &pubmsg, &opts)) != MQTTASYNC_SUCCESS)
-      {
-        printf("Failed to start sendMessage, return code %d\n", rc);
-        exit(EXIT_FAILURE);
-      }
+      return_code = MQTTAsync_sendMessage(client, topic_name.c_str(), &pubmsg, &opts);
+      processing_results(return_code, "MQTTAsync_sendMessage");
     };
     conn_opts.onSuccess = onConnect;
 
     auto onConnectFailure = [](void* context, MQTTAsync_failureData* response) -> void {
-
+      cout<<"Connect failed, return code ["<< response->code <<endl;
+      finished = 1;
     };
     conn_opts.onFailure = onConnectFailure;
 
     conn_opts.context = client;
   };
+
   /* 连接mqtt服务 */ {
     return_code = MQTTAsync_connect(client, &conn_opts);
     processing_results(return_code, "MQTTAsync_connect");
@@ -156,7 +156,6 @@ void main() {
   }
 
   MQTTAsync_destroy(&client);
-
 };
 
 
