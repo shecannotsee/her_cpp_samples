@@ -1,6 +1,8 @@
 # TODO: 1.该模板无法处理冒号构造函数的格式
 # TODO: 2.无法将枚举值换行处理
-# TODO: 3.无法自动给函数结束添加换行符
+# TODO: 3.switch-case语句中case未被代码块包含
+# HACK: x.空函数也就是空代码块可能不会换行写在一行里并且不会给前括号添加空格-需要避免空代码块的出现
+# HACK: x.无法自动给函数结束添加换行符-可以在编写时候手动去写
 BasedOnStyle: Google
 
 # Allow double brackets such as std::vector<std::vector<int>>.
