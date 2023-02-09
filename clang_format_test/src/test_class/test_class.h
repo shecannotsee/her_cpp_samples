@@ -5,8 +5,7 @@
 #ifndef CLANG_FORMAT_TEST_CLANG_FORMAT_TEST_SRC_TEST_CLASS_H_
 #define CLANG_FORMAT_TEST_CLANG_FORMAT_TEST_SRC_TEST_CLASS_H_
 
-class test_class
-{
+class test_class {
  private:
   int data_;
   int no_;
