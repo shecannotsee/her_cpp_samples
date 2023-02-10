@@ -53,13 +53,8 @@ void main() {
       printf("Reconnecting\n");
       conn_opts.keepAliveInterval = 20;
       conn_opts.cleansession = 1;
-
-      if ((return_code = MQTTAsync_connect(client, &conn_opts)) != MQTTASYNC_SUCCESS) {
-        cout << "Failed to start connect, return code" << return_code << endl;
-        finished = 1;
-      }
-      processing_results(return_code, "MQTTAsync_connect");
-
+      // 重新连接
+      processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
     };
     // 消息处理函数
     auto messageArrived = [](void *context, char *topicName, int topicLen, MQTTAsync_message *m) -> int {

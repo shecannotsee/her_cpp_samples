@@ -47,20 +47,14 @@ void main() {
     auto connlost = [](void *context, char *cause) -> void {
       MQTTAsync client = (MQTTAsync)context;
       MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
-      int rc;
-
+      int return_code;
       printf("\nConnection lost\n");
-      if (cause) {
-        printf("     cause: %s\n", cause);
-      };
-
+      printf("     cause: %s\n", cause);
       printf("Reconnecting\n");
       conn_opts.keepAliveInterval = 20;
       conn_opts.cleansession = 1;
-      if ((rc = MQTTAsync_connect(client, &conn_opts)) != MQTTASYNC_SUCCESS) {
-        printf("Failed to start connect, return code %d\n", rc);
-        finished = 1;
-      }
+      // 冲新连接
+      processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
     };
     // 收到消息处理函数
     auto msgarrvd = [](void *context, char *topicName, int topicLen, MQTTAsync_message *message) -> int {
