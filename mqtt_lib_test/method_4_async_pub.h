@@ -43,7 +43,7 @@ void main() {
   }
 
   /* 对client设置操作相应的回调函数 */ {
-    // 连接失败处理函数
+    // 连接失败处理函数,该函数更多出现在客户端和服务器连上后,然后心跳消失时调用
     auto connlost = [](void *context, char *cause) -> void {
       MQTTAsync client = (MQTTAsync) context;
       MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
