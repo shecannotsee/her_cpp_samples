@@ -42,6 +42,40 @@ void main() {
                        "MQTTAsync_create");
   };
 
+  /* 对client设置操作相应的回调函数 */ {
+    // 连接失败处理函数
+    auto connlost = [](void *context, char *cause) -> void {
+      MQTTAsync client = (MQTTAsync)context;
+      MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
+      int rc;
+
+      printf("\nConnection lost\n");
+      if (cause) {
+        printf("     cause: %s\n", cause);
+      };
+
+      printf("Reconnecting\n");
+      conn_opts.keepAliveInterval = 20;
+      conn_opts.cleansession = 1;
+      if ((rc = MQTTAsync_connect(client, &conn_opts)) != MQTTASYNC_SUCCESS) {
+        printf("Failed to start connect, return code %d\n", rc);
+        finished = 1;
+      }
+    };
+    // 收到消息处理函数
+    auto msgarrvd = [](void *context, char *topicName, int topicLen, MQTTAsync_message *message) -> int {
+      printf("Message arrived\n");
+      printf("     topic: %s\n", topicName);
+      printf("   message: %.*s\n", message->payloadlen, (char*)message->payload);
+      MQTTAsync_freeMessage(&message);
+      MQTTAsync_free(topicName);
+      return 1;
+    };
+
+    processing_results(MQTTAsync_setCallbacks(client, client, connlost, msgarrvd, NULL),
+                       "MQTTAsync_setCallbacks");
+  };
+
   MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* set */ {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
@@ -103,39 +137,6 @@ void main() {
     disc_opts.onFailure = onDisconnectFailure;
   };
 
-  /* set callback */ {
-    // 连接失败处理函数
-    auto connlost = [](void *context, char *cause) -> void {
-      MQTTAsync client = (MQTTAsync)context;
-      MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
-      int rc;
-
-      printf("\nConnection lost\n");
-      if (cause) {
-        printf("     cause: %s\n", cause);
-      };
-
-      printf("Reconnecting\n");
-      conn_opts.keepAliveInterval = 20;
-      conn_opts.cleansession = 1;
-      if ((rc = MQTTAsync_connect(client, &conn_opts)) != MQTTASYNC_SUCCESS) {
-        printf("Failed to start connect, return code %d\n", rc);
-        finished = 1;
-      }
-    };
-    // 收到消息处理函数
-    auto msgarrvd = [](void *context, char *topicName, int topicLen, MQTTAsync_message *message) -> int {
-      printf("Message arrived\n");
-      printf("     topic: %s\n", topicName);
-      printf("   message: %.*s\n", message->payloadlen, (char*)message->payload);
-      MQTTAsync_freeMessage(&message);
-      MQTTAsync_free(topicName);
-      return 1;
-    };
-
-    processing_results(MQTTAsync_setCallbacks(client, client, connlost, msgarrvd, NULL),
-                       "MQTTAsync_setCallbacks");
-  };
 
   /* 连接mqtt服务器 */ {
     processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
