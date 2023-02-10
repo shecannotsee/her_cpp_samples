@@ -66,6 +66,7 @@ void main() {
       // not expecting any messages
       return 1;
     };
+
     processing_results(MQTTAsync_setCallbacks(client, NULL, connlost, messageArrived, NULL),
                        "MQTTAsync_setCallbacks");
   }
