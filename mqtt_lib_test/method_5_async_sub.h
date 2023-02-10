@@ -37,7 +37,7 @@ void main() {
     }
   };
 
-  MQTTAsync client;/* init */ {
+  MQTTAsync client;/* init & create */ {
     processing_results(MQTTAsync_create(&client, server_url.c_str(), client_id.c_str(), MQTTCLIENT_PERSISTENCE_NONE, NULL),
                        "MQTTAsync_create");
   };
@@ -46,6 +46,7 @@ void main() {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
 
+    // 连接到服务器成功的回调函数
     auto onConnect = [](void* context, MQTTAsync_successData* response) {
       MQTTAsync client = (MQTTAsync)context;
       MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* set */ {
@@ -74,12 +75,15 @@ void main() {
         finished = 1;
       };
     };
+    // 设置回调
     conn_opts.onSuccess = onConnect;
 
+    // 连接服务器失败的回调函数
     auto onConnectFailure = [](void* context, MQTTAsync_failureData* response) {
       cout << "Connect failed, rc ["<< response->code <<"]\n";
       finished = 1;
     };
+    // 设置回调
     conn_opts.onFailure = onConnectFailure;
 
     conn_opts.context = client;
@@ -100,6 +104,7 @@ void main() {
   };
 
   /* set callback */ {
+    // 连接失败处理函数
     auto connlost = [](void *context, char *cause) -> void {
       MQTTAsync client = (MQTTAsync)context;
       MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
@@ -117,6 +122,7 @@ void main() {
         finished = 1;
       }
     };
+    // 收到消息处理函数
     auto msgarrvd = [](void *context, char *topicName, int topicLen, MQTTAsync_message *message) -> int {
       printf("Message arrived\n");
       printf("     topic: %s\n", topicName);
@@ -130,11 +136,13 @@ void main() {
                        "MQTTAsync_setCallbacks");
   };
 
-  /* 连接mqtt服务器 */
-  processing_results(MQTTAsync_connect(client, &conn_opts),"MQTTAsync_connect");
+  /* 连接mqtt服务器 */ {
+    processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
+  };
 
   // 订阅已完成并且任务已完成
   while (!subscribed && !finished) {
+    cout << "what?\n";
     usleep(10000L);
   }
 
