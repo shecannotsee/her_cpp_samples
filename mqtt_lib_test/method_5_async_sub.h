@@ -111,8 +111,9 @@ void main() {
       int rc;
 
       printf("\nConnection lost\n");
-      if (cause)
+      if (cause) {
         printf("     cause: %s\n", cause);
+      };
 
       printf("Reconnecting\n");
       conn_opts.keepAliveInterval = 20;
