@@ -9,6 +9,7 @@
 #include "method_3_publish_async.h"
 #include "method_4_async_pub.h"
 #include "method_5_async_sub.h"
+#include "method_6_interface.h"
 
 int main() {
   std::cout<<"mqtt lib test.\n";
