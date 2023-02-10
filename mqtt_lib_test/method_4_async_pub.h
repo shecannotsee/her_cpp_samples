@@ -16,7 +16,6 @@ using ::std::endl;
 using ::std::string;
 
 std::atomic<bool> some_errors_have_occurred {false};
-static string error_message = std::string();
 
 void main() {
 ///////////////////////////////////mqtt异步发布//////////////////////////////////////////////////////////////////////////
@@ -91,16 +90,14 @@ void main() {
           MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
             opts.onSuccess = [](void* context, MQTTAsync_successData* response) {
               printf("Successful disconnection\n");
-              some_errors_have_occurred = true;
-            };;
+            };
             opts.onFailure = [](void* context, MQTTAsync_failureData* response) {
               printf("Disconnect failed\n");
-              some_errors_have_occurred = 1;
+              some_errors_have_occurred = true;
             };;
             opts.context = client;
           };
           processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
-
         };
         opts.onSuccess = onSend;
 
@@ -111,15 +108,15 @@ void main() {
           MQTTAsync_disconnectOptions opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
             opts.onSuccess = [](void* context, MQTTAsync_successData* response) {
               printf("Successful disconnection\n");
-              some_errors_have_occurred = 1;
             };;
             opts.onFailure = [](void* context, MQTTAsync_failureData* response) {
               printf("Disconnect failed\n");
-              some_errors_have_occurred = 1;
+              some_errors_have_occurred = true;
             };;
             opts.context = client;
           }
           processing_results(MQTTAsync_disconnect(client, &opts), "MQTTAsync_disconnect");
+          some_errors_have_occurred = true;
         };
         opts.onFailure = onSendFailure;
 
@@ -155,7 +152,12 @@ void main() {
   };
   /* quit */ {
     for (int ch = 0;ch != 'q'&& ch != 'Q';) {
-      ch = getchar();
+      if (some_errors_have_occurred) {
+        cout << "some_errors_have_occurred";
+        ch = 'q';
+      } else {
+        ch = getchar();
+      }
     }
   };
 
