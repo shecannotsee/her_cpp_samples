@@ -77,32 +77,26 @@ void main() {
 
     // 连接到服务器成功的回调函数
     auto onConnect = [](void* context, MQTTAsync_successData* response) {
+      cout << "Successful connection\n";
+      cout << "Subscribing to topic [" << topic_name << "]\n";
+      cout << "for client [" << client_id << "] using QoS["<<1<<"]\n\n";
       MQTTAsync client = (MQTTAsync)context;
+      // 订阅动作的回调函数设置
       MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* set */ {
-        auto onSubscribe = [](void* context, MQTTAsync_successData* response) -> void {
-          printf("Subscribe succeeded\n");
-          subscribed = 1;
-        };
-        opts.onSuccess = onSubscribe;
+        // 订阅主题成功对应的回调函数
+        opts.onSuccess = [](void* context, MQTTAsync_successData* response) -> void {
+          cout << "Subscribe succeeded\n";
+        };;
 
-        auto onSubscribeFailure = [](void* context, MQTTAsync_failureData* response) ->void {
-          printf("Subscribe failed, rc %d\n", response->code);
-          finished = 1;
-        };
-        opts.onFailure = onSubscribeFailure;
+        // 订阅主题失败对应的回调函数
+        opts.onFailure = [](void* context, MQTTAsync_failureData* response) ->void {
+          cout<<"Subscribe failed, rc ["<< response->code <<"]\n";
+        };;
 
         opts.context = client;
       };
-
-      printf("Successful connection\n");
-
-      printf("Subscribing to topic [%s]\nfor client [%s] using QoS[%d]\n\n"
-             "Press Q<Enter> to quit\n\n", topic_name.c_str(), client_id.c_str(), 1);
-      int rc = 0;
-      if ((rc = MQTTAsync_subscribe(client, topic_name.c_str(), 1, &opts)) != MQTTASYNC_SUCCESS) {
-        printf("Failed to start subscribe, return code %d\n", rc);
-        finished = 1;
-      };
+      // 订阅动作
+      processing_results(MQTTAsync_subscribe(client, topic_name.c_str(), 1, &opts),"MQTTAsync_subscribe");
     };
     conn_opts.onSuccess = onConnect;
 
@@ -115,21 +109,6 @@ void main() {
 
     conn_opts.context = client;
   };
-
-  MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
-    auto onDisconnect = [](void* context, MQTTAsync_successData* response) ->void {
-      printf("Successful disconnection\n");
-      disc_finished = 1;
-    };
-    disc_opts.onSuccess = onDisconnect;
-
-    auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) ->void {
-      printf("Disconnect failed, rc %d\n", response->code);
-      disc_finished = 1;
-    };
-    disc_opts.onFailure = onDisconnectFailure;
-  };
-
 
   /* 连接mqtt服务器 */
   processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
@@ -146,6 +125,19 @@ void main() {
   };
 
   /* 断开连接 */ {
+    MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
+      auto onDisconnect = [](void* context, MQTTAsync_successData* response) ->void {
+        printf("Successful disconnection\n");
+        disc_finished = 1;
+      };
+      disc_opts.onSuccess = onDisconnect;
+
+      auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) ->void {
+        printf("Disconnect failed, rc %d\n", response->code);
+        disc_finished = 1;
+      };
+      disc_opts.onFailure = onDisconnectFailure;
+    };
     processing_results(MQTTAsync_disconnect(client, &disc_opts), "MQTTAsync_disconnect");
   }
   while (!disc_finished) {
