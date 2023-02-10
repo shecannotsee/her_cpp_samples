@@ -22,6 +22,8 @@ std::atomic<int> subscribed{0};
 // 1:活动弄已经结束 0:活动未结束
 std::atomic<int> disc_finished{0};
 
+std::atomic<bool> some_errors_have_occurred{false};
+
 void main() {
 ///////////////////////////////////mqtt异步订阅//////////////////////////////////////////////////////////////////////////
   static string server_url = "tcp://localhost:1883";
@@ -45,15 +47,21 @@ void main() {
   /* 对client设置操作相应的回调函数 */ {
     // 连接失败处理函数,该函数更多出现在客户端和服务器连上后,然后心跳消失时调用
     auto connlost = [](void *context, char *cause) -> void {
+      /* log */ {
+        cout << "\nConnection lost\n";
+        cout << "cause: " << cause << "\n";
+        cout << "Reconnecting\n";
+      };
       MQTTAsync client = (MQTTAsync)context;
-      MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
-      int return_code;
-      printf("\nConnection lost\n");
-      printf("     cause: %s\n", cause);
-      printf("Reconnecting\n");
-      conn_opts.keepAliveInterval = 20;
-      conn_opts.cleansession = 1;
-      // 重新连接
+      MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* set */ {
+        conn_opts.onSuccess = [](void* context, MQTTAsync_successData* response){};
+        conn_opts.onFailure = [](void* context, MQTTAsync_failureData* response){
+          some_errors_have_occurred = true;
+        };
+        conn_opts.keepAliveInterval = 20;
+        conn_opts.cleansession = 1;
+      };
+      // 重新连接一次
       processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
     };
     // 收到消息处理函数
@@ -91,6 +99,7 @@ void main() {
         // 订阅主题失败对应的回调函数
         opts.onFailure = [](void* context, MQTTAsync_failureData* response) ->void {
           cout<<"Subscribe failed, rc ["<< response->code <<"]\n";
+          some_errors_have_occurred = true;
         };;
 
         opts.context = client;
@@ -103,7 +112,7 @@ void main() {
     // 连接服务器失败的回调函数
     auto onConnectFailure = [](void* context, MQTTAsync_failureData* response) {
       cout << "Connect failed, rc ["<< response->code <<"]\n";
-      finished = 1;
+      some_errors_have_occurred = true;
     };
     conn_opts.onFailure = onConnectFailure;
 
@@ -113,35 +122,36 @@ void main() {
   /* 连接mqtt服务器 */
   processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
 
-  // 订阅已完成并且任务已完成
-  while (!subscribed && !finished) {
-    cout << "what?\n";
-    usleep(10000L);
-  }
-
-  // 阻塞,用来触发消息接收的回调函数
-  for (int ch = 0; ch!='Q' && ch != 'q'; ) {
-    ch = getchar();
+  /* quit */ {
+    for (int ch = 0;ch != 'q'&& ch != 'Q';) {
+      if (some_errors_have_occurred) {
+        cout << "some_errors_have_occurred";
+        ch = 'q';
+      } else {
+        ch = getchar();
+      }
+    }
   };
 
   /* 断开连接 */
   MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
       auto onDisconnect = [](void* context, MQTTAsync_successData* response) ->void {
+        cout << "Successful disconnection\n";
         printf("Successful disconnection\n");
-        disc_finished = 1;
+        some_errors_have_occurred = false;
       };
       disc_opts.onSuccess = onDisconnect;
 
       auto onDisconnectFailure = [](void* context, MQTTAsync_failureData* response) ->void {
-        printf("Disconnect failed, rc %d\n", response->code);
-        disc_finished = 1;
+        cout << "Disconnect failed, rc [" << response->code << "]\n";
+        some_errors_have_occurred = true;
       };
       disc_opts.onFailure = onDisconnectFailure;
     };
   processing_results(MQTTAsync_disconnect(client, &disc_opts), "MQTTAsync_disconnect");
 
-  while (!disc_finished) {
-    usleep(10000L);
+  if (some_errors_have_occurred) {
+    cout << "MQTTAsync_disconnect failed.\n";
   }
 
   MQTTAsync_destroy(&client);

@@ -21,8 +21,8 @@ int main() {
 //  pub_async_future.wait();
 //  sub_future.wait();
 //  method_3_publish_async::main();
-//  method_4_async_pub::main();
-  method_5_async_sub::main();
+  method_4_async_pub::main();
+//  method_5_async_sub::main();
 
   std::cout<<"mqtt lib test.\n";
   return 0;
