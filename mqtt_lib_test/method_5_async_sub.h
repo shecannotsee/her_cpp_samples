@@ -124,8 +124,8 @@ void main() {
     ch = getchar();
   };
 
-  /* 断开连接 */ {
-    MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
+  /* 断开连接 */
+  MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;/* set */ {
       auto onDisconnect = [](void* context, MQTTAsync_successData* response) ->void {
         printf("Successful disconnection\n");
         disc_finished = 1;
@@ -138,8 +138,8 @@ void main() {
       };
       disc_opts.onFailure = onDisconnectFailure;
     };
-    processing_results(MQTTAsync_disconnect(client, &disc_opts), "MQTTAsync_disconnect");
-  }
+  processing_results(MQTTAsync_disconnect(client, &disc_opts), "MQTTAsync_disconnect");
+
   while (!disc_finished) {
     usleep(10000L);
   }
