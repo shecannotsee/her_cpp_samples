@@ -53,7 +53,7 @@ void main() {
       printf("Reconnecting\n");
       conn_opts.keepAliveInterval = 20;
       conn_opts.cleansession = 1;
-      // 冲新连接
+      // 重新连接
       processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
     };
     // 收到消息处理函数
