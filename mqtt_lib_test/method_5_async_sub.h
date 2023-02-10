@@ -104,7 +104,6 @@ void main() {
         finished = 1;
       };
     };
-    // 设置回调
     conn_opts.onSuccess = onConnect;
 
     // 连接服务器失败的回调函数
@@ -112,7 +111,6 @@ void main() {
       cout << "Connect failed, rc ["<< response->code <<"]\n";
       finished = 1;
     };
-    // 设置回调
     conn_opts.onFailure = onConnectFailure;
 
     conn_opts.context = client;
