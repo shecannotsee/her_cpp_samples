@@ -75,6 +75,7 @@ void main() {
     auto onConnect = [](void* context, MQTTAsync_successData* response) -> void {
       cout << "Successful connection\n";
       MQTTAsync client = (MQTTAsync)context;
+      // 发布动作的回调函数设置
       MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* set */ {
         // 发送消息成功对应的回调函数
         auto onSend = [](void* context, MQTTAsync_successData* response) -> void {
@@ -125,12 +126,14 @@ void main() {
 
         opts.context = client;
       };
+      // 发布消息处理
       MQTTAsync_message pubmsg = MQTTAsync_message_initializer;/* msg init */ {
         pubmsg.payload = msg;
         pubmsg.payloadlen = (int)strlen(msg);
         pubmsg.qos = 1;
         pubmsg.retained = 0;
       };
+      // 发布动作
       processing_results(MQTTAsync_sendMessage(client, topic_name.c_str(), &pubmsg, &opts), "MQTTAsync_sendMessage");
     };
     conn_opts.onSuccess = onConnect;
