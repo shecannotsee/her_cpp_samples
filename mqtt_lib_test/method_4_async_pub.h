@@ -78,7 +78,9 @@ void main() {
 
     // 连接成功所对应的回调函数
     auto onConnect = [](void* context, MQTTAsync_successData* response) -> void {
-      cout << "Successful connection\n";
+      /* log */ {
+        cout << "Successful connection\n";
+      };
       MQTTAsync client = (MQTTAsync)context;
       // 发布动作的回调函数设置
       MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;/* set */ {
@@ -150,6 +152,11 @@ void main() {
   /* log */{
     cout << "Waiting for publication of [" << msg << "]\n";
     cout << "on topic [" << topic_name << "] for client with ClientID: [" << client_id << "]\n";
+  };
+  /* quit */ {
+    for (int ch = 0;ch != 'q'&& ch != 'Q';) {
+      ch = getchar();
+    }
   };
 
   MQTTAsync_destroy(&client);
