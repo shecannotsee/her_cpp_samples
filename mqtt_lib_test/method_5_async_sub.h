@@ -76,6 +76,7 @@ void main() {
                        "MQTTAsync_setCallbacks");
   };
 
+  /* 连接选项设置 */
   MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;/* set */ {
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;
@@ -138,9 +139,8 @@ void main() {
   };
 
 
-  /* 连接mqtt服务器 */ {
-    processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
-  };
+  /* 连接mqtt服务器 */
+  processing_results(MQTTAsync_connect(client, &conn_opts), "MQTTAsync_connect");
 
   // 订阅已完成并且任务已完成
   while (!subscribed && !finished) {
