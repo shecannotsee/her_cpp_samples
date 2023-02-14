@@ -4,7 +4,7 @@ using namespace std;
 
 int numSteps(string s) {
     int a = 0 ; int temp = 0 ;
-	//¶ş½øÖÆ×ªÊ®½øÖÆ
+	//äºŒè¿›åˆ¶è½¬åè¿›åˆ¶
     for ( int i=0 ; i<s.size() ; i++ ){
         if( s[i]=='1' ){
             for( int j=0 ; j<(s.size()-i) ; j++ ){
@@ -19,13 +19,13 @@ int numSteps(string s) {
         }
     }
         
-	//ÓÃÊ®½øÖÆ¼ÆËã
+	//ç”¨åè¿›åˆ¶è®¡ç®—
     temp = 0 ;
     while(a>1){
-        if( a%2 == 1 ){//ÊÇÆæÊı
+        if( a%2 == 1 ){//æ˜¯å¥‡æ•°
             a = a + 1 ;
         }
-        else{//ÊÇÅ¼Êı
+        else{//æ˜¯å¶æ•°
             a = a / 2 ;
         }
         temp++;
