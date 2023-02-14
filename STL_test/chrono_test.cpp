@@ -76,6 +76,26 @@ int main() {
     std::cout<<"half an hour ago : "<<std::ctime(&tm_2);
   }
 
+  /* get_milliseconds_from_specific_time */ {
+    int year    = 2023;    year  = year-1900; // std::chrono default set
+    int month   = 2;       month = month-1;   // std::chrono default set
+    int day     = 14;
+    int hour    = 10;
+    int minute  = 32;
+    int second  = 0;
+    // 2023-02-14 10:32:00
+    tm tm_target = {second, minute, hour, day, month, year};
+    auto target = std::chrono::system_clock::from_time_t(std::mktime(&tm_target));
+    auto now = std::chrono::system_clock::now();
+    if (now<=target) {
+      throw std::invalid_argument("[The input time is greater than the current time]");
+    }
+    auto duration = now - target;
+    auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    std::cout<< "2023-02-14 10:32:00 to now (ms) :" << milliseconds <<std::endl;
+  };
+
+
   std::cout<<"end.\n";
   return 0;
 }
