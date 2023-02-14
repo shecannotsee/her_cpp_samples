@@ -25,7 +25,7 @@ void main() {
   static char msg[] = "4_hello_world";
   // 返回值处理函数
   static auto processing_results = [](int return_code, const string& method_name) {
-    if ( return_code != MQTTCLIENT_SUCCESS ) {
+    if ( return_code != MQTTASYNC_SUCCESS ) {
       cout<<"Failed to["<<method_name<<"],return code"<<return_code<<endl;
       exit(EXIT_FAILURE);
     } else {
