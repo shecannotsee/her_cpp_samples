@@ -17,7 +17,7 @@ void main() {
 
   MQTTAsync client;
   MQTTAsync_createOptions create_options = MQTTAsync_createOptions_initializer;/* set */ {};
-  MQTTAsync_createWithOptions(&client,server_url.c_str(),client_id.c_str(),MQTTCLIENT_PERSISTENCE_NONE,NULL,&create_options);\
+  MQTTAsync_createWithOptions(&client,server_url.c_str(),client_id.c_str(),MQTTCLIENT_PERSISTENCE_NONE,NULL,&create_options);
   MQTTAsync_setCallbacks(client, client, NULL, NULL/*messageArrived*/, NULL);
 
   MQTTAsync_SSLOptions ssl_options = MQTTAsync_SSLOptions_initializer;
@@ -58,7 +58,13 @@ void main() {
   };
   MQTTAsync_connect(client, &connect_options);
 
+  MQTTAsync_disconnectOptions disconnect_options = MQTTAsync_disconnectOptions_initializer;/* set */ {
+    disconnect_options.onSuccess = NULL;
+    disconnect_options.onFailure = NULL;
+  };
+  MQTTAsync_disconnect(client,&disconnect_options);
 
+  MQTTAsync_destroy(&client);
 };
 
 };// namespace method_8_async_ssl_sub
