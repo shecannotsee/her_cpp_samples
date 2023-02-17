@@ -13,7 +13,8 @@
 //#include "method_7_async_ssl_pub.h"
 //#include "method_8_async_ssl_sub.h"
 //#include "method_9_cpp_sub.h"
-#include "method_10_cpp_ssl_pub.h"
+//#include "method_10_cpp_ssl_pub.h"
+#include "method_11_cpp_pub.h"
 
 int main() {
   std::cout<<"mqtt lib test.\n";
@@ -28,7 +29,8 @@ int main() {
 //  method_4_async_pub::main();
 //  method_5_async_sub::main();
 //  method_9_cpp_sub::main();
-  method_10_cpp_ssl_pub::main();
+//  method_10_cpp_ssl_pub::main();
+  method_11_cpp_pub::main();
 
   std::cout<<"mqtt lib test.\n";
   return 0;
