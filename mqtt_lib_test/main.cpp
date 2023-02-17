@@ -12,6 +12,7 @@
 //#include "method_6_interface.h"
 //#include "method_7_async_ssl_pub.h"
 #include "method_8_async_ssl_sub.h"
+#include "method_9_cpp_sub.h"
 
 int main() {
   std::cout<<"mqtt lib test.\n";

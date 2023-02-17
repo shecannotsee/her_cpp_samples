@@ -13,11 +13,17 @@ message(STATUS "sheTestcode_father's path:${sheTestcode_father}")
 
 # 添加mqtt库路径
 set(paho.mqtt.c-1.3.10 "${sheTestcode_father}/libraries/paho.mqtt.c-1.3.10")
+# 添加mqtt-cpp库路径
+set(paho.mqtt.cpp-1.2.0 "${sheTestcode_father}/libraries/paho.mqtt.cpp-1.2.0")
 
 # include
-include_directories(${paho.mqtt.c-1.3.10}/include)
+include_directories(
+        ${paho.mqtt.c-1.3.10}/include
+        ${paho.mqtt.cpp-1.2.0}/include)
 # lib
-link_directories(${paho.mqtt.c-1.3.10}/lib)
+link_directories(
+        ${paho.mqtt.c-1.3.10}/lib
+        ${paho.mqtt.cpp-1.2.0}/lib)
 
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp")
 add_executable(${PROJECT_NAME} ${SRC})
@@ -25,4 +31,5 @@ add_executable(${PROJECT_NAME} ${SRC})
 # 链接库
 target_link_libraries(${PROJECT_NAME} "-pthread"
         paho-mqtt3a paho-mqtt3c
-        paho-mqtt3as paho-mqtt3cs)
+        paho-mqtt3as paho-mqtt3cs
+        mqttpp3)
