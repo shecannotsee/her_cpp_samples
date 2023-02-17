@@ -11,5 +11,7 @@ paho.mqtt.c-1.3.10 ...
 -> ls
 bin  include  lib  share
 ```
+tips:If you want to use the c++interface of the library, be sure to generate its static library when compiling paho.mqtt.c
+
 And you can use this CMakeLists.txt now.
 
