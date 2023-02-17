@@ -30,6 +30,5 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 # 链接库
 target_link_libraries(${PROJECT_NAME} "-pthread"
-        paho-mqtt3a paho-mqtt3c
         paho-mqtt3as paho-mqtt3cs
-        mqttpp3)
+        paho-mqttpp3)
