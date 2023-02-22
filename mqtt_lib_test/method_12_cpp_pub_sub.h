@@ -148,7 +148,7 @@ connect:
     connect_success = true;
   }
   catch (const mqtt::exception& exc) {
-    std::cout << "publish set or connect error:" << exc.what() << std::endl;
+    std::cout << "connect error:" << exc.what() << std::endl;
     sleep(1);
     goto connect;
   };
@@ -171,6 +171,9 @@ connect:
       sleep(1);
     }
   });
+
+
+  client.disconnect()->wait();
 
   sleep(100);
 
