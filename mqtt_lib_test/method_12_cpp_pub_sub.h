@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <future>
+#include <atomic>
 #include <mqtt/async_client.h>
 
 namespace method_12_cpp_pub_sub {
@@ -18,36 +19,73 @@ using UpCallback = std::function<void(const std::string& topic, const std::strin
 class mqttCallbacks : public virtual mqtt::callback,
                       public virtual mqtt::iaction_listener {
  public:
-  mqttCallbacks(mqtt::async_client& client, mqtt::connect_options& connect_options)
+  mqttCallbacks(mqtt::async_client& client, mqtt::connect_options& connect_options,UpCallback ca)
       : client_(client),
-        connect_options_(connect_options) {};
+        connect_options_(connect_options),
+        callback_(nullptr) {};
  private:
   mqtt::async_client& client_;
   mqtt::connect_options& connect_options_;
+  UpCallback callback_;
  public:
-  void reconnect();
+
+  void reconnect() {
+    do {
+      try {
+        client_.connect(connect_options_, nullptr, *this);
+        std::cout << "Reconnect success.\n";
+      }
+      catch (const mqtt::exception &exc) {
+        std::cout << "reconnect error: [" << exc.what() << "]\n";
+        sleep(3);
+      }
+    } while (true);
+  };
 
   // Re-connection failure
-  void on_failure(const mqtt::token& tok) override;
+  void on_failure(const mqtt::token& tok) override {
+    std::cout << "Connection attempt failed" << std::endl;
+    reconnect();
+  };
 
   // (Re)connection success
   // Either this or connected() can be used for callbacks.
-  void on_success(const mqtt::token& tok) override;
+  void on_success(const mqtt::token& tok) override {
+    std::cout<< "[on_success]Connect to mqtt server success.\n";
+  };
 
   // (Re)connection success
-  void connected(const std::string& cause) override;
+  void connected(const std::string& cause) override {
+    std::cout<< "[connected]Connect to mqtt server success.\n";
+  };
 
   // Callback for when the connection is lost.
   // This will initiate the attempt to manually reconnect.
-  void connection_lost(const std::string& cause) override;
+  void connection_lost(const std::string& cause) override {
+    std::cout << "Connection lost.\n";
+    if (!cause.empty()) {
+      std::cout << "cause:[" << cause << "]\n";
+    }
+    std::cout << "Start to reconnecting...\n";
+    reconnect();
+  };
 
   // Callback for when a message arrives.
-  void message_arrived(mqtt::const_message_ptr msg) override;
+  void message_arrived(mqtt::const_message_ptr msg) override {
+    std::cout << "Message arrived:";
+    std::cout << msg->get_topic();
+    std::cout << "[" << msg->to_string() << "]\n";
+    if (callback_) {
+      std::string topic   = std::string(msg->get_topic());
+      std::string payload = std::string(msg->to_string());
+      callback_(topic,payload);
+    }
+  };
 
   // Callback for send message suucess
   void delivery_complete(mqtt::delivery_token_ptr token) override {
     int tokenNum = (token ? token->get_message_id() : -1);
-    std::cout << "Delivery complete for token:["<<tokenNum<< "]\n";
+    std::cout << "Delivery complete for token:[" << tokenNum << "]\n";
   };
 
 };// class callback
@@ -87,25 +125,38 @@ void main() {
     });
   };
   mqtt::connect_options connect_options{};/* set */ {
-    connect_options.set_user_name("");
-    connect_options.set_password("");
-    connect_options.set_clean_session(false);
+    connect_options.set_user_name("admin");
+    connect_options.set_password("123456");
+    connect_options.set_clean_session(true);
     if (set_ssl) connect_options.set_ssl(std::move(ssl_options));
-    mqtt::message will_message = mqtt::message("","",/*QOS*/1, false);
+    mqtt::message will_message = mqtt::message("/quit","Last will and testament",/*QOS*/1, false);
     connect_options.set_will_message(std::move(will_message));
   }
 
+  std::atomic<bool> connect_success {false};
+
+connect:
   try {
-    mqtt::token_ptr connect_token = client.connect(connect_options);
-    connect_token->wait();// block to connect until success
-    // connect_success_ = true;
+    bool use_block = true;
+    if (use_block) {
+      mqtt::token_ptr connect_token = client.connect(connect_options);
+      connect_token->wait();// block to connect until success
+      connect_success = true;
+    }
+    else {
+      client.connect(connect_options);
+    }
   }
   catch (const mqtt::exception& exc) {
-    std::cerr << "publish set or connect error:" << exc.what() << std::endl;
+    std::cout << "publish set or connect error:" << exc.what() << std::endl;
+    sleep(1);
+    goto connect;
   };
 
-
-  mqttCallbacks cb(client,connect_options);
+  UpCallback cssCallback = [](std::string topic,std::string payload){
+    std::cout<<"cssCallback:"<<topic<<"["<<payload<<"]\n";
+  };
+  mqttCallbacks cb(client,connect_options,cssCallback);
   client.set_callback(cb);
 
   std::async(std::launch::async,[&](){
@@ -115,8 +166,10 @@ void main() {
   });
 
   std::async(std::launch::async,[&](){
+    while (!connect_success){};
     for (int i=0;i<topics.size();i++) {
-      client.publish(topics[i],topics[topics.size()-1],QOS[i], false);
+      client.publish(topics[i],std::to_string(i+1),QOS[i], false);
+      sleep(1);
     }
   });
 
