@@ -173,7 +173,12 @@ connect:
   });
 
 
-  client.disconnect()->wait();
+  try {
+    client.disconnect()->wait();
+  }
+  catch (const mqtt::exception& exc) {
+    std::cout << "Disconnect error :" << exc.what() << std::endl;
+  };
 
   sleep(100);
 
