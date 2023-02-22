@@ -141,11 +141,11 @@ connect:
     if (use_block) {
       mqtt::token_ptr connect_token = client.connect(connect_options);
       connect_token->wait();// block to connect until success
-      connect_success = true;
     }
     else {
       client.connect(connect_options);
     }
+    connect_success = true;
   }
   catch (const mqtt::exception& exc) {
     std::cout << "publish set or connect error:" << exc.what() << std::endl;
@@ -166,7 +166,6 @@ connect:
   });
 
   std::async(std::launch::async,[&](){
-    while (!connect_success){};
     for (int i=0;i<topics.size();i++) {
       client.publish(topics[i],std::to_string(i+1),QOS[i], false);
       sleep(1);
