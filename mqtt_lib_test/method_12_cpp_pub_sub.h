@@ -19,10 +19,10 @@ using UpCallback = std::function<void(const std::string& topic, const std::strin
 class mqttCallbacks : public virtual mqtt::callback,
                       public virtual mqtt::iaction_listener {
  public:
-  mqttCallbacks(mqtt::async_client& client, mqtt::connect_options& connect_options,UpCallback ca)
+  mqttCallbacks(mqtt::async_client& client, mqtt::connect_options& connect_options,UpCallback cb)
       : client_(client),
         connect_options_(connect_options),
-        callback_(nullptr) {};
+        callback_(cb) {};
  private:
   mqtt::async_client& client_;
   mqtt::connect_options& connect_options_;
@@ -173,10 +173,6 @@ connect:
   });
 
   sleep(100);
-
-
-
-
 
 
 };
