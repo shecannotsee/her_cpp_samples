@@ -63,8 +63,25 @@ void main() {
 
   bool set_ssl = false;
   mqtt::ssl_options ssl_options{};/* set */ {
-    ssl_options.set_trust_store("");
-    ssl_options.set_key_store("");
+    std::string KEY_STORE   = "client.pem";
+    std::string TRUST_STORE = "test-root-ca.crt";
+    if (set_ssl) {
+      std::ifstream tstore(TRUST_STORE);
+      if (!tstore) {
+        std::cerr << "The trust store file does not exist: " << TRUST_STORE << std::endl;
+        std::cerr << "  Get a copy from \"paho.mqtt.c/test/ssl/test-root-ca.crt\"" << std::endl;;
+        return ;
+      };
+
+      std::ifstream kstore(KEY_STORE);
+      if (!kstore) {
+        std::cerr << "The key store file does not exist: " << KEY_STORE << std::endl;
+        std::cerr << "  Get a copy from \"paho.mqtt.c/test/ssl/client.pem\"" << std::endl;
+        return ;
+      };
+    };
+    ssl_options.set_trust_store(TRUST_STORE);
+    ssl_options.set_key_store(KEY_STORE);
     ssl_options.set_error_handler([](const std::string& msg) {
       std::cerr << "SSL Error: " << msg << std::endl;
     });
