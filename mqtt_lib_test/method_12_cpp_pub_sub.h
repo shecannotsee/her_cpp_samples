@@ -99,6 +99,8 @@ void main() {
 
   mqtt::async_client client(serverAddress,clientId);
 
+
+  // set connect options
   bool set_ssl = false;
   mqtt::ssl_options ssl_options{};/* set */ {
     std::string KEY_STORE   = "client.pem";
@@ -135,6 +137,7 @@ void main() {
 
   std::atomic<bool> connect_success {false};
 
+  // connect(block)
 connect:
   try {
     bool use_block = true;
@@ -153,18 +156,21 @@ connect:
     goto connect;
   };
 
+  // set callback
   UpCallback cssCallback = [](std::string topic,std::string payload){
     std::cout<<"cssCallback:"<<topic<<"["<<payload<<"]\n";
   };
-  mqttCallbacks cb(client,connect_options,cssCallback);
+  mqttCallbacks cb(client,connect_options, cssCallback);
   client.set_callback(cb);
 
+  // subscribe
   std::async(std::launch::async,[&](){
     for (int i=0;i<topics.size();i++) {
       client.subscribe(topics[i],QOS[i]);
     }
   });
 
+  // publish
   std::async(std::launch::async,[&](){
     for (int i=0;i<topics.size();i++) {
       client.publish(topics[i],std::to_string(i+1),QOS[i], false);
@@ -172,7 +178,7 @@ connect:
     }
   });
 
-
+  // disconnect
   try {
     client.disconnect()->wait();
   }
