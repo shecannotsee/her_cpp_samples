@@ -16,6 +16,7 @@ set(map "map_test.cpp")
 set(condition_variable "condition_variable_test.cpp")
 set(chrono "chrono_test.cpp")
 set(packaged_task "packaged_task_test.cpp")
+set(VariableLengthParameterTemplate "VariableLengthParameterTemplate_test.cpp")
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${chrono}")
 add_executable(${PROJECT_NAME}
         ${SRC}
