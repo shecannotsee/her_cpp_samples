@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(PROJECT_NAME "jsoncpp__test")
+set(PROJECT_NAME "jsoncpp_test")
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
 project(${PROJECT_NAME})
 
