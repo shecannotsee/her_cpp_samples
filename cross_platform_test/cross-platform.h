@@ -25,6 +25,7 @@ static void os_display() {
 
 static void compiler_display() {
   std::cout << "The compiler used is \t:";
+
   #ifdef __GNUC__
     std::cout << "GNUC.\n";
   #elif defined(__MINGW32__) || defined(__MINGW64__)
