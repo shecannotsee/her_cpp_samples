@@ -123,13 +123,17 @@ class coro_ret {
       return suspend_always{};
     };
 
-    // co_return的时候触发
+    // co_return的时候触发,与return_void之间只能声明一个
     // 定制:永不返回
     void return_value(T value) {
       value_ = value;
       std::cout << "promise_type::return_void().\n";
       return;
     };
+
+    // void return_void() {
+    // };
+
 
     // 协程抛异常，会传递到这
     // 定制:异常处理
