@@ -12,31 +12,31 @@
 #include <unistd.h>
 #include <string.h>
 
-#define SHM_NAME "/my_shared_memory"
-#define SHM_SIZE 4096
+#define SHARE_NAME "/my_shared_memory"
+#define SHARE_SIZE_4K 4096
 
 namespace m1_memory_share_test {
 
 int main() {
   int fd;
   char *addr;
-  char buf[SHM_SIZE];
+  char buf[SHARE_SIZE_4K];
 
-  // 创建共享内存区域
-  fd = shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666);
+  // 通过名称创建共享内存区域
+  fd = shm_open(SHARE_NAME, O_CREAT | O_RDWR, 0666);
   if (fd == -1) {
     perror("shm_open");
     exit(1);
   }
 
   // 设置共享内存区域大小
-  if (ftruncate(fd, SHM_SIZE) == -1) {
+  if (ftruncate(fd, SHARE_SIZE_4K) == -1) {
     perror("ftruncate");
     exit(1);
   }
 
   // 映射共享内存到进程地址空间
-  addr = static_cast<char*>(mmap(NULL, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0));
+  addr = static_cast<char*>(mmap(NULL, SHARE_SIZE_4K, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0));
   if (addr == MAP_FAILED) {
     perror("mmap");
     exit(1);
@@ -50,7 +50,7 @@ int main() {
   printf("%s\n", addr);
 
   // 解除共享内存映射
-  if (munmap(addr, SHM_SIZE) == -1) {
+  if (munmap(addr, SHARE_SIZE_4K) == -1) {
     perror("munmap");
     exit(1);
   }
@@ -62,7 +62,7 @@ int main() {
   }
 
   // 删除共享内存对象
-  if (shm_unlink(SHM_NAME) == -1) {
+  if (shm_unlink(SHARE_NAME) == -1) {
     perror("shm_unlink");
     exit(1);
   }
