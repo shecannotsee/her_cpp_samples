@@ -2,7 +2,7 @@
 
 这是一个基于源码自动构建依赖库然后将库集成到项目中的案例
 
-在该案例中， ./third_party 中有glog的源代码，可以在 ./third_party 下通过 git clone glog_url 获取
+在该案例中， ./third_party 中有glog的源代码，可以在 ./third_party 下通过 git clone https://github.com/google/glog.git 获取
 
 接下来就是在获取到源码后如何构建的问题
 
@@ -23,7 +23,7 @@ make
 
 This is a case study of automatically building dependency libraries based on source code and integrating them into a project.
 
-In this case/ third_ There is source code for glog in the party, which can be found in/ third_ Under party, through git clone glog_ URL acquisition.
+In this case, You can use [ git clone https://github.com/google/glog.git ] to get the source code.
 
 The next question is how to build after obtaining the source code
 
