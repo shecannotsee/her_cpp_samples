@@ -6,9 +6,9 @@ set(PROJECT_NAME "cmake_test")
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
 project(${PROJECT_NAME})
 
-# 一种从外部获取源码编译成库的支持，cmake最低支持版本为3.14
+# 一种从外部获取源码编译成库的支持，cmake最低支持版本为3.11
 include(FetchContent)
-# 另一种从源码直接编译的支持，需要cmake的最低版本是3.11
+# 另一种从源码直接编译的支持
 include(ExternalProject)
 
 if (NOT EXISTS "${CMAKE_SOURCE_DIR}/glog-install")
@@ -26,6 +26,14 @@ else()
     message(STATUS "Glog does not need to be compiled again.")
 endif()
 
+# 从url拉取第三方库并且进行编译，通过该方式添加的库会出现${CMAKE_BINARY_DIR}目录下
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.12.x
+)
+FetchContent_MakeAvailable(googletest)
+
 
 # 将安装后的glog引入到项目中来
 include_directories(${CMAKE_SOURCE_DIR}/glog-install/include)
@@ -40,4 +48,5 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/glog-install")
     message(STATUS "Add Compilation Dependency")
     add_dependencies(${PROJECT_NAME} glog)
 endif()
-target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/glog-install/lib/libglog.so)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/glog-install/lib/libglog.so gtest gmock)
+

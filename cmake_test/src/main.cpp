@@ -1,6 +1,17 @@
 #include <glog/logging.h>
+#include <gtest/gtest.h>
+
+inline int add(int a, int b) {
+  return a+b;
+}
+
+TEST(/*父模板名*/add_test,/*具体父模块下实际子模块名*/1_2) {
+EXPECT_EQ(add(1,2),3);
+};
 
 int main(int argc, char** argv) {
+  testing::InitGoogleTest();;
+  return RUN_ALL_TESTS();// 运行所有测试单元
   // 初始化 glog 库
   google::InitGoogleLogging(argv[0]);
 
