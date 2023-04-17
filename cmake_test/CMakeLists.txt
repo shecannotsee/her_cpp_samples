@@ -24,7 +24,10 @@ include_directories(${CMAKE_SOURCE_DIR}/glog-install/include)
 
 link_directories(${CMAKE_SOURCE_DIR}/glog-install/lib)
 
-
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp")
+
 add_executable(${PROJECT_NAME} ${SRC})
+
+# 指定cmake_test依赖于glog
+add_dependencies(${PROJECT_NAME} glog)
 target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/glog-install/lib/libglog.so)
