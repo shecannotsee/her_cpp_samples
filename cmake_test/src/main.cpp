@@ -11,7 +11,6 @@ EXPECT_EQ(add(1,2),3);
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest();;
-  return RUN_ALL_TESTS();// 运行所有测试单元
   // 初始化 glog 库
   google::InitGoogleLogging(argv[0]);
 
@@ -29,5 +28,5 @@ int main(int argc, char** argv) {
   // 关闭 glog 库
   google::ShutdownGoogleLogging();
 
-  return 0;
+  return RUN_ALL_TESTS();// 运行所有测试单元
 }
