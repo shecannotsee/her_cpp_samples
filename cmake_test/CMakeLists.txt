@@ -11,13 +11,21 @@ include(FetchContent)
 # 另一种从源码直接编译的支持，需要cmake的最低版本是3.11
 include(ExternalProject)
 
-ExternalProject_Add(
-        glog
-        # 指定源码
-        SOURCE_DIR "${CMAKE_SOURCE_DIR}/third_party/glog"
-        # 指定cmake的安装目录
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/glog-install
-)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/glog-install")
+    # 指定cmake_test依赖于glog
+    message(STATUS "Need to compile third-party libraries:glog.")
+    # 如果库不存在，就编译第三方库
+    ExternalProject_Add(
+            glog
+            # 指定源码
+            SOURCE_DIR "${CMAKE_SOURCE_DIR}/third_party/glog"
+            # 指定cmake的安装目录
+            CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/glog-install
+    )
+else()
+    message(STATUS "Glog does not need to be compiled again.")
+endif()
+
 
 # 将安装后的glog引入到项目中来
 include_directories(${CMAKE_SOURCE_DIR}/glog-install/include)
@@ -28,6 +36,8 @@ file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp")
 
 add_executable(${PROJECT_NAME} ${SRC})
 
-# 指定cmake_test依赖于glog
-add_dependencies(${PROJECT_NAME} glog)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/glog-install")
+    message(STATUS "Add Compilation Dependency")
+    add_dependencies(${PROJECT_NAME} glog)
+endif()
 target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/glog-install/lib/libglog.so)
