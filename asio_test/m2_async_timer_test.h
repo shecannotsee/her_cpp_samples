@@ -17,6 +17,6 @@ void main() {
 
 };
 
-};
+};// namespace m2_async_timer_test
 
 #endif //ASIO_TEST_ASIO_TEST_M2_ASYNC_TIMER_TEST_H_

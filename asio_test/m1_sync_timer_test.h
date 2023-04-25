@@ -17,6 +17,6 @@ void main() {
   std::cout << "Hello, world!" << std::endl;
 };
 
-};
+};// namespace m1_sync_timer_test
 
 #endif //ASIO_TEST_ASIO_TEST_M1_SYNC_TIMER_TEST_H_
