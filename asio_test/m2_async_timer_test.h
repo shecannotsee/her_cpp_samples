@@ -14,6 +14,11 @@ void print(const asio::error_code& /*e*/) {
 }
 
 void main() {
+  asio::io_context io;
+  asio::steady_timer t(io, asio::chrono::seconds(5));
+  t.async_wait(&print);
+  std::cout << "wait to async timer...\n";
+  io.run();
 
 };
 
