@@ -1,0 +1,1 @@
+Example of using the compiler's error report to view the types of auto variables.
