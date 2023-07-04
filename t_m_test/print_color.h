@@ -14,7 +14,5 @@ const std::string YELLOW_COLOR  = "\033[33m";
 const std::string PURPLE_COLOR  = "\033[35m";
 const std::string BLUE_COLOR    = "\033[34m";
 
-#endif //SHEPLAYER_PRINT_COLOR_H
-
 
 #endif //T_M_TEST_T_M_TEST_PRINT_COLOR_H_
