@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+#include "print_color.h"
 #include "m1_base.hpp"
 
 int main() {
