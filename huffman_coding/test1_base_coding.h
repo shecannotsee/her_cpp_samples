@@ -34,28 +34,8 @@ void main() {
     _.insert(std::make_pair(element.second,element.first));
   }
 
-
-  // node : fre, char , left child
-  using value = std::tuple<int,char>;
-  auto [fre,ch] = value a{1,'a'};
-  using node = std::tuple<value ,value*,value*>;
-  std::unique_ptr<node> root = std::make_unique<node>(std::make_tuple(0,' '), nullptr, nullptr);
-
-  struct xx {
-    int i;
-    xx* left;
-    xx* right;
-  };
-  
-node_generate:
-  int node_num = 0;
-  for (auto element : _ ) {
-    if (node_num == 2) {
-      goto node_generate;
-    }
+  for(auto element : _) {
     std::cout << element.first << element.second << std::endl;
-
-    node_num++;
   }
 
 
