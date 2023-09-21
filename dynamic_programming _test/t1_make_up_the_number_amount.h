@@ -57,9 +57,12 @@ int get_min_paper(int num) {
   return num_paper[num];
 }
 
-void main(int value) {
-  auto ret = get_min_paper(value);
-  std::cout << "\033[32m" << value << "(11,5,1):[" << ret << "]\033[0m" << std::endl;
+void main() {
+  int range = 55;
+  for (int i = 0; i <= range; ++i) {
+    auto ret = get_min_paper(i);
+    std::cout << "\033[32m" << i << "(11,5,1):[" << ret << "]\033[0m" << std::endl;
+  }
 }
 
 
