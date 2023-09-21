@@ -12,7 +12,11 @@
 
 namespace t1_make_up_the_number_amount {
 
+//
 void cal(int num, std::unordered_map<int,int>& num_paper) {
+  if (num == 0) {
+    return;
+  }
   if (num_paper.count(num) > 0) {
     // 已经计算过了
     return;
@@ -22,9 +26,14 @@ void cal(int num, std::unordered_map<int,int>& num_paper) {
     /*zzz*/if (num > 11) {
 
     } else if (num >  5) {
-
+      cal(num-5,num_paper);
+      cal(num-1,num_paper);
+      int temp_1 = num_paper[1] + num_paper[num-1];
+      int temp_2 = num_paper[5] + num_paper[num-1];
+      (temp_1>temp_2) ? (temp = temp_2) : (temp = temp_1);
     } else if (num >  0) {
-
+      cal(num-1,num_paper);
+      temp = num_paper[1] + num_paper[num-1];
     }
 
     num_paper.insert(std::make_pair(num,temp));
@@ -34,8 +43,6 @@ void cal(int num, std::unordered_map<int,int>& num_paper) {
 
 int get_min_paper(int num) {
   // 11 5 1
-  int paper = num;// 使用的张数
-
   std::unordered_map<int,int> num_paper;/*init*/ {
     num_paper.insert(std::make_pair( 1,1));
     num_paper.insert(std::make_pair( 5,1));
