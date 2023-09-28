@@ -13,14 +13,14 @@
 #include "bit_map.h"
 #include "hash.h"
 
-class BloomFilter
+class bloom_filter
 {
  public:
-  BloomFilter(){
-    m_bitmap = new BitMap(1024);
+  bloom_filter(){
+    m_bitmap = new bit_map(1024);
   };
 
-  ~BloomFilter(){
+  ~bloom_filter(){
     delete m_bitmap;
     m_bitmap = nullptr;
   };
@@ -50,7 +50,7 @@ class BloomFilter
   };
 
  private:
-  BitMap *m_bitmap;
+  bit_map *m_bitmap;
 
 };
 

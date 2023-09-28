@@ -10,7 +10,7 @@
 namespace t1_bitmap {
 
 void main() {
-  BitMap bm(33);
+  bit_map bm(33);
 
   bm.debug();
 }

@@ -10,7 +10,7 @@
 namespace t2_bloomfilter {
 
 void main() {
-  BloomFilter bf;
+  bloom_filter bf;
 
   bf.add("function_use1");
   bf.add("function_use2");

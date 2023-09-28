@@ -13,17 +13,17 @@
 #include <memory>
 
 
-class BitMap
+class bit_map
 {
  public:
-  BitMap(int size=32){
+  bit_map(int size=32){
     m_readSize = size%sizeof(int)+1;
     m_ptr = new unsigned int[m_readSize];
     m_size = size;
     turnAllOff();
   };
 
-  ~BitMap(){
+  ~bit_map(){
     delete[] m_ptr;
     m_ptr = nullptr;
   };
