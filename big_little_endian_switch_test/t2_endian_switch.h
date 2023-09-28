@@ -50,10 +50,11 @@ endian endian_check() {
 #define htons(h) ((endian_check == endian::big) ? h : ENDIAN_SWAP16(h))
 #define ntohs(n) ((endian_check == endian::big) ? n : ENDIAN_SWAP16(n))
 
-#define local_to_big_endian_32(net) htonl(net)
-#define big_to_local_32(local)      ntohl(local)
-#define local_to_big_endian_16(net) htons(net)
-#define big_to_local_16(local)      ntohs(local)
+// The network is always the big endian
+#define HOST_TO_NETWORK_32(net)   htonl(net)
+#define NETWORK_TO_HOST_32(host)  ntohl(host)
+#define HOST_TO_NETWORK_16(net)   htons(net)
+#define NETWORK_TO_HOST_16(host)  ntohs(host)
 
 void main() {
   (endian_check()==endian::big)?
