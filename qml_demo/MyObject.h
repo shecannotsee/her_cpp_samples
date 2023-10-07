@@ -13,7 +13,6 @@ class MyObject : public QObject {
  Q_OBJECT
  public:
   explicit MyObject(QObject* parent = nullptr);
-  virtual ~MyObject() = default;
 
  public slots:
   void handleButtonClick();
