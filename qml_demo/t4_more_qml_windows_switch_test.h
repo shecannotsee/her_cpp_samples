@@ -8,7 +8,6 @@
 #include <thread>
 #include <unistd.h>
 #include "other_class/login.h"
-#include "other_class/windows_control.h"
 
 namespace t4_more_qml_windows_switch_test {
 

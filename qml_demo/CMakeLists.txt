@@ -14,8 +14,7 @@ find_package(Qt5 COMPONENTS Core
 add_executable(qml_demo
         main.cpp
         other_class/MyObject.cpp
-        other_class/login.cpp
-        other_class/windows_control.cpp)
+        other_class/login.cpp)
 
 # 链接Qt库
 target_link_libraries(qml_demo "-pthread"

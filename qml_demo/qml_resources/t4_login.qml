@@ -51,8 +51,6 @@ ApplicationWindow {
                 onClicked: {
                     var result = loginHandler.validateLogin(usernameInput.text, passwordInput.text);
                     if (result) {
-                        // 修改 t4_manage_window.qml 中的 visible 为false
-                        MANAGE_SHOW = true;
                         window.visible = false;
                     }
 
