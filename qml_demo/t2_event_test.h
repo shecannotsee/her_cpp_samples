@@ -8,7 +8,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "MyObject.h"
+#include "other_class/MyObject.h"
 
 namespace t2_event_test {
 
