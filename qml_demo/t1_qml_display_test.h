@@ -16,7 +16,7 @@ int main(int argc,char* argv[]) {
   QGuiApplication app(argc, argv);
 
   QQmlApplicationEngine engine;
-  engine.load(QUrl(QStringLiteral("../t1.qml")));
+  engine.load(QUrl(QStringLiteral("../qml_resources/t1.qml")));
   if (engine.rootObjects().isEmpty()) {
     return -1;
   }

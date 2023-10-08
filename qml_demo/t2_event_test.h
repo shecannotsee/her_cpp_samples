@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   // 将C++对象添加到QML上下文
   engine.rootContext()->setContextProperty("myObject", &myObject);
 
-  engine.load(QUrl(QStringLiteral("../t2.qml")));
+  engine.load(QUrl(QStringLiteral("../qml_resources/t2.qml")));
 
   return app.exec();
 }
