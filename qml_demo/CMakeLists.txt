@@ -13,7 +13,8 @@ find_package(Qt5 COMPONENTS Core
 # 添加可执行文件
 add_executable(qml_demo
         main.cpp
-        other_class/MyObject.cpp)
+        other_class/MyObject.cpp
+        other_class/login.cpp)
 
 # 链接Qt库
 target_link_libraries(qml_demo "-pthread"
