@@ -5,10 +5,11 @@
 #include "login.h"
 #include <string>
 #include <iostream>
+#include <QQmlContext>
 
 namespace t3_login_test {
 
-login::login(QObject *parent) : QObject(parent) {
+login::login(QQmlApplicationEngine* e, QObject *parent) : QObject(parent), engine(e) {
 
 }
 
@@ -19,6 +20,8 @@ bool login::validateLogin(const QString &username, const QString &password) {
 bool login::validateLogin(const std::string &username, const std::string &password) {
   if (username == "admin" && password == "123456") {
     std::cout << "pass" <<std::endl;
+    // 修改全局变量!完成显示!
+    engine->rootContext()->setContextProperty("MANAGE_SHOW", true);
     return true;
   } else {
     std::cout << "not pass" <<std::endl;

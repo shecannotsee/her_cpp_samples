@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
   QQmlApplicationEngine engine;
 
   // 创建登录处理器对象
-  login loginHandler;
+  login loginHandler(&engine);
 
   // 将登录处理器对象注册到 QML 上下文中
   engine.rootContext()->setContextProperty("loginHandler", &loginHandler);
