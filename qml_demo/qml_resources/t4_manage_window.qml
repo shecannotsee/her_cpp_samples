@@ -3,9 +3,10 @@ import QtQuick.Controls 2.15
 
 // window containing the application
 ApplicationWindow {
+    id: manage_window
     // Content Area
 
-    visible: true
+    visible: MANAGE_SHOW
     // title of the application
     title: qsTr("Hello World")
     width: 640

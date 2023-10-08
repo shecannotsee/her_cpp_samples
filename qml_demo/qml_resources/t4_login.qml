@@ -7,22 +7,14 @@ ApplicationWindow {
     visible: true
     width: 400
     height: 200
-    title: "login example"
+    title: "login"
 
     Rectangle {
         id: loginPage
 
         gradient: Gradient {
-            GradientStop {
-                position: 1
-                color: "slategray"
-            }
-
-            GradientStop {
-                position: 0
-                color: "lightsteelblue"
-            }
-
+            GradientStop { position: 1; color: "slategray"}
+            GradientStop { position: 0; color: "lightsteelblue"}
         }
 
         border.color: "slategray"
@@ -58,8 +50,11 @@ ApplicationWindow {
                 height: 40
                 onClicked: {
                     var result = loginHandler.validateLogin(usernameInput.text, passwordInput.text);
-                    if (result)
-                        close();
+                    if (result) {
+                        // 修改 t4_manage_window.qml 中的 visible 为false
+                        MANAGE_SHOW = true;
+                        window.visible = false;
+                    }
 
                 }
             }
