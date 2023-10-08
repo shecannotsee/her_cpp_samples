@@ -59,7 +59,7 @@ ApplicationWindow {
                 onClicked: {
                     var result = loginHandler.validateLogin(usernameInput.text, passwordInput.text);
                     if (result)
-                        display = false;
+                        close();
 
                 }
             }
