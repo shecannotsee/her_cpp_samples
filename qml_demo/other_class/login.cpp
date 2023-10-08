@@ -12,15 +12,17 @@ login::login(QObject *parent) : QObject(parent) {
 
 }
 
-void login::validateLogin(const QString &username, const QString &password) {
-  this->validateLogin(username.toStdString(),password.toStdString());
+bool login::validateLogin(const QString &username, const QString &password) {
+  return this->validateLogin(username.toStdString(),password.toStdString());
 }
 
-void login::validateLogin(const std::string &username, const std::string &password) {
+bool login::validateLogin(const std::string &username, const std::string &password) {
   if (username == "admin" && password == "123456") {
     std::cout << "pass" <<std::endl;
+    return true;
   } else {
     std::cout << "not pass" <<std::endl;
+    return false;
   }
 }
 

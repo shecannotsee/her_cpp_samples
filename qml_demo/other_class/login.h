@@ -16,8 +16,8 @@ class login : public QObject
   explicit login(QObject *parent = nullptr);
 
  public slots:
-  void validateLogin(const QString &username, const QString &password);
-  void validateLogin(const std::string &username, const std::string &password);
+  bool validateLogin(const QString &username, const QString &password);
+  bool validateLogin(const std::string &username, const std::string &password);
 
 };
 
