@@ -28,14 +28,14 @@ void ChatWidget::sendMessage() {
 void ChatWidget::setupUI() {
   QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
-  chatTextEdit = new QTextEdit(this);
+  chatTextEdit = std::make_unique<QTextEdit>(this);
   chatTextEdit->setReadOnly(true);
   chatTextEdit->setStyleSheet("background-color: #f2f2f2; border: 1px solid #ccc; padding: 10px;");
-  mainLayout->addWidget(chatTextEdit);
+  mainLayout->addWidget(chatTextEdit.get());
 
-  inputTextEdit = new QTextEdit(this);
+  inputTextEdit = std::make_unique<QTextEdit>(this);
   inputTextEdit->setStyleSheet("background-color: #ffffff; border: 1px solid #ccc; padding: 10px;");
-  mainLayout->addWidget(inputTextEdit);
+  mainLayout->addWidget(inputTextEdit.get());
 
   QPushButton *sendButton = new QPushButton("send message", this);
   sendButton->setIcon(QIcon(":/icons/send.png"));

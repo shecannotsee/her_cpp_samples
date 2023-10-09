@@ -5,6 +5,7 @@
 #ifndef QWIDGET_DEMO_CHAT_WINDOW_H
 #define QWIDGET_DEMO_CHAT_WINDOW_H
 
+#include <memory>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -28,8 +29,9 @@ class ChatWidget : public QWidget
 
   void displayMessage(const QString &message);
 
-  QTextEdit *chatTextEdit{};
-  QTextEdit *inputTextEdit{};
+  std::unique_ptr<QTextEdit> chatTextEdit;
+  std::unique_ptr<QTextEdit> inputTextEdit;
+
 };
 
 } // t3_chat_window_test
