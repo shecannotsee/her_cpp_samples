@@ -15,6 +15,8 @@ const std::string BLUE_COLOR    = "\033[34m";
 int main(int argc, char *argv[]) {
   std::cout << YELLOW_COLOR << "test start" << RESET_COLOR << std::endl;
 
+  t1_connect_test::demo1();
+  t1_connect_test::demo2();
   t1_connect_test::main();
 
   std::cout << YELLOW_COLOR << "test end" << RESET_COLOR << std::endl;
