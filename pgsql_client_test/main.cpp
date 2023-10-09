@@ -3,11 +3,20 @@
 //
 #include <iostream>
 
+#include "t1_connect_test.h"
+
+const std::string RESET_COLOR   = "\033[0m";
+const std::string RED_COLOR     = "\033[31m";
+const std::string GREEN_COLOR   = "\033[32m";
+const std::string YELLOW_COLOR  = "\033[33m";
+const std::string PURPLE_COLOR  = "\033[35m";
+const std::string BLUE_COLOR    = "\033[34m";
 
 int main(int argc, char *argv[]) {
-  std::cout << "\033[33m" << "test start" << "\033[0m" << std::endl;
+  std::cout << YELLOW_COLOR << "test start" << RESET_COLOR << std::endl;
 
+  t1_connect_test::main();
 
-  std::cout << "\033[33m" << "test end" << "\033[0m" << std::endl;
+  std::cout << YELLOW_COLOR << "test end" << RESET_COLOR << std::endl;
   return 0;
 }
