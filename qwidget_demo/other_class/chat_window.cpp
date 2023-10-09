@@ -6,6 +6,8 @@
 #include <QHBoxLayout>
 #include <QShortcut>
 #include <QKeyEvent>
+#include <QDesktopWidget>
+#include <iostream>
 
 namespace t3_chat_window_test {
 
@@ -55,7 +57,17 @@ void ChatWidget::setupUI() {
   resize(800, 600); // 设置默认大小
 
   // 让窗口居中
-  // move(0, 0);
+  QDesktopWidget* desktopWidget = QApplication::desktop();
+  // 获取第二个屏幕的信息
+  int secondScreenIndex = 1;  // 1 表示第二个屏幕
+  QRect secondScreenRect = desktopWidget->screenGeometry(secondScreenIndex);
+
+  // 计算窗口在第二个屏幕中央的位置
+  int x = secondScreenRect.x() + (secondScreenRect.width() - width()) / 2;
+  int y = secondScreenRect.y() + (secondScreenRect.height() - height()) / 2;
+
+  // 移动窗口到第二个屏幕的中央
+  move(x, y);
 
   // 允许用户调节窗口大小
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
