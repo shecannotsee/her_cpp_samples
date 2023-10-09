@@ -24,6 +24,11 @@ int main(int argc, char* argv[]) {
   window.setWindowTitle("登录界面"); // 设置窗口标题
   window.resize(400, 200); // 设置窗口大小
 
+  // manage page
+  QWidget manage_page;
+  manage_page.setWindowTitle("manage_page"); // 设置窗口标题
+  manage_page.resize(400, 300); // 设置窗口大小
+
   // 创建垂直布局管理器
   QVBoxLayout *layout = new QVBoxLayout(&window);
 
@@ -58,7 +63,8 @@ int main(int argc, char* argv[]) {
 
     if (username == "admin" && password == "123456") {
       // 登录成功，可以执行相应操作
-      window.close();
+      window.hide();
+      manage_page.show();
     } else {
       // 登录失败，可以显示错误消息
       QMessageBox::warning(&window, "登录失败", "用户名或密码不正确");
