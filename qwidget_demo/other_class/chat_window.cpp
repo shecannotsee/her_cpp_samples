@@ -4,6 +4,8 @@
 
 #include "chat_window.h"
 #include <QHBoxLayout>
+#include <QShortcut>
+#include <QKeyEvent>
 
 namespace t3_chat_window_test {
 
@@ -35,7 +37,7 @@ void ChatWidget::setupUI() {
   inputTextEdit->setStyleSheet("background-color: #ffffff; border: 1px solid #ccc; padding: 10px;");
   mainLayout->addWidget(inputTextEdit);
 
-  QPushButton *sendButton = new QPushButton("发送", this);
+  QPushButton *sendButton = new QPushButton("send message", this);
   sendButton->setIcon(QIcon(":/icons/send.png"));
   sendButton->setStyleSheet("background-color: #0078d4; color: #fff; border: none; padding: 10px;");
   mainLayout->addWidget(sendButton);
@@ -43,6 +45,7 @@ void ChatWidget::setupUI() {
   connect(sendButton, &QPushButton::clicked, this, &ChatWidget::sendMessage);
 
   setLayout(mainLayout);
+  setWindowTitle("chat window");
 
   // 设置默认焦点为输入文本框
   inputTextEdit->setFocus();
