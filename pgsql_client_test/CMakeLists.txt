@@ -12,14 +12,14 @@ get_filename_component(sheTestcode_path ${CMAKE_SOURCE_DIR} DIRECTORY)
 message(STATUS "sheTestcode_path's path:${sheTestcode_path}")
 
 # include
-include_directories()
+include_directories(/home/shecannotsee/desktop/libraries/postgresql-14.1/include)
 # lib
-link_directories()
+link_directories(/home/shecannotsee/desktop/libraries/postgresql-14.1/lib)
 
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp")
 add_executable(${PROJECT_NAME} ${SRC})
 
 # 链接库
-target_link_libraries(${PROJECT_NAME} "-pthread")
+target_link_libraries(${PROJECT_NAME} "-pthread" pq)
 
 ########################################################################################################################
