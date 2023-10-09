@@ -3,9 +3,9 @@
 //
 
 #include "chat_window.h"
+#include <QHBoxLayout>
 
 namespace t3_chat_window_test {
-
 
 ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent) {
   setupUI();
@@ -24,23 +24,41 @@ void ChatWidget::sendMessage() {
 }
 
 void ChatWidget::setupUI() {
-  QVBoxLayout *layout = new QVBoxLayout(this);
+  QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
   chatTextEdit = new QTextEdit(this);
   chatTextEdit->setReadOnly(true);
-  layout->addWidget(chatTextEdit);
+  chatTextEdit->setStyleSheet("background-color: #f2f2f2; border: 1px solid #ccc; padding: 10px;");
+  mainLayout->addWidget(chatTextEdit);
 
   inputTextEdit = new QTextEdit(this);
-  layout->addWidget(inputTextEdit);
+  inputTextEdit->setStyleSheet("background-color: #ffffff; border: 1px solid #ccc; padding: 10px;");
+  mainLayout->addWidget(inputTextEdit);
 
   QPushButton *sendButton = new QPushButton("发送", this);
-  layout->addWidget(sendButton);
+  sendButton->setIcon(QIcon(":/icons/send.png"));
+  sendButton->setStyleSheet("background-color: #0078d4; color: #fff; border: none; padding: 10px;");
+  mainLayout->addWidget(sendButton);
 
   connect(sendButton, &QPushButton::clicked, this, &ChatWidget::sendMessage);
 
-  setLayout(layout);
+  setLayout(mainLayout);
 
+  // 设置默认焦点为输入文本框
+  inputTextEdit->setFocus();
+
+  // 设置窗口的默认大小适配人类的习惯
+  setMinimumSize(400, 300); // 设置最小大小
+  resize(800, 600); // 设置默认大小
+
+  // 让窗口居中
+  // move(0, 0);
+
+  // 允许用户调节窗口大小
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
+
+
 
 void ChatWidget::displayMessage(const QString &message) {
   chatTextEdit->append(message);
