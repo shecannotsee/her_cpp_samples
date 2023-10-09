@@ -34,7 +34,7 @@ void main() {
   PGresult* res = nullptr;
   /* 设置始终安全的搜索路径，这样恶意用户就无法控制 */
   res = PQexec(conn,"SET search_path = private");/* check set */ {
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
       std::cout << "\033[31m" << "SET failed:" << PQerrorMessage(conn) << "\033[0m" << std::endl;
       PQclear(res);
       exit_nicely(conn);
@@ -45,19 +45,9 @@ void main() {
     PQclear(res);
   }
 
-//  /* Start a transaction block */
-//  res = PQexec(conn, "BEGIN");/* check */ {
-//    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-//      std::cout << "\033[31m" << "BEGIN command failed:" << PQerrorMessage(conn) << "\033[0m" << std::endl;
-//      PQclear(res);
-//      exit_nicely(conn);
-//    }
-//    PQclear(res);
-//  }
-
   /* Fetch rows from pg_database, the system catalog of databases */
-  res = PQexec(conn, "select * from private.book");/* check success */ {
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+  res = PQexec(conn, "SELECT name, price FROM private.book");/* check success */ {
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
       fprintf(stderr, "DECLARE CURSOR failed: %s", PQerrorMessage(conn));
       PQclear(res);
       exit_nicely(conn);
@@ -65,39 +55,19 @@ void main() {
     PQclear(res);
   }
 
-//  res = PQexec(conn, "FETCH ALL in myportal");/* check success */ {
-//    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-//      fprintf(stderr, "FETCH ALL failed: %s", PQerrorMessage(conn));
-//      PQclear(res);
-//      exit_nicely(conn);
-//    }
-//    PQclear(res);
-//  }
+  // 获取结果集中的行数
+  int numRows = PQntuples(res);
 
-  /* 打印属性行 */
-  int nFields = PQnfields(res);
-  for (int i = 0; i < nFields; i++) {
-//    std::cout << PQfname(res, i) << std::endl;
-    printf("%-15s", PQfname(res, i));
-  }
-  printf("\n\n");
-
-  /* output row data */
-  for (int i = 0; i < PQntuples(res); i++) {
-    for (int j = 0; j < nFields; j++) {
-//      std::cout << PQgetvalue(res, i, j) << std::endl;
-      printf("%-15s", PQgetvalue(res, i, j));
+// 遍历结果集并输出书名和价格
+  for (int i = 0; i < numRows; i++) {
+    const char *name = PQgetvalue(res, i, 0);
+    const char *price = PQgetvalue(res, i, 1);
+    if (name && price) {
+      printf("书名: %s, 价格: %s\n", name, price);
+    } else {
+      printf("无效的书名或价格\n");
     }
-    printf("\n");
   }
-
-  /* close the portal ... we don't bother to check for errors ... */
-  res = PQexec(conn, "CLOSE myportal");
-  PQclear(res);
-
-  /* end the transaction */
-  res = PQexec(conn, "END;");
-  PQclear(res);
 
   /* close the connection to the database and cleanup */
   PQfinish(conn);
