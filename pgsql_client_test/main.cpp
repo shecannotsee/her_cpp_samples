@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "t1_connect_test.h"
+#include "t0_example.h"
 
 const std::string RESET_COLOR   = "\033[0m";
 const std::string RED_COLOR     = "\033[31m";
@@ -15,8 +16,8 @@ const std::string BLUE_COLOR    = "\033[34m";
 int main(int argc, char *argv[]) {
   std::cout << YELLOW_COLOR << "test start" << RESET_COLOR << std::endl;
 
-  t1_connect_test::demo1();
-  t1_connect_test::demo2();
+  t0_example::demo1();
+  t0_example::demo2();
   t1_connect_test::main();
 
   std::cout << YELLOW_COLOR << "test end" << RESET_COLOR << std::endl;
