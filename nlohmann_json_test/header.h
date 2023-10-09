@@ -23,6 +23,11 @@ void main() {
     // 将nlohmann json 转换为std::string
     std::string str3 = json.dump(4);
     std::cout<<"nlohmann json to std::string :"<<str3<<std::endl;
+    // get value
+    std::string str4 = json["happy"].get<std::string>();
+    std::string str5 = json["happy"].dump();
+    std::cout<<"nlohmann json(key:happy's value) to std::string (no dump): "<<str4<<std::endl;
+    std::cout<<"nlohmann json(key:happy's value) to std::string (dump): "<<str5<<std::endl;
   };
   /* get json key value */ {
     std::cout<<"\nget json key value test:\n";
