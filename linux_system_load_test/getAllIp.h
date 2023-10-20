@@ -30,7 +30,7 @@ int main() {
     if (ifa->ifa_addr->sa_family == AF_INET) {
       int s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
       if (s == 0) {
-        std::cout << "Interface:[" << ifa->ifa_name << "],IP Address:[" << host << "]" <<std::endl;
+        std::cout << "Interface:[" << std::string(ifa->ifa_name) << "],IP Address:[" << std::string(host,NI_MAXHOST) << "]" <<std::endl;
       }
     }
   }
