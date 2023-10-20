@@ -4,7 +4,9 @@
 #include <iostream>
 //#include "getMemory.h"
 //#include "getCpu.h"
-#include "get_process_cpu_memory.h"
+//#include "get_process_cpu_memory.h"
+#include "get_ip.h"
+#include "ping_url.h"
 
 int main (int argc,char* argv[],char* env[]) {
   for (int i = 0; i < argc; i++) {
@@ -16,6 +18,8 @@ int main (int argc,char* argv[],char* env[]) {
   }
 //  getMemory::main();
 //  getCpu::main();
-  get_process_cpu_memory::main();
+//  get_process_cpu_memory::main();
+  get_ip::main();
+  ping_url::main();
   return 0;
 }
