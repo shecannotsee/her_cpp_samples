@@ -1,7 +1,7 @@
 ########################################################################################################################
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PROJECT_NAME "coroutines_in_c")
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
