@@ -12,7 +12,7 @@ enum class endian {
   big    = 1
 };
 
-endian endian_check() {
+static endian endian_check() {
   //  0x1234567(example)
   //  0x00 0x01 0x10 0x11 ......(memory address)
   //  01   23   45   67 ......(big endian)
@@ -45,10 +45,10 @@ endian endian_check() {
 /*
  * htonl/ntohl/htons/ntohs impl
 */
-#define htonl(h) ((endian_check == endian::big) ? h : ENDIAN_SWAP32(h))
-#define ntohl(n) ((endian_check == endian::big) ? n : ENDIAN_SWAP32(n))
-#define htons(h) ((endian_check == endian::big) ? h : ENDIAN_SWAP16(h))
-#define ntohs(n) ((endian_check == endian::big) ? n : ENDIAN_SWAP16(n))
+#define hton32(h) (endian_check() == endian::big) ? h : ENDIAN_SWAP32(h))
+#define ntoh32(n) (endian_check() == endian::big) ? n : ENDIAN_SWAP32(n))
+#define hton16(h) (endian_check() == endian::big) ? h : ENDIAN_SWAP16(h))
+#define ntoh16(n) (endian_check() == endian::big) ? n : ENDIAN_SWAP16(n))
 
 // The network is always the big endian
 #define HOST_TO_NETWORK_32(net)   htonl(net)
