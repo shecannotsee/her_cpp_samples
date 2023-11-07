@@ -22,12 +22,12 @@ void main() {
     std::cout << data_big << std::endl;
 
     // 小端处理法
-    std::uint16_t b_little = (static_cast<std::uint8_t>(stream[0]) << 8) |
-                             (static_cast<std::uint8_t>(stream[1]) << 0);
+    std::uint16_t b_little = (static_cast<std::uint16_t>(stream[0]) << 8) |
+                             (static_cast<std::uint16_t>(stream[1]) << 0);
     std::cout << b_little << std::endl;
     // 大端处理法
-    std::uint16_t b_big = (static_cast<std::uint8_t>(stream[1]) << 8) |
-                          (static_cast<std::uint8_t>(stream[0]) << 0);
+    std::uint16_t b_big = (static_cast<std::uint16_t>(stream[1]) << 8) |
+                          (static_cast<std::uint16_t>(stream[0]) << 0);
     std::cout << b_big << std::endl;
   }
 
@@ -41,16 +41,16 @@ void main() {
     std::cout << data_big << std::endl;
 
     // 小端处理法
-    std::uint32_t b_little = (static_cast<std::uint16_t>(stream[0]) << 24) |
-                             (static_cast<std::uint16_t>(stream[1]) << 16) |
-                             (static_cast<std::uint16_t>(stream[2]) <<  8) |
-                             (static_cast<std::uint16_t>(stream[3]) <<  0);
+    std::uint32_t b_little = (static_cast<std::uint32_t>(stream[0]) << 24) |
+                             (static_cast<std::uint32_t>(stream[1]) << 16) |
+                             (static_cast<std::uint32_t>(stream[2]) <<  8) |
+                             (static_cast<std::uint32_t>(stream[3]) <<  0);
     std::cout << b_little << std::endl;
     // 大端处理法
-    std::uint32_t b_big = (static_cast<std::uint16_t>(stream[3]) << 24) |
-                          (static_cast<std::uint16_t>(stream[2]) << 16) |
-                          (static_cast<std::uint16_t>(stream[1]) <<  8) |
-                          (static_cast<std::uint16_t>(stream[0]) <<  0);
+    std::uint32_t b_big = (static_cast<std::uint32_t>(stream[3]) << 24) |
+                          (static_cast<std::uint32_t>(stream[2]) << 16) |
+                          (static_cast<std::uint32_t>(stream[1]) <<  8) |
+                          (static_cast<std::uint32_t>(stream[0]) <<  0);
     std::cout << b_big << std::endl;
   }
 
