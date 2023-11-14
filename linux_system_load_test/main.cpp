@@ -8,6 +8,7 @@
 //#include "get_ip.h"
 //#include "ping_url.h"
 #include "getAllIp.h"
+#include "store.h"
 
 int main (int argc,char* argv[],char* env[]) {
   for (int i = 0; i < argc; i++) {
@@ -22,6 +23,7 @@ int main (int argc,char* argv[],char* env[]) {
 //  get_process_cpu_memory::main();
 //  get_ip::main();
 //  ping_url::main();
-  get_all_ip::main();
+//  get_all_ip::main();
+  store::main();
   return 0;
 }
