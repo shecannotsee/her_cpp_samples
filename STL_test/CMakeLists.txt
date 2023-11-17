@@ -19,7 +19,8 @@ set(chrono "chrono_test.cpp")
 set(packaged_task "packaged_task_test.cpp")
 set(VariableLengthParameterTemplate "VariableLengthParameterTemplate_test.cpp")
 set(priority_queue "priority_queue_test.cpp")
-file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${priority_queue}")
+set(future "future_test.cpp")
+file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${future}")
 add_executable(${PROJECT_NAME}
         ${SRC}
         )
