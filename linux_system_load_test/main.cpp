@@ -9,6 +9,7 @@
 //#include "ping_url.h"
 #include "getAllIp.h"
 #include "store.h"
+#include "get_dir_store.h"
 
 int main (int argc,char* argv[],char* env[]) {
   for (int i = 0; i < argc; i++) {
@@ -24,6 +25,7 @@ int main (int argc,char* argv[],char* env[]) {
 //  get_ip::main();
 //  ping_url::main();
 //  get_all_ip::main();
-  store::main();
+//  store::main();
+  get_dir_store::main();
   return 0;
 }
