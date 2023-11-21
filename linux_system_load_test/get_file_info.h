@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <unistd.h>
 #include <fstream>
+#include <memory>
 
 
 namespace get_file_info {
@@ -44,7 +45,7 @@ std::string getIncrementalContent(const std::string& filePath, std::streampos& o
 
   if (incrementalSize > 0) {
     // 分配缓冲区以存储增量内容
-    std::unique_ptr<char[]> buffer(new char[incrementalSize]);
+    std::unique_ptr<char[]> buffer(std::make_unique<char[]>(incrementalSize));
     // 将增量内容读入缓冲区
     file.read(buffer.get(), incrementalSize);
     // 将偏移量更新为文件的当前末尾
