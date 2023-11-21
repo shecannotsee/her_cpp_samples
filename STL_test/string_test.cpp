@@ -31,8 +31,7 @@ int main() {
     std::cout << "Part 3: " << part3 << std::endl;
   }
 
-  /* \0分隔 */
-  {
+  /* \0分隔 */{
     // define
     std::string data;
     std::string streamBuffer_;
@@ -81,6 +80,39 @@ int main() {
       std::cout << "buffer:" << streamBuffer_ << std::endl;
     }
 
+
+  }
+
+  /* E check */ {
+    std::cout << "E check =============================\n";
+    std::vector<std::string> datas = {
+      "xxxxxx-D.log",
+      "xxxxxx-D.1.log",
+      "xxxxxx-D.2.log",
+      "xxxxxx-D.3.log",
+      "xxxxxx-I.log",
+      "xxxxxx-I.1.log",
+      "xxxxxx-I.2.log",
+      "xxxxxx-I.3.log",
+      "xxxxxx-W.log",
+      "xxxxxx-W.1.log",
+      "xxxxxx-W.2.log",
+      "xxxxxx-W.3.log",
+      "xxxxxx-E.log",
+      "xxxxxx-E.1.log",
+    };
+    for (auto data: datas) {
+      // 使用迭代器倒序遍历std::string
+      for (int i= data.size()-1; i>=0 ; --i) {
+        if (data[i] == '-') {
+          if (data[i+1] == 'E') {
+            std::cout << data << std::endl;
+          }
+          break;
+        }
+
+      }
+    }
 
   }
 
