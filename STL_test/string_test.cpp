@@ -2,6 +2,7 @@
 // Created by shecannotsee on 23-11-21.
 //
 #include <iostream>
+#include <regex>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -116,6 +117,78 @@ int main() {
 
   }
 
+  /* log framing */ {
+    struct LogEntry {
+      size_t startIndex;
+      size_t endIndex;
+      std::string dateTime;
+      std::string logLevel;
+      std::string module;
+      std::string fileName;
+      std::string functionName;
+      std::string lineNumber;
+      std::string content;
+    };
 
+        std::cout << "log framing =================\n";
+    // 示例日志条目
+    const std::string logEntry =
+        "[2023-11-13 17:35:16:291 INFO] [NetWork][handleData.c][recvNWData][156] Recv Net Data : xxxxxxxxxxxxxxx\n"
+        "[2023-11-13 17:35:16:291 DEBUG] [NetWork][handleData.c][recvNWData][156] zzzzzzzzzzzzz\n";
+    std::cout << logEntry << std::endl;
+    std::cout << "logEntry done.\n";
+
+    // 定义正则表达式来匹配日志条目的不同部分
+    std::regex logRegex(R"(\[([\d\s:-]+)\s(\w+)\]\s\[(\w+)\]\[(\w+\.\w+)\]\[(\w+)\]\[(\d+)\]\s(.+))");
+
+    // 用于存储匹配结果的std::smatch对象
+    std::smatch match;
+
+    // 用于存储多个日志条目
+    std::vector<LogEntry> logEntries;
+
+    // 开始位置
+    size_t currentIndex = 0;
+
+    // 用于存储未匹配部分的字符串
+    std::string remainingLog = logEntry;
+
+    // 在字符串中查找所有匹配的日志条目
+    while (std::regex_search(remainingLog, match, logRegex)) {
+        LogEntry entry;
+        entry.startIndex = currentIndex;
+        entry.endIndex = currentIndex + match[0].length() - 1;
+        entry.dateTime = match[1];
+        entry.logLevel = match[2];
+        entry.module = match[3];
+        entry.fileName = match[4];
+        entry.functionName = match[5];
+        entry.lineNumber = match[6];
+        entry.content = match[7];
+
+        // 将当前匹配的日志条目添加到集合中
+        logEntries.push_back(entry);
+
+        // 更新起始位置
+        currentIndex += match[0].length();
+
+        // 更新待匹配的字符串，去掉已匹配的部分
+        remainingLog = match.suffix();
+    }
+
+    // 输出每条日志的起始和结束位置
+    for (const auto& entry : logEntries) {
+        std::cout << "Start Index: " << entry.startIndex << ", End Index: " << entry.endIndex << std::endl;
+        std::cout << "Date/Time: " << entry.dateTime << std::endl;
+        std::cout << "Log Level: " << entry.logLevel << std::endl;
+        std::cout << "Module: " << entry.module << std::endl;
+        std::cout << "File Name: " << entry.fileName << std::endl;
+        std::cout << "Function Name: " << entry.functionName << std::endl;
+        std::cout << "Line Number: " << entry.lineNumber << std::endl;
+        std::cout << "Content: " << entry.content << std::endl;
+        std::cout << "------------------------" << std::endl;
+    }
+
+  }
   return 0;
 }
