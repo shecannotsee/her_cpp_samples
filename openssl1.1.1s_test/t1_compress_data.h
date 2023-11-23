@@ -106,8 +106,6 @@ void main() {
       std::cout << "file process success.\n";
     }
   }
-
-  exit(1);
 }
 
 }  // namespace t1_compress_data
