@@ -1,0 +1,135 @@
+[2023-11-23 20:41:50:106 INFO][ZZZ][log.cpp][show][104]Vsadasdsadsad
+[2023-11-23 20:41:50:107 INFO][ZXC][cfg.cpp][run][33]vxcvcxxsfsdas
+[2023-11-23 20:41:50:107 INFO][ZXC][cfg.cpp][cfg][21]gggggggggggggggggg
+[2023-11-23 20:41:50:107 INFO][BBB][base.cpp][initDevices][81]start run devices!
+[2023-11-23 20:41:50:108 INFO][TTTTT][configitem.cpp][getSubItemValueStringByName][517]get config data developRootHttpUrl success, value is http://61.169.5.67:32012/api.tbox/v1
+[2023-11-23 20:41:50:108 INFO][TTTTT][configitem.cpp][getSubItemValueStringByName][517]get config data testRootHttpUrl success, value is http://36.152.36.6:8093/api.tbox/v1
+[2023-11-23 20:41:50:108 INFO][TTTTT][configitem.cpp][getSubItemValueStringByName][517]get config data preProductRootHttpUrl success, value is https://tgateway.soimt.com/api.tbox/v1
+[2023-11-23 20:41:50:108 INFO][TTTTT][configitem.cpp][getSubItemValueStringByName][517]get config data productRootHttpUrl success, value is https://gateway.soimt.com/api.tbox/v1
+[2023-11-23 20:41:50:108 INFO][TTTTT][ttrun.cpp][run][48]module run completed!
+[2023-11-23 20:41:50:108 INFO][TTTTT][ttrun.cpp][TspService][43]module construction completed!
+[2023-11-23 20:41:50:111 INFO][SSS][pppserver.cpp][IccpService][52]module construction completed!
+[2023-11-23 20:41:50:112 INFO][PP][udp.cpp][run][711]module run completed!
+[2023-11-23 20:41:50:112 INFO][PP][udp.cpp][McuService][585]module construction completed!
+[2023-11-23 20:41:50:112 INFO][UDP][udpserver.cpp][initServer][55]upd bind success
+[2023-11-23 20:41:50:113 INFO][ISSS][qqq.cpp][run][69]module run completed!
+[2023-11-23 20:41:50:113 INFO][ISSS][qqq.cpp][BspInterfaceService][37]module construction completed!
+[2023-11-23 20:41:50:116 INFO][DDD][asave.cpp][run][38]run, tbox run basic:{"TBOX":{"RUN":{"basic":{"configActive":false,"getIotTypeRsp":{"code":0,"data":{"iotType":1,"isCsrNeeded":0,"vin":"4856F49119EBCB431475CB9C2C5E3352B25839DCA3262366C4A2693D81DD890A"},"message":"success"},"iccid":"89860320040282566702","iotRegist":true,"iotRegistRsp":{"code":0,"data":{"iotType":1,"registrationInfo":{"certCertificatePem":"-----BEGIN CERTIFICATE-----\nMIIDWjCCAkKgAwIBAgIVAP5wZ7FIDdJjpEK47vQzcep++JHiMA0GCSqGSIb3DQEB\nCwUAME0xSzBJBgNVBAsMQkFtYXpvbiBXZWIgU2VydmljZXMgTz1BbWF6b24uY29t\nIEluYy4gTD1TZWF0dGxlIFNUPVdhc2hpbmd0b24gQz1VUzAeFw0yMzEwMTkxNDAx\nMDVaFw00OTEyMzEyMzU5NTlaMB4xHDAaBgNVBAMME0FXUyBJb1QgQ2VydGlmaWNh\ndGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCqaASzz3+hH04pBMdu\nfFVwSApO9C0XGb7WG8aa9tHti5ON5jJXpTaGOGcA478QEbVOk22XovfyYYFEeiSk\n9ZHNVxh73WiEfAlSnGw456XUd7TxccHg4dHEb6Qphwk4C4OlAxKP6qVO4Xt0mciq\nUuYNyWxAB4UDABdOgzIHRgnOnLsukWXBKoeYt8pzTG1lmEcrot/W8UYdLt8mOr+0\nsxJ1AS5NVRio3mNOfVcTBhorev9AwUPfWVuSTNa7PsYgIrHgFc4NUwkd2OVyVKB6\ngSw03sRfrR63876efeyFCSPjFKEhUm+9U49ITjN4CNoG2DwL57fXqqQJN3jxA7+8\nUxu7AgMBAAGjYDBeMB8GA1UdIwQYMBaAFOp6OWkJe7PtohO1+Igk9qhE3BILMB0G\nA1UdDgQWBBTdH1UI/sWFl5B5C+IBhPKMj97OqzAMBgNVHRMBAf8EAjAAMA4GA1Ud\nDwEB/wQEAwIHgDANBgkqhkiG9w0BAQsFAAOCAQEAoLh1/WrZpK47LkqZKfxinuMO\nJPEa38stL2cMDEMKrfF2ni05Askrz69NskkNcD40e6fYzyjWY5U1c9ANO/wZ6+Vl\naDQSLsLMDWeaKNjSs5x2nAkr6C487YgaSA3wWFdVqfbaWEsbuTUakBBFsCpMUw1B\nJM3cz2uoJQHRewGWgO8NXUQku6DPUlX+7RzolUsiiJyMMSxwAsC4K1yUxkSiMLQ1\n8uPPkxe9Ug3OQq7Hv+YoNXDJu2E5ictAC1Z5V+lOG3Qpv0hWrVS+ohAloerN9Gt/\n0spoAYgBlPvLTcgeJh0cN2jxvc5EC02f2rb+6ZqZhDexT9u8lfkcQL5B/28e5w==\n-----END CERTIFICATE-----\n","certPrivateKey":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAqmgEs89/oR9OKQTHbnxVcEgKTvQtFxm+1hvGmvbR7YuTjeYy\nV6U2hjhnAOO/EBG1TpNtl6L38mGBRHokpPWRzVcYe91ohHwJUpxsOOel1He08XHB\n4OHRxG+kKYcJOAuDpQMSj+qlTuF7dJnIqlLmDclsQAeFAwAXToMyB0YJzpy7LpFl\nwSqHmLfKc0xtZZhHK6Lf1vFGHS7fJjq/tLMSdQEuTVUYqN5jTn1XEwYaK3r/QMFD\n31lbkkzWuz7GICKx4BXODVMJHdjlclSgeoEsNN7EX60et/O+nn3shQkj4xShIVJv\nvVOPSE4zeAjaBtg8C+e316qkCTd48QO/vFMbuwIDAQABAoIBADCI094K2YUgj3hr\nXgn/663BNv5p2XXc5VfCLXzxk7UerfYafHguHCt6YQwF0eNXx9YLc4le51PnpZPF\nXi6FqvNbPSP6WcxyL42R89j5UWgEeErUZa4RY1eZnJ4fUebekK4tA9ptsIuY+Tqq\nmla4qcF/fw91lNLX8ctw3ozny99GmZdAonxQiSA3QuQldvVlqhQbnUSHqNAVuqPV\nhGIp34JRj7ICSEP4cUKMt+Qd3XyV4TdfsQFFSIPpYIZTFsEKSpgj2sB2TgajjuDy\na6/8yEInE3/g+evxc4QpdrgaMc/bMtLq1wpgsv9mP4DNu13Wy2CtBU3HWafe3mjk\nzbh1kCECgYEA18bLhVBpUAk24YaawQdPr0eVeDDOdDUfA+HOnsNV0MRswWq8us2Z\nSLkenCKVy63Cl/nm/FXFsQH693G+5KqWLbYeiniSjIv/ToAMhy0gbDJYJNVGe1b5\njXLa5ROOH3eJbdCgv6YWiurOoXev9ZIQgDOUbTB2bzq2rafFFsZ6DwMCgYEAyiwV\nSfLr4K5NN6fQRQB+Tr1FbLGrz+hbMg90KZ1tJI6Uc9uu6PLEcT9L4U08eF6tw3NG\nrQN4RF9N/6h3R8wMH6Dy+QXwbUBHudRyqSom5dKIhUcHBYJXGnbOy2fsKlO4lkeJ\niBTwFfI7UC715ZYv7ATBefVJccsRNPKwGaarJukCgYAYcWycrX9AkcqlwZnGRA3C\nzVkhRGYew+W/itTdJ0ORYq7vOignASNcGZxeE4zkhcqFbMm9y/mZE6BaZ4g4Xxqk\nEv1iskXnpfRF8Dt7FKGXoBxcD8zsK+4ZF+m0CYMQDXqD9h4/l5D2K6M8p1JHf0Rf\nQXiO5e6EqyIGifrJmbI6AQKBgQCYw+C+RQnJd8uvP2XXjfzjII/CByrtagTm+dhr\nzaH4GqjANwKe0Tpw3ERJFWSZC+m/I28HMvUArQcyJKklHmEW0TZnxv4af5TzLT4K\n52gHByPTmY0Ls6Z/v8CY4IkKnsJ/A8U/h5q26pe5ChMSjX7el+Vec2Mw0iHJYYyB\nhXgUaQKBgQCB7gyxuOEp+p5Z01fAMz/+g62VkKp7FgwNg8FGmzucjF4Imq36a6Y8\n9ausISWt0eylCvRHPl/JIlBFKl/rjTW/uZxYxp7TpJ4A/SoeZ+6i8breDoOKHkk/\nSejCPNO0iTfLPEqurYRgsHiVZgbPZL4Dq9bC3le1aabtdOLMPNrmxg==\n-----END RSA PRIVATE KEY-----\n","endpoint":"a19gev2dxjsrzn-ats.iot.ap-southeast-1.amazonaws.com","rootCA":"-----BEGIN CERTIFICATE-----\nMIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj    \nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\nAYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\nA4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\nU5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\nN+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\no/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\nrqXRfboQnoZsG4q5WTP468SQvvG5\n-----END CERTIFICATE-----"},"topicList":[{"topicName":"test/tbox/ota/downlink/c99af0a4524c9c86cc811d1ba21f112f","topicType":"OTA_DOWNLINK"},{"topicName":"test/tbox/ota/uplink/c99af0a4524c9c86cc811d1ba21f112f","topicType":"OTA_UPLINK"},{"topicName":"test/tbox/msg/downlink/c99af0a4524c9c86cc811d1ba21f112f","topicType":"MSG_DOWNLINK"},{"topicName":"test/tbox/msg/uplink/c99af0a4524c9c86cc811d1ba21f112f","topicType":"MSG_UPLINK"},{"topicName":"test/tbox/msg/broadcast","topicType":"MSG_BROADCAST"}],"vin":"4856F49119EBCB431475CB9C2C5E3352B25839DCA3262366C4A2693D81DD890A"},"message":"success"},"newPubKeyRes":{"publicKey":"8132238b0dae73923c05a94e17836d94555ae3ecabeb2595881dba8062a103bc2559219a22689496c354d9e80f31d49539fa50c7fd6a046c3ad12b31289adccb","publicKeyGranted":true},"newSecKeyRes":{"secKeyReq":true,"tboxID":"393433393238323231333830"},"secKey":"36383845463731363830394130464331","simCardActive":false,"simInfo":"8619180720973","sn":"TESTSN0000000661","tboxActive":true,"vin":"TESTVIN0000000661"}}}}
+[2023-11-23 20:41:50:118 INFO][TCP][tcpclient.cpp][connectToServer][237]tcp client connect server(127.0.0.1:54343) success!
+[2023-11-23 20:41:50:119 INFO][DDD][asave.cpp][run][58]run, activation info:{"TBOX":{"FICM":{"activationInfoUpdateReq":{"activationInfo":{"bCallEnabled":1,"btKeyEntryEnable":1,"dataCollectionEnabled":1,"iCallEnabled":1,"journeysEnabled":1,"onlineInfEnabled":1,"remoteChargeEnabled":1,"remoteControlEnabled":1,"remoteDtcEnabled":1,"svtEnabled":1,"vehicleStatusEnabled":1}}}}}
+[2023-11-23 20:41:50:119 INFO][DDD][asave.cpp][run][74]run, version info:{"TBOX":{"FICM":{"queryCurTboxVerInfoRsp":{"btVer":"bt test verion 1.0.3 20231115","mcuVer":"mcu test verion 1.0.0 20231115","modemVer":"modem test verion 1.0.2 20231115","mpuVer":"mpu test verion 1.0.1 20231115"}}}}
+[2023-11-23 20:41:50:120 INFO][DDD][asave.cpp][run][76]module run completed!
+[2023-11-23 20:41:50:120 INFO][DDD][asave.cpp][SaveDataService][20]module construction completed!
+[2023-11-23 20:41:50:120 INFO][VSCODE][good.cpp][run][26]module run completed!
+[2023-11-23 20:41:50:120 INFO][VSCODE][good.cpp][VehicleControlService][22]module construction completed!
+[2023-11-23 20:41:50:120 INFO][VSAAS][okok.cpp][run][46]module run completed!
+[2023-11-23 20:41:50:120 INFO][VSAAS][okok.cpp][VehicleStatusAlertService][27]module construction completed!
+[2023-11-23 20:41:50:121 INFO][KKK][ps.cpp][run][32]module run completed!
+[2023-11-23 20:41:50:121 INFO][KKK][ps.cpp][PositionService][26]module construction completed!
+[2023-11-23 20:41:50:121 INFO][RRR][rs.cpp][run][27]module run completed!
+[2023-11-23 20:41:50:121 INFO][RRR][rs.cpp][RemoteKeyService][23]module construction completed!
+[2023-11-23 20:41:50:121 INFO][MM][duke.cpp][run][43]module run completed!
+[2023-11-23 20:41:50:122 INFO][MM][duke.cpp][PowerManagementService][26]module construction completed!
+[2023-11-23 20:41:50:122 INFO][CCC][cardservice.cpp][run][54]module run completed!
+[2023-11-23 20:41:50:122 INFO][CCC][cardservice.cpp][SimCardService][39]module construction completed!
+[2023-11-23 20:41:50:122 INFO][TCP][tcpserver.cpp][initServer][116]server listen fd(15)
+[2023-11-23 20:41:50:123 INFO][FFFFF][ffservice.cpp][run][50]module run completed!
+[2023-11-23 20:41:50:123 INFO][FFFFF][ffservice.cpp][FicmService][35]module construction completed!
+[2023-11-23 20:41:50:123 INFO][CMS][rc.cpp][run][34]module run completed!
+[2023-11-23 20:41:50:123 INFO][CMS][rc.cpp][ChargeManagementService][27]module construction completed!
+[2023-11-23 20:41:50:124 INFO][KTM][ddduke.cpp][run][30]module run completed!
+[2023-11-23 20:41:50:124 INFO][KTM][ddduke.cpp][RemoteCfgService][23]module construction completed!
+[2023-11-23 20:41:50:124 INFO][CF][upgrade.cpp][TboxUpgrade][11]module construction completed!
+[2023-11-23 20:41:50:125 INFO][HALEI][ready.cpp][run][31]module run completed!
+[2023-11-23 20:41:50:125 INFO][HALEI][ready.cpp][IotRegist][27]module construction completed!
+[2023-11-23 20:41:50:125 INFO][TTTTB][to.cpp][run][40]module run completed!
+[2023-11-23 20:41:50:125 INFO][TTTTB][to.cpp][TboxActive][36]module construction completed!
+[2023-11-23 20:41:50:125 INFO][CCCCCE][race.cpp][run][26]module run completed!
+[2023-11-23 20:41:50:125 INFO][CCCCCE][race.cpp][ConfigActive][22]module construction completed!
+[2023-11-23 20:41:50:125 INFO][BBB][base.cpp][initDevices][116]devices run completed!
+[2023-11-23 20:41:50:125 INFO][BBB][configitem.cpp][getSubItemValueDoubleByName][494]get config data periodicity success, value is 1.000000
+[2023-11-23 20:41:50:126 INFO][BBB][base.cpp][initLinks][136]start run links!
+[2023-11-23 20:41:50:126 INFO][BBB][base.cpp][initLinks][166]links run completed!
+[2023-11-23 20:41:50:127 INFO][TTTTT][ttrun.cpp][createMqttServerUrl][934]endpoint: a19gev2dxjsrzn-ats.iot.ap-southeast-1.amazonaws.com
+[2023-11-23 20:41:50:127 INFO][TTTTT][ttrun.cpp][createMqttServerUrl][939]mqtt server url: ssl://a19gev2dxjsrzn-ats.iot.ap-southeast-1.amazonaws.com:8883
+[2023-11-23 20:41:50:129 INFO][TCP][tcpclient.cpp][connectToServer][237]tcp client connect server(192.168.255.255:8080) success!
+[2023-11-23 20:41:50:138 INFO][TTTTT][ttrun.cpp][mqttInit][108]mqtt run completed!
+[2023-11-23 20:41:50:138 INFO][TTTTT][ttrun.cpp][mqttWork][114]mqtt start work!
+[2023-11-23 20:41:50:138 INFO][BBB][base.cpp][run][74]module run completed!
+[2023-11-23 20:41:50:138 INFO][BBB][base.cpp][BasicManagementFunction][44]module construction completed!
+[2023-11-23 20:41:50:723 TRACE][FFFFF][ffservice.cpp][recvApn2SwitchUpdateReq][485]send ficm msg:{"TBOX":{"FICM":{"apn2SwitchUpdateReq":{"apn2SwitchStatus":1}}}}
+[2023-11-23 20:41:50:723 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:41:50:821 INFO][MQQQQT][mqttcallback.cpp][connected][31]Connection success.
+[2023-11-23 20:41:50:821 INFO][MQQQQT][mqttservice.cpp][connectAndSubscribeThd][81]mqtt connect success!
+[2023-11-23 20:41:50:822 INFO][MQQQQT][mqttservice.cpp][connectAndSubscribeThd][86]mqtt subscribe:test/tbox/ota/downlink/c99af0a4524c9c86cc811d1ba21f112f
+[2023-11-23 20:41:50:822 INFO][MQQQQT][mqttservice.cpp][connectAndSubscribeThd][86]mqtt subscribe:test/tbox/msg/downlink/c99af0a4524c9c86cc811d1ba21f112f
+[2023-11-23 20:41:50:822 INFO][MQQQQT][mqttservice.cpp][connectAndSubscribeThd][86]mqtt subscribe:test/tbox/msg/broadcast
+[2023-11-23 20:41:55:113 TRACE][SSS][pppserver.cpp][sendHeartByTimer][1240]tx data heart = 0x:a5a500054f0100010000925cbad9
+[2023-11-23 20:42:00:106 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:00:107 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:107 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:00:108 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:00:109 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:112 TRACE][SSS][pppserver.cpp][sendHeartByTimer][1240]tx data heart = 0x:a5a500054f0100020000901a0480
+[2023-11-23 20:42:00:128 TRACE][FFFFF][ffservice.cpp][recvCsqUpdateReq][455]send ficm msg:{"TBOX":{"FICM":{"csqUpdateReq":{"csq":15}}}}
+[2023-11-23 20:42:00:129 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:157 DEBUG][CCC][cardservice.cpp][recvSimCard][218]no change for sim card info!
+[2023-11-23 20:42:00:157 DEBUG][CCC][cardservice.cpp][simCardRet][247]query sim card info!
+[2023-11-23 20:42:00:158 TRACE][FFFFF][ffservice.cpp][recvImsiUpdateReq][441]send ficm msg:{"TBOX":{"FICM":{"imsiUpdateReq":{"imsi":"460115273107872"}}}}
+[2023-11-23 20:42:00:158 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:158 TRACE][FFFFF][ffservice.cpp][recvBsInfoUpdateReq][394]send ficm msg:{"TBOX":{"FICM":{"bsInfoUpdateReq":{"bsInfo":[{"community":1,"lac":0,"mcc":460,"mnc":11,"netType":6,"reserved":0,"rssi":-84}]}}}}
+[2023-11-23 20:42:00:158 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:255 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:00:255 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:00:445 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:00:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:00:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:01:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:01:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:01:446 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:01:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:01:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:02:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:02:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:02:446 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:02:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:02:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:03:255 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:03:255 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:03:445 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:03:809 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:03:809 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:04:115 TRACE][FFFFF][ffservice.cpp][recvCsqUpdateReq][455]send ficm msg:{"TBOX":{"FICM":{"csqUpdateReq":{"csq":14}}}}
+[2023-11-23 20:42:04:115 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:04:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:04:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:04:445 TRACE][FFFFF][ffservice.cpp][recvBsInfoUpdateReq][394]send ficm msg:{"TBOX":{"FICM":{"bsInfoUpdateReq":{"bsInfo":[{"community":1,"lac":0,"mcc":460,"mnc":11,"netType":6,"reserved":0,"rssi":-86}]}}}}
+[2023-11-23 20:42:04:445 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:04:446 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:04:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:04:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:05:113 TRACE][SSS][pppserver.cpp][sendHeartByTimer][1240]tx data heart = 0x:a5a500054f010003000091d86eb7
+[2023-11-23 20:42:05:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:05:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:05:445 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:05:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:05:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:06:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:06:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:06:445 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:06:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:06:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:07:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:07:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:07:446 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:07:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:07:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:08:255 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:08:255 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:08:445 DEBUG][OOO][store.cpp][checkStorageSpace][33]No need to upload logs.
+[2023-11-23 20:42:08:808 TRACE][FFFFF][ffservice.cpp][recvGpsInfoUpdateReq][376]send ficm msg:{"TBOX":{"FICM":{"gpsInfoUpdateReq":{"gpsInfo":{"altitude":0,"gpsStatus":0,"hdop":0,"heading":0,"latitude":0,"longitude":0,"pdop":0,"speed":0,"timeStamp":0,"vdop":0}}}}}
+[2023-11-23 20:42:08:808 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:09:104 TRACE][FFFFF][ffservice.cpp][recvCsqUpdateReq][455]send ficm msg:{"TBOX":{"FICM":{"csqUpdateReq":{"csq":14}}}}
+[2023-11-23 20:42:09:104 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
+[2023-11-23 20:42:09:256 TRACE][FFFFF][ffservice.cpp][recvWanConnInfoUpdateReq][426]send ficm msg:{"TBOX":{"FICM":{"wanConnInfoUpdateReq":{"ipAddr":"10.117.240.150\u0000","wanStatus":4}}}}
+[2023-11-23 20:42:09:256 WARN][FFFFF][ffservice.cpp][sendData][529]there is no client(0), send data failed!
