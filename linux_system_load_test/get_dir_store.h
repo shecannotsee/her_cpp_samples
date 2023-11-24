@@ -7,6 +7,7 @@
 
 #include <string>
 #include <fstream>
+#include <sys/statvfs.h>
 
 namespace get_dir_store {
 
