@@ -66,8 +66,6 @@ int main() {
       std::cout << "Total size of files in directory: " << usedSpace << " bytes" << std::endl;
     }
     std::cout << usedSpace <<std::endl;
-
-    exit(1);
   }
   goto p2;
   /* log content */ {
@@ -163,7 +161,8 @@ int main() {
     std::cout << "errorlog:--------------------\n";
     std::cout << errorLogBuffer_ << "\n";
   }
-  /* log file name */ {
+  /* log file name */
+  {
     p2:
     std::vector<std::string> files = {
       "moduleA.log","moduleA.1.log","moduleA.2.log","moduleA.3.log","moduleA.4.log",
@@ -171,34 +170,58 @@ int main() {
       "moduleC.log","moduleC.1.log","moduleC.2.log","moduleC.3.log","moduleC.4.log",
       "moduleD.log"
     };
+    enum class log_module {DEFAULT,A,B,C,D};
+    enum class log_file_type {USING,UPLOADABLE};
+    std::vector<std::tuple<log_module,log_file_type>> files_info{files.size()};
+
 
     const std::string moduleA = "moduleA";
     const std::string moduleB = "moduleB";
     const std::string moduleC = "moduleC";
     const std::string moduleD = "moduleD";
 
-    for (const auto& file_name : files) {
+    for ( int i = 0; i<files.size(); ++i) {
       std::vector<int> founds;
 
-      for ( int i = 0; i < file_name.size(); ++i ) {
-        if (file_name[i] == '.') {
-          founds.emplace_back(i);
+      for ( int j = 0; i < files[j].size(); ++j ) {
+        if (files[i][j] == '.') {
+          founds.emplace_back(j);
         }
       }
       if (!founds.empty()) {
-        founds.emplace_back(file_name.size());
+        founds.emplace_back(files[i].size());
       }
 
       int start_index = 0;
       for (const auto& index : founds) {
-        std::string tmp = file_name.substr(start_index,index-start_index);
-        if (tmp.compare(moduleA)) {
-          std::cout << "[moduleA]\n";
+        std::string tmp = files[i].substr(start_index,index-start_index);
+        if (tmp == moduleA) {
+          std::get<0>(files_info[i]) = log_module::A;
+          continue;
+        } else if (tmp == moduleB) {
+          std::get<0>(files_info[i]) = log_module::B;
+          continue;
+        } else if (tmp == moduleC) {
+          std::get<0>(files_info[i]) = log_module::C;
+          continue;
+        } else if (tmp == moduleD) {
+          std::get<0>(files_info[i]) = log_module::D;
+          continue;
         }
+        for (const auto& n : tmp) {
+          if (std::isdigit(n)) {
+            std::get<1>(files_info[i]) = log_file_type::UPLOADABLE;
+            continue;
+          }
+        }
+
+
         std::cout << tmp.size() << ":" << tmp << std::endl;
         start_index = index + 1;
       }
     }
+
+    std::cout << "" << std::endl;
 
   }
   std::cout << "Done.\n";
