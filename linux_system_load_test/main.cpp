@@ -12,7 +12,9 @@
 //#include "get_dir_store.h"
 //#include "get_dir_files.h"
 // #include "get_file_info.h"
-#include "get_file_store.h"
+// #include "get_file_store.h"
+// #include "get_file_incremental_content.h"
+#include "get_file_update.h"
 
 int main (int argc,char* argv[],char* env[]) {
   for (int i = 0; i < argc; i++) {
@@ -32,6 +34,9 @@ int main (int argc,char* argv[],char* env[]) {
   // get_dir_store::main();
   // get_dir_files::main();
   // get_file_info::main();
-  get_file_store::main();
+  // get_file_store::main();
+  // get_file_incremental_content::main();
+  get_file_update::main();
+
   return 0;
 }
