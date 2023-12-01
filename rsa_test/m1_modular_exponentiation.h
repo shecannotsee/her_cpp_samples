@@ -1,18 +1,21 @@
 //
-// Created by  shecannotsee on 2023/1/10.
+// Created by shecannotsee on 23-12-1.
 //
 
-#ifndef RSA_TEST_CALLINGPYTHON_H
-#define RSA_TEST_CALLINGPYTHON_H
+#ifndef MODULAR_EXPONENTIATION_H
+#define MODULAR_EXPONENTIATION_H
 
 #include <cstdio>
+#include <cstring>
 #include <string>
 #include <iostream>
+
+namespace m1_modular_exponentiation {
 
 // @param arg_1:在加密的时候是[明文],解密的时候是[]
 // @param arg_2:在加密的时候是[与两质数的欧拉函数互质的一个数e],解密的时候是[e对于两质数的欧拉函数的模反元素]
 // @param prime_product:两个质数的乘积
-std::string cal(int arg_1,int arg_2,int prime_product) {
+std::string call_python_to_cal(int arg_1,int arg_2,int prime_product) {
   using std::to_string;
   std::string cmd =
           "python3 ../rsa_bigNumber_cal.py "
@@ -34,5 +37,6 @@ std::string cal(int arg_1,int arg_2,int prime_product) {
   return std::string(buffer,strlen(buffer));
 };
 
+}
 
-#endif //RSA_TEST_CALLINGPYTHON_H
+#endif //MODULAR_EXPONENTIATION_H

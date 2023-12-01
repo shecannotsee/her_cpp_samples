@@ -12,8 +12,7 @@ include_directories()
 link_directories()
 
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp")
-add_executable(${PROJECT_NAME} ${SRC}
-        ${CMAKE_SOURCE_DIR}/bignumber.cpp)
+add_executable(${PROJECT_NAME} ${SRC})
 
 # 链接库
 target_link_libraries(${PROJECT_NAME} "-pthread")
