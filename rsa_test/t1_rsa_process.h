@@ -55,47 +55,95 @@ void main() {
 
   int CommonKey[2] = {n,e};
   int PrivateKey[2] = {n,d};
-  // 秘文是小于n的一个整数,故用一个字符串数组存储用来兼容以后可能出现的长数值情况
-  std::vector<std::string> cipher;
-  /* 使用公钥加密 */ {
-    // 对m进行加密,m必须小于n
-    // m^e = c (mod n) ; c为加密后的内容,等价于下行
-    // c = (m^e) mod n
-    std::string plaintext = "shecannotsee";
 
-    auto start = std::chrono::system_clock::now();
-    for (const char& ch : plaintext) {
-      cipher.push_back(m1_modular_exponentiation::call_python_to_cal((int)ch,CommonKey[1],CommonKey[0]));
-    }
-    auto end = std::chrono::system_clock::now();
-    std::cout<<"The encryption process took time ["<<
-             (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
-              std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
-             <<"]ms , 1s = 1000ms"<<std::endl;
+  /* call_python_to_cal */ {
+    std::cout << "==========call_python_to_cal==============\n";
+    std::vector<std::string> cipher;
+    /* 使用公钥加密 */ {
+      // 对m进行加密,m必须小于n
+      // m^e = c (mod n) ; c为加密后的内容,等价于下行
+      // c = (m^e) mod n
+      std::string plaintext = "shecannotsee";
 
-  };
+      const auto start_call_python_to_cal = std::chrono::system_clock::now();
+      for (const char& ch : plaintext) {
+        cipher.push_back(m1_modular_exponentiation::call_python_to_cal((int)ch,CommonKey[1],CommonKey[0]));
+      }
+      const auto end_call_python_to_cal = std::chrono::system_clock::now();
+      std::cout<<"The encryption process took time ["<<
+               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_call_python_to_cal)-
+                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_call_python_to_cal)).count()/* return ms,1s=1000ms*/
+               <<"]ms , 1s = 1000ms"<<std::endl;
+    }// 公钥加密结束
 
-  /* 使用私钥解密 */ {
-    // m = (c^d) mod n
-    std::string original_plaintext;
-    auto start = std::chrono::system_clock::now();
-    for (const std::string& str : cipher) {
-      char t;
-      t = std::atoi(
-        m1_modular_exponentiation::call_python_to_cal(std::atoi(str.c_str()),
-                                                      PrivateKey[1],
-                                                      PrivateKey[0]).c_str());
-      original_plaintext.push_back(t);
-    }
-    auto end = std::chrono::system_clock::now();
-    std::cout<<"The decryption process took time ["<<
-             (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
-              std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
-             <<"]ms , 1s = 1000ms"<<std::endl;
-    std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
-  };
+    /* 使用私钥解密 */ {
+      // m = (c^d) mod n
+      std::string original_plaintext;
 
-};
+      // call_python_to_cal
+      const auto start_call_python_to_cal = std::chrono::system_clock::now();
+      for (const std::string& str : cipher) {
+        char t =std::atoi(m1_modular_exponentiation::call_python_to_cal(
+                                                                              std::atoi(str.c_str()),
+                                                                              PrivateKey[1],
+                                                                              PrivateKey[0]).c_str());
+        original_plaintext.push_back(t);
+      }
+      const auto end_call_python_to_cal = std::chrono::system_clock::now();
+      std::cout<<"The decryption process took time ["<<
+               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_call_python_to_cal)-
+                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_call_python_to_cal)).count()/* return ms,1s=1000ms*/
+               <<"]ms , 1s = 1000ms"<<std::endl;
+      std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
+    }// 私钥解密结束
+  }
+
+  /* fast_cal */ {
+    std::cout << "==========fast_cal==============\n";
+    // 秘文是小于n的一个整数,故用一个字符串数组存储用来兼容以后可能出现的长数值情况
+    std::vector<std::string> cipher;
+    /* 使用公钥加密 */ {
+      // 对m进行加密,m必须小于n
+      // m^e = c (mod n) ; c为加密后的内容,等价于下行
+      // c = (m^e) mod n
+      std::string plaintext = "shecannotsee";
+
+      const auto start_fast_cal = std::chrono::system_clock::now();
+      for (const char& ch : plaintext) {
+        cipher.push_back(m1_modular_exponentiation::fast_cal((int)ch,CommonKey[1],CommonKey[0]));
+      }
+      const auto end_fast_cal = std::chrono::system_clock::now();
+      std::cout<<"The encryption process took time (fast_cal)["<<
+               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_fast_cal)-
+                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_fast_cal)).count()/* return ms,1s=1000ms*/
+               <<"]ms , 1s = 1000ms"<<std::endl;
+
+    }// 公钥加密结束
+
+    /* 使用私钥解密 */ {
+      // m = (c^d) mod n
+      std::string original_plaintext;
+
+      const auto start_fast_cal = std::chrono::system_clock::now();
+      for (const std::string& str : cipher) {
+        char t =std::atoi(m1_modular_exponentiation::fast_cal(
+                                                                    std::atoi(str.c_str()),
+                                                                    PrivateKey[1],
+                                                                    PrivateKey[0]).c_str());
+        original_plaintext.push_back(t);
+      }
+      const auto end_fast_cal = std::chrono::system_clock::now();
+      std::cout<<"The decryption process took time (fast_cal)["<<
+               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_fast_cal)-
+                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_fast_cal)).count()/* return ms,1s=1000ms*/
+               <<"]ms , 1s = 1000ms"<<std::endl;
+      std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
+
+
+    }// 私钥解密结束
+  }
+
+}
 
 };// namespace method_1
 

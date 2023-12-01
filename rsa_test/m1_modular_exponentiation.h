@@ -37,6 +37,26 @@ std::string call_python_to_cal(int arg_1,int arg_2,int prime_product) {
   return std::string(buffer,strlen(buffer));
 };
 
+std::string fast_cal(unsigned long long arg_1,unsigned long long arg_2,unsigned long long prime_product) {
+  unsigned long long result = 1;
+  arg_1 = arg_1 % prime_product;  // 对底数取模，防止溢出
+
+  while (arg_2 > 0) {
+    // 如果当前指数为奇数，累乘到结果中
+    if (arg_2 % 2 == 1) {
+      result = (result * arg_1) % prime_product;
+    }
+
+    // 将指数右移一位（相当于除以2）
+    arg_2 = arg_2 / 2;
+
+    // 底数平方取模
+    arg_1 = (arg_1 * arg_1) % prime_product;
+  }
+
+  return std::to_string(result);
+}
+
 }
 
 #endif //MODULAR_EXPONENTIATION_H
