@@ -13,6 +13,20 @@
 
 namespace t1_rsa_process {
 
+using time_type = std::chrono::time_point<std::chrono::system_clock>;
+
+/**
+ * \brief 获取两个时间点的时间间隔
+ * \param start 起始时间
+ * \param end 结束时间
+ * \return 以毫秒为单位的时间间隔
+ */
+int time_interval(const time_type start, const time_type end) {
+  return (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
+          std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)
+         ).count();
+}
+
 // n为输入两个质数的乘积
 // 该函数返回一个整数e,e大于1并且小于n的欧拉函数,并且满足e与n的欧拉函数互质
 int getE(int prime_number_1, int prime_number_2) {
@@ -20,7 +34,7 @@ int getE(int prime_number_1, int prime_number_2) {
   // TODO:需要添加合适的算法用来计算,该返回值只是针对指定数值进行特定返回
   int ret = 17;
   return ret;
-};
+}
 
 // 输入e以及n的欧拉函数
 // 返回d,使得d满足[e x d - 1 = k * Euler_function_by_n]
@@ -29,16 +43,7 @@ int getModularMultiplicativeInverse(int e, int Euler_function_by_n) {
   // TODO:需要添加合适的算法用来计算,该返回值只是针对指定数值进行特定返回
   int ret = 2753;
   return ret;
-};
-
-void demo() {
-  auto start = std::chrono::system_clock::now();
-  auto end = std::chrono::system_clock::now();
-  std::cout<<"sleep(2) has spent ["<<
-  (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end)-
-  std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start)).count()/* return ms,1s=1000ms*/
-  <<"]ms , 1s = 1000ms"<<std::endl;
-};
+}
 
 void main() {
   // step_0:选两个质数
@@ -65,23 +70,19 @@ void main() {
       // c = (m^e) mod n
       std::string plaintext = "shecannotsee";
 
-      const auto start_call_python_to_cal = std::chrono::system_clock::now();
+      const auto start = std::chrono::system_clock::now();
       for (const char& ch : plaintext) {
         cipher.push_back(m1_modular_exponentiation::call_python_to_cal((int)ch,CommonKey[1],CommonKey[0]));
       }
-      const auto end_call_python_to_cal = std::chrono::system_clock::now();
-      std::cout<<"The encryption process took time ["<<
-               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_call_python_to_cal)-
-                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_call_python_to_cal)).count()/* return ms,1s=1000ms*/
-               <<"]ms , 1s = 1000ms"<<std::endl;
+      const auto end = std::chrono::system_clock::now();
+      std::cout << "The encryption process took time [" << time_interval(start, end) << "]ms , 1s = 1000ms\n";
     }// 公钥加密结束
 
     /* 使用私钥解密 */ {
       // m = (c^d) mod n
       std::string original_plaintext;
 
-      // call_python_to_cal
-      const auto start_call_python_to_cal = std::chrono::system_clock::now();
+      const auto start = std::chrono::system_clock::now();
       for (const std::string& str : cipher) {
         char t =std::atoi(m1_modular_exponentiation::call_python_to_cal(
                                                                               std::atoi(str.c_str()),
@@ -89,12 +90,9 @@ void main() {
                                                                               PrivateKey[0]).c_str());
         original_plaintext.push_back(t);
       }
-      const auto end_call_python_to_cal = std::chrono::system_clock::now();
-      std::cout<<"The decryption process took time ["<<
-               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_call_python_to_cal)-
-                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_call_python_to_cal)).count()/* return ms,1s=1000ms*/
-               <<"]ms , 1s = 1000ms"<<std::endl;
-      std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
+      const auto end = std::chrono::system_clock::now();
+      std::cout << "The decryption process took time [" << time_interval(start, end) << "]ms , 1s = 1000ms\n";
+      std::cout << "original plaintext is[" << original_plaintext << "]\n";
     }// 私钥解密结束
   }
 
@@ -108,23 +106,19 @@ void main() {
       // c = (m^e) mod n
       std::string plaintext = "shecannotsee";
 
-      const auto start_fast_cal = std::chrono::system_clock::now();
+      const auto start = std::chrono::system_clock::now();
       for (const char& ch : plaintext) {
         cipher.push_back(m1_modular_exponentiation::fast_cal((int)ch,CommonKey[1],CommonKey[0]));
       }
-      const auto end_fast_cal = std::chrono::system_clock::now();
-      std::cout<<"The encryption process took time (fast_cal)["<<
-               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_fast_cal)-
-                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_fast_cal)).count()/* return ms,1s=1000ms*/
-               <<"]ms , 1s = 1000ms"<<std::endl;
-
+      const auto end = std::chrono::system_clock::now();
+      std::cout << "The encryption process took time (fast_cal)[" << time_interval(start, end) << "]ms , 1s = 1000ms\n";
     }// 公钥加密结束
 
     /* 使用私钥解密 */ {
       // m = (c^d) mod n
       std::string original_plaintext;
 
-      const auto start_fast_cal = std::chrono::system_clock::now();
+      const auto start = std::chrono::system_clock::now();
       for (const std::string& str : cipher) {
         char t =std::atoi(m1_modular_exponentiation::fast_cal(
                                                                     std::atoi(str.c_str()),
@@ -132,14 +126,9 @@ void main() {
                                                                     PrivateKey[0]).c_str());
         original_plaintext.push_back(t);
       }
-      const auto end_fast_cal = std::chrono::system_clock::now();
-      std::cout<<"The decryption process took time (fast_cal)["<<
-               (std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(end_fast_cal)-
-                std::chrono::time_point_cast<std::chrono::duration<int,std::ratio<1,1000>>>(start_fast_cal)).count()/* return ms,1s=1000ms*/
-               <<"]ms , 1s = 1000ms"<<std::endl;
-      std::cout<<"original plaintext is["<<original_plaintext<<"]"<<std::endl;
-
-
+      const auto end = std::chrono::system_clock::now();
+      std::cout << "The decryption process took time (fast_cal)[" << time_interval(start, end) << "]ms , 1s = 1000ms\n";
+      std::cout << "original plaintext is[" << original_plaintext << "]\n";
     }// 私钥解密结束
   }
 
