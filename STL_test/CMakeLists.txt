@@ -22,7 +22,8 @@ set(priority_queue "priority_queue_test.cpp")
 set(future "future_test.cpp")
 set(string "string_test.cpp")
 set(regex "regex_test.cpp")
-file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${regex}")
+set(mutex "mutex_test.cpp")
+file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/${mutex}")
 add_executable(${PROJECT_NAME}
         ${SRC}
         )
