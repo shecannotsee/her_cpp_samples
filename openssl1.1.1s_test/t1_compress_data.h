@@ -11,6 +11,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 namespace t1_compress_data {
@@ -45,22 +46,21 @@ bool zip_files_with_pwd(const std::string& dir_path, const std::vector<std::stri
       zipClose(zip_file, nullptr);
       return false;
                                 }
-
     std::ifstream input_file(full_file_path, std::ios::binary);
     if (!input_file.is_open()) {
       std::cerr << "Failed to open input file: " << full_file_path << std::endl;
       zipClose(zip_file, nullptr);
       return false;
     }
-
     const int buffer_size = 4096;
     char buffer[buffer_size];
 
     while (input_file.good()) {
+      sleep(2);
+
       input_file.read(buffer, buffer_size);
       zipWriteInFileInZip(zip_file, buffer, static_cast<unsigned int>(input_file.gcount()));
     }
-
     input_file.close();
     zipCloseFileInZip(zip_file);
   }
@@ -70,7 +70,9 @@ bool zip_files_with_pwd(const std::string& dir_path, const std::vector<std::stri
 }
 
 void main() {
+  goto p3;
   /* single file */ {
+    p1:
     const std::string dir_path      = ".."; // Replace with your directory path
     const std::vector<std::string> file_names = {"single_test_file.txt"}; // Add your file names
     const std::string password      = "789";
@@ -83,6 +85,7 @@ void main() {
     }
   }
   /* zip just include file */ {
+    p2:
     const std::string dir_path      = "../test_dir"; // Replace with your directory path
     const std::vector<std::string> file_names = {"test_file1.txt", "test_file2.txt", "test_file3.txt"}; // Add your file names
     const std::string password      = "789";
@@ -94,9 +97,32 @@ void main() {
       std::cout << "file process success.\n";
     }
   }
+p3:
   /* zip include dir */ {
+    std::thread delete_thread([]() {
+      const std::string file_path = "../test_dir/test_delete.txt";
+      sleep(1);
+      if (std::remove(file_path.c_str()) != 0) {
+        std::cout << "File deletion failed: %s" << file_path.c_str() << std::endl;
+        } else {
+          std::cout << "Successfully deletion: %s" << file_path.c_str() << std::endl;
+        }
+    });
+    // std::thread write_thread([]() {
+    //   const std::string file_path = "../test_dir/test_delete.txt";
+    //   std::ofstream file_stream(file_path, std::ios::app);  // 使用 std::ios::app 表示在文件末尾追加内容
+    //   if (!file_stream.is_open()) {
+    //       std::cerr << "无法打开文件: " << file_path << std::endl;
+    //       return 1;  // 返回错误代码
+    //   }
+    //   // 持续往文件中写入内容
+    //   while (true) {
+    //       std::string content = "1";
+    //       file_stream << content << std::endl;
+    //   }
+    // });
     const std::string dir_path      = ".."; // Replace with your directory path
-    const std::vector<std::string> file_names = {"test_dir/test_file1.txt", "test_dir/test_file2.txt", "test_dir/test_file3.txt"}; // Add your file names
+    const std::vector<std::string> file_names = {"/test_dir/test_delete.txt"}; // Add your file names
     const std::string password      = "789";
     const std::string zip_file_path = "../temp/dir.zip";
 
@@ -105,6 +131,8 @@ void main() {
     } else {
       std::cout << "file process success.\n";
     }
+    // write_thread.join();
+    delete_thread.join();
   }
 }
 
