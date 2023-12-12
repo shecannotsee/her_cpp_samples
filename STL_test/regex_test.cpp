@@ -47,27 +47,6 @@ long long  calculateDirectorySize(std::string dirPath) {
 
 int main() {
   std::cout << "start.\n";
-  {
-    std::string path = "/home/shecannotsee/desktop/temp/store";  // TODO:先写死路径
-    // 1）NAD APP：600MB
-    // 2）NAD Service：600MB
-    // 3）MCU：100MB
-    // TODO:需要细分处理，总共1300M
-    long long storageThreshold =
-        100 * 1024 * 1024;  // TODO:存储阈值，先写死100M
-    struct statvfs stat {};
-    if (statvfs(path.c_str(), &stat) != 0) {
-      std::cout << "Error getting filesystem statistics.\n";
-      return 0;
-    }
-
-    long long usedSpace = calculateDirectorySize(path);;
-    if (usedSpace != -1) {
-      std::cout << "Total size of files in directory: " << usedSpace << " bytes" << std::endl;
-    }
-    std::cout << usedSpace <<std::endl;
-  }
-  goto p2;
   /* log content */ {
     p1:
     std::string logContentStr;
@@ -100,6 +79,7 @@ int main() {
         std::string date;
         std::string time;
         std::string log_level;
+        std::string threadId;
         std::string module;
         std::string file_name;
         std::string function_name;
@@ -110,32 +90,35 @@ int main() {
       // 定义正则表达式来匹配日志条目的不同部分
       const std::regex logRegex(
           "\\[([^\\]]+)\\s([^\\]]+)\\s([^\\]]+)\\]\\[([^\\]]+)\\]\\[([^\\]]+)\\]"
-          "\\[([^\\]]+)\\]\\[([^\\]]+)\\](.*)");
+          "\\[([^\\]]+)\\]\\[([^\\]]+)\\]\\[([^\\]]+)\\](.*)");
       std::smatch match;
       // 在字符串中查找所有匹配的日志条目
       int currcurrentIndex = 0;
       while (std::regex_search(remainingLog, match, logRegex)) {
-        // std::cout << "match[1]: " << match[1] << std::endl;
-        // std::cout << "match[2]: " << match[2] << std::endl;
-        // std::cout << "match[3]: " << match[3] << std::endl;
-        // std::cout << "match[4]: " << match[4] << std::endl;
-        // std::cout << "match[5]: " << match[5] << std::endl;
-        // std::cout << "match[6]: " << match[6] << std::endl;
-        // std::cout << "match[7]: " << match[7] << std::endl;
-        // std::cout << "match[8]: " << match[8] << std::endl;
-        // std::cout << "-----------------------------" << std::endl;
-        // std::cout << "match[0]: " << match[0] << std::endl;
-        // std::cout << "-----------------------------" << std::endl;
+        std::cout << "match[1]: " << match[1] << std::endl;
+        std::cout << "match[2]: " << match[2] << std::endl;
+        std::cout << "match[3]: " << match[3] << std::endl;
+        std::cout << "match[4]: " << match[4] << std::endl;
+        std::cout << "match[5]: " << match[5] << std::endl;
+        std::cout << "match[6]: " << match[6] << std::endl;
+        std::cout << "match[7]: " << match[7] << std::endl;
+        std::cout << "match[8]: " << match[8] << std::endl;
+        std::cout << "match[9]: " << match[9] << std::endl;
+
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "match[0]: " << match[0] << std::endl;
+        std::cout << "-----------------------------" << std::endl;
         entry.start_index    = currcurrentIndex;
         entry.end_index      = currcurrentIndex+match[0].length();
         entry.date         = match[1];
         entry.time         = match[2];
         entry.log_level    = match[3];
-        entry.module       = match[4];
-        entry.file_name    = match[5];
-        entry.function_name= match[6];
-        entry.line_number  = match[7];
-        entry.content      = match[8];
+        entry.threadId     = match[4];
+        entry.module       = match[5];
+        entry.file_name    = match[6];
+        entry.function_name= match[7];
+        entry.line_number  = match[8];
+        entry.content      = match[9];
         currcurrentIndex = entry.end_index + 1;
 
         std::get<0>(tmp) = entry.start_index;
@@ -160,6 +143,7 @@ int main() {
     }
     std::cout << "errorlog:--------------------\n";
     std::cout << errorLogBuffer_ << "\n";
+    exit(1);
   }
   /* log file name */
   {
