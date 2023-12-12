@@ -39,9 +39,9 @@ bool zip_files_with_pwd(const std::string& dir_path, const std::vector<std::stri
     // Construct the full file path by concatenating the directory path and file name
     std::string full_file_path = dir_path + "/" + file_name;
 
-    if (zipOpenNewFileInZip3_64(zip_file, file_name.c_str(), &zip_file_info, nullptr, 0, nullptr, 0, nullptr,
+    if (zipOpenNewFileInZip3(zip_file, file_name.c_str(), &zip_file_info, nullptr, 0, nullptr, 0, nullptr,
                                 Z_DEFLATED, Z_DEFAULT_COMPRESSION, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
-                                password.c_str(), 0, 0) != ZIP_OK) {
+                                password.c_str(), 0) != ZIP_OK) {
       std::cerr << "Failed to open file in zip with password: " << full_file_path << std::endl;
       zipClose(zip_file, nullptr);
       return false;
@@ -99,15 +99,15 @@ void main() {
   }
 p3:
   /* zip include dir */ {
-    std::thread delete_thread([]() {
-      const std::string file_path = "../test_dir/test_delete.txt";
-      sleep(1);
-      if (std::remove(file_path.c_str()) != 0) {
-        std::cout << "File deletion failed: %s" << file_path.c_str() << std::endl;
-        } else {
-          std::cout << "Successfully deletion: %s" << file_path.c_str() << std::endl;
-        }
-    });
+    // std::thread delete_thread([]() {
+    //   const std::string file_path = "../test_dir/test_delete.txt";
+    //   sleep(1);
+    //   if (std::remove(file_path.c_str()) != 0) {
+    //     std::cout << "File deletion failed: %s" << file_path.c_str() << std::endl;
+    //     } else {
+    //       std::cout << "Successfully deletion: %s" << file_path.c_str() << std::endl;
+    //     }
+    // });
     // std::thread write_thread([]() {
     //   const std::string file_path = "../test_dir/test_delete.txt";
     //   std::ofstream file_stream(file_path, std::ios::app);  // 使用 std::ios::app 表示在文件末尾追加内容
@@ -121,10 +121,10 @@ p3:
     //       file_stream << content << std::endl;
     //   }
     // });
-    const std::string dir_path      = ".."; // Replace with your directory path
-    const std::vector<std::string> file_names = {"/test_dir/test_delete.txt"}; // Add your file names
-    const std::string password      = "789";
-    const std::string zip_file_path = "../temp/dir.zip";
+    const std::string dir_path      = "/home/shecannotsee/desktop/all_code/sheTestcode/openssl1.1.1s_test/test_dir"; // Replace with your directory path
+    const std::vector<std::string> file_names = {"test_delete.txt", "test_file1.txt"}; // Add your file names
+    const std::string password      = "123456789";
+    const std::string zip_file_path = "/home/shecannotsee/desktop/all_code/sheTestcode/openssl1.1.1s_test/temp/dir.zip";
 
     if (!zip_files_with_pwd(dir_path, file_names, password, zip_file_path)) {
       std::cout << "file process failed.\n";
@@ -132,7 +132,7 @@ p3:
       std::cout << "file process success.\n";
     }
     // write_thread.join();
-    delete_thread.join();
+    // delete_thread.join();
   }
 }
 
