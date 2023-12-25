@@ -9,7 +9,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* global mock set */
-constexpr bool mock_fopen = true;
+static bool mock_fopen = false;
 constexpr int mock_fopen_errno = 1;
 enum class fopen_case_des : int {
   ret_nullptr,
@@ -42,7 +42,7 @@ extern "C" FILE* fopen(const char *__restrict __filename,
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// extern int fclose (FILE *__stream);
 /* global mock set */
-constexpr bool mock_fclose = true;
+static bool mock_fclose = false;
 constexpr int mock_fclose_errno = 1;
 enum class fclose_case_des : int {
   ret_0,
@@ -89,6 +89,9 @@ int test_function_with_system_interface() {
 }
 
 TEST(t4_system_interface_mock, linux_system_interface) {
+  mock_fopen = true;
+  mock_fclose = true;
+
   fopen_case = fopen_case_des::ret_nullptr;
   fclose_case = fclose_case_des::ret_0;
   EXPECT_EQ(test_function_with_system_interface(), -1);
