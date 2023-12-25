@@ -7,60 +7,98 @@
 #include <dlfcn.h>
 #include <sys/socket.h>
 
-typedef int (*connect_func_t)(int sockfd,
-                             const struct sockaddr * addr,
-                             socklen_t addrlen);
-
-connect_func_t connect_func = reinterpret_cast<connect_func_t>(dlsym(RTLD_NEXT,"connect"));
-
-bool mock_connet = true;
-int mock_connet_errno = 1;
-// mock connect
-extern "C" int connect(int sockfd,
-                       const struct sockaddr * addr,
-                       socklen_t addrlen) {
-  if (mock_connet) {
-    errno = mock_connet_errno;
-    return errno == 0 ? 0 : -1;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* global mock set */
+constexpr bool mock_fopen = true;
+constexpr int mock_fopen_errno = 1;
+enum class fopen_case_des : int {
+  ret_nullptr,
+  ret_FILE,
+};
+static fopen_case_des fopen_case = fopen_case_des::ret_nullptr;
+/* fopen mock set */
+typedef FILE* (*fopen_func_t)(
+  const char *__restrict __filename,
+  const char *__restrict __modes);
+/* The real function address function */
+fopen_func_t fopen_func = reinterpret_cast<fopen_func_t>(dlsym(RTLD_NEXT,"fopen"));
+/* fopen mock */
+extern "C" FILE* fopen(const char *__restrict __filename,
+                       const char *__restrict __modes) {
+  if (mock_fopen) {
+    if (fopen_case == fopen_case_des::ret_nullptr) {
+      return nullptr;
+    } else if (fopen_case == fopen_case_des::ret_FILE) {
+      return new FILE;
+    } else {
+      return nullptr;
+    }
   } else {
-    return connect_func(sockfd, addr, addrlen);
+    return fopen_func(__filename, __modes);
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// extern int fclose (FILE *__stream);
+/* global mock set */
+constexpr bool mock_fclose = true;
+constexpr int mock_fclose_errno = 1;
+enum class fclose_case_des : int {
+  ret_0,
+  ret_1,
+};
+static fclose_case_des fclose_case = fclose_case_des::ret_0;
+/* fclose mock set */
+typedef int (*fclose_func_t)(FILE *__stream);
+/* The real function address function */
+fclose_func_t fclose_func = reinterpret_cast<fclose_func_t>(dlsym(RTLD_NEXT,"fclose"));
+/* fopen mock */
+extern "C" int fclose(FILE *__stream) {
+  if (mock_fclose) {
+    if (fclose_case == fclose_case_des::ret_0) {
+      return 0;
+    } else if (fclose_case == fclose_case_des::ret_1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  } else {
+    return fclose_func(__stream);
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// typedef FILE* (fopen_func_t)(
-//   const char *__restrict __filename,
-//   const char *__restrict __modes);
-//
-// fopen_func_t fopen_func = dlsym(RTLD_NEXT,"fopen");
-// bool mock_fopen;
-// int mock_fopen_errno;
-// extern "C" FILE* fopen(const char *__restrict __filename,
-//                      const char *__restrict __modes) {
-//   if (mock_fopen) {
-//     errno = mock_fopen_errno;
-//     return nullptr;
-//   } else {
-//     return fopen_func(__filename, __modes);
-//   }
-// }
-
-TEST(t4_system_interface_mock, linux_system_interface) {
+int test_function_with_system_interface() {
   // file pathty
   const std::string file_path = "../README.md";
 
   // open file
   FILE* file_handle = fopen(file_path.c_str(), "r");
   if (file_handle == nullptr) {
-    perror("Error opening file");
-    exit(EXIT_FAILURE);
+    return -1;
   }
 
   // close file
   if (fclose(file_handle) != 0) {
-    perror("Error closing file");
-    exit(EXIT_FAILURE);
+    return -2;
   }
+
+  return 0;
+}
+
+TEST(t4_system_interface_mock, linux_system_interface) {
+  fopen_case = fopen_case_des::ret_nullptr;
+  fclose_case = fclose_case_des::ret_0;
+  EXPECT_EQ(test_function_with_system_interface(), -1);
+  fopen_case = fopen_case_des::ret_FILE;
+  fclose_case = fclose_case_des::ret_0;
+  EXPECT_EQ(test_function_with_system_interface(), 0);
+
+  fopen_case = fopen_case_des::ret_FILE;
+  fclose_case = fclose_case_des::ret_1;
+  EXPECT_EQ(test_function_with_system_interface(), -2);
 }
 
 TEST(t4_system_interface_mock, std_interface) {
