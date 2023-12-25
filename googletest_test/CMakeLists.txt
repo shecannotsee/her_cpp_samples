@@ -30,7 +30,7 @@ link_directories(
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp"
         "${CMAKE_SOURCE_DIR}/t1_gtest_basic.cpp"
         "${CMAKE_SOURCE_DIR}/t2_gmock_easy.cpp"
-        "${CMAKE_SOURCE_DIR}/t3_gmock_test.cpp"
+        "${CMAKE_SOURCE_DIR}/t3_gmock_complex.cpp"
         )
 add_executable(${PROJECT_NAME}
         ${SRC}

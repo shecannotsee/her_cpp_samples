@@ -2,9 +2,6 @@
 // Created by shecannotsee on 23-12-25.
 //
 
-#ifndef T2_GMOCK_EASY_H
-#define T2_GMOCK_EASY_H
-
 #include "global_test_set.h"
 
 namespace t2_gmock_easy {
@@ -30,6 +27,4 @@ TEST(t2_gmock_easy, function_test) {
   };
 
   EXPECT_EQ(8,temp.get_number_8());
-};
-
-#endif //T2_GMOCK_EASY_H
+}

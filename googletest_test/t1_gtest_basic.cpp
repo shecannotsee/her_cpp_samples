@@ -2,9 +2,6 @@
 // Created by shecannotsee on 23-12-25.
 //
 
-#ifndef T1_GTEST_BASIC_H
-#define T1_GTEST_BASIC_H
-
 #include "global_test_set.h"
 
 TEST(t1_gtest_basic, gtest_basic) {
@@ -97,5 +94,3 @@ TEST(t1_gtest_basic, add_test) {
   EXPECT_EQ(t1_gtest_basic::add(3,4),7);
   EXPECT_EQ(t1_gtest_basic::add(1,5),6);
 }
-
-#endif //T1_GTEST_BASIC_H
