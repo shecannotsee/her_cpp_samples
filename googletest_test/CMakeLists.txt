@@ -28,9 +28,11 @@ link_directories(
 ###############################################################
 
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp"
+        "${CMAKE_SOURCE_DIR}/stackoverflow_mock_code.cpp"
         "${CMAKE_SOURCE_DIR}/t1_gtest_basic.cpp"
         "${CMAKE_SOURCE_DIR}/t2_gmock_easy.cpp"
         "${CMAKE_SOURCE_DIR}/t3_gmock_complex.cpp"
+        "${CMAKE_SOURCE_DIR}/t4_system_interface_mock.cpp"
         )
 add_executable(${PROJECT_NAME}
         ${SRC}
@@ -41,4 +43,5 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
         "-pthread"
         gmock gtest
+        dl
         )

@@ -48,5 +48,5 @@ TEST(t3_gmock_complex, mock_function_test) {
 
   // check param
   EXPECT_CALL(mock, set_value(magic_int_7));
-  mock.set_value(magic_int_3);// if [set_value(magic_int_3)] will Failure
+  mock.set_value(magic_int_7);// if [set_value(magic_int_3)] will Failure
 }
