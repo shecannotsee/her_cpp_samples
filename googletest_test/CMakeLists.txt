@@ -33,6 +33,7 @@ file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp"
         "${CMAKE_SOURCE_DIR}/t2_gmock_easy.cpp"
         "${CMAKE_SOURCE_DIR}/t3_gmock_complex.cpp"
         "${CMAKE_SOURCE_DIR}/t4_system_interface_mock.cpp"
+        "${CMAKE_SOURCE_DIR}/t5_std_func_mock.cpp"
         )
 add_executable(${PROJECT_NAME}
         ${SRC}
