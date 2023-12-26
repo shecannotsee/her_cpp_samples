@@ -102,6 +102,9 @@ TEST(t4_system_interface_mock, linux_system_interface) {
   fopen_case = fopen_case_des::ret_FILE;
   fclose_case = fclose_case_des::ret_1;
   EXPECT_EQ(test_function_with_system_interface(), -2);
+
+  mock_fopen = false; // close mock fopen
+  mock_fclose = false; // close mock fclose
 }
 
 TEST(t4_system_interface_mock, std_interface) {
