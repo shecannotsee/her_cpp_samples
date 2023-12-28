@@ -146,7 +146,7 @@ struct get_ctor_addr_thread {
   template<typename Callable,
     typename... Args,
     typename = std::_Require<not_same<Callable>>>
-  void *operator()(Callable &&f, Args &&... args, bool start = true) {
+  void *operator()(bool start, Callable &&f, Args &&... args) {
     //the start vairable must be true, or the compiler will optimize out.
     if (start) {
       goto Start;
@@ -216,43 +216,62 @@ void _M_start_thread_mock(std::unique_ptr<std::thread::_State>, void (*)()) {
 };
 
 }// namespace thread_stub
-
 TEST(t6_cpp_stub, std_thread_mock) {
-  Stub stub;
-  auto std_thread_c = cpp_class_stub::get_ctor_addr<std::thread>();
-  auto mock_thread_c = cpp_class_stub::get_ctor_addr<thread_stub::thread_mock>();
-  stub.set(std_thread_c, mock_thread_c);
-  auto std_thread_d = cpp_class_stub::get_dtor_addr<std::thread>();
-  auto mock_thread_d = cpp_class_stub::get_dtor_addr<thread_stub::thread_mock>();
-  stub.set(std_thread_d, mock_thread_d);
-  stub.set(ADDR(std::thread, join), thread_stub::join_mock);
   // default ctor test
   {
+    Stub stub;
+    // ctor
+    auto std_thread_c = cpp_class_stub::get_ctor_addr<std::thread>();
+    auto mock_thread_c = cpp_class_stub::get_ctor_addr<thread_stub::thread_mock>();
+    stub.set(std_thread_c, mock_thread_c);
+    // dtor
+    auto std_thread_d = cpp_class_stub::get_dtor_addr<std::thread>();
+    auto mock_thread_d = cpp_class_stub::get_dtor_addr<thread_stub::thread_mock>();
+    stub.set(std_thread_d, mock_thread_d);
+    // join
+    stub.set(ADDR(std::thread, join), thread_stub::join_mock);
+
     std::thread th;
     th.join();
   }
-  printf("#####################\n");
   // overload ctor test: method 1-success
+  printf("\n##### overload thread ctor test to replace the system api function #####\n");
   {
+    Stub stub;
+    // ctor
+    stub.set(pthread_create, thread_stub::pthread_create_mock);
+    stub.set(ADDR(std::thread, _M_start_thread), thread_stub::_M_start_thread_mock);
+    // dtor
+    auto std_thread_d = cpp_class_stub::get_dtor_addr<std::thread>();
+    auto mock_thread_d = cpp_class_stub::get_dtor_addr<thread_stub::thread_mock>();
+    stub.set(std_thread_d, mock_thread_d);
+    // join
+    stub.set(ADDR(std::thread, join), thread_stub::join_mock);
+
     std::function<void()> build_function = []() {
       printf("\nmock thread failed!\n");
     };
-    Stub stub;
-    stub.set(pthread_create, thread_stub::pthread_create_mock);
-    stub.set(ADDR(std::thread, _M_start_thread), thread_stub::_M_start_thread_mock);
-    stub.set(std_thread_c, mock_thread_c);
     std::thread th(build_function);
     th.join();
   }
   // overload ctor test: method 2-failed
+  printf("\n##### overload thread ctor test to get overload ctor address #####\n");
   {
     std::function<void()> build_function = []() {
       printf("\nmock thread failed!\n");
     };
     Stub stub;
-//    auto std_thread_c = thread_stub::get_ctor_addr_thread<std::thread>()(build_function);
-//    auto mock_thread_c = thread_stub::get_ctor_addr_thread<thread_stub::thread_mock>()(build_function);
-    stub.set(std_thread_c, mock_thread_c);
+    // ctor
+//    auto std_thread_c_special = thread_stub::get_ctor_addr_thread<std::thread>()(true, build_function);
+//    auto mock_thread_c_special = thread_stub::get_ctor_addr_thread<thread_stub::thread_mock>()(true, build_function);
+//    stub.set(std_thread_c_special, mock_thread_c_special);
+    // dtor
+    auto std_thread_d = cpp_class_stub::get_dtor_addr<std::thread>();
+    auto mock_thread_d = cpp_class_stub::get_dtor_addr<thread_stub::thread_mock>();
+    stub.set(std_thread_d, mock_thread_d);
+    // join
+    stub.set(ADDR(std::thread, join), thread_stub::join_mock);
+
     std::thread th(build_function);
     th.join();
   }
