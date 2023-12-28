@@ -8,6 +8,9 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include "cpp-stub_lib/stub.h"
+#include "cpp-stub_lib/addr_pri.h"
+#include "cpp-stub_lib/addr_any.h"
 
 const std::string RESET_COLOR   = "\033[0m";
 const std::string RED_COLOR     = "\033[31m";

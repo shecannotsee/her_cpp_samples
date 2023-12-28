@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_NAME "googletest_test")
 set(CMAKE_CXX_FLAGS "-g")# 断点无效处理方案
+
+SET(CMAKE_CXX_FLAGS "-fno-access-control")
+SET(CMAKE_C_FLAGS   "-fno-access-control")
+
 project(${PROJECT_NAME})
 
 #
@@ -34,6 +38,7 @@ file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp"
         "${CMAKE_SOURCE_DIR}/t3_gmock_complex.cpp"
         "${CMAKE_SOURCE_DIR}/t4_system_interface_mock.cpp"
         "${CMAKE_SOURCE_DIR}/t5_std_func_mock.cpp"
+        "${CMAKE_SOURCE_DIR}/t6_cpp_stub.cpp"
         )
 add_executable(${PROJECT_NAME}
         ${SRC}
