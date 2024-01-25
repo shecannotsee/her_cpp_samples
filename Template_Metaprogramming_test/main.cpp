@@ -5,6 +5,7 @@
 #include "method_1.h"
 #include "method_2_make_tuple.h"
 #include "method_3.h"
+#include "t4_type_traits.h"
 
 int main() {
   std::cout<<"Template Metaprogramming test start.\n";
