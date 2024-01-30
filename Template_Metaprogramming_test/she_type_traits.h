@@ -20,14 +20,6 @@ struct constant_base {
       return "false";
     }
   }
-  using value_type = type_;
-  using type       = constant_base<type_, value_>;
-  constexpr operator value_type() const noexcept {
-    return value;
-  }
-  constexpr value_type operator()() const noexcept {
-    return value;
-  }
 };
 
 using true_type  = constant_base<bool, true>;
