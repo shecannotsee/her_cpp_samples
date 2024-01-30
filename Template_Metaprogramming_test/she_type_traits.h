@@ -5,61 +5,98 @@
 #ifndef SHE_TYPE_TRAITS_H
 #define SHE_TYPE_TRAITS_H
 
-#include <string>
 #include <type_traits>
 
 namespace she {
 
 template <typename type_, type_ value_>
-struct constant_base {
+struct integral_constant {
+  using type                   = integral_constant;
   static constexpr type_ value = value_;
-  static std::string get_value() {
-    if (value_) {
-      return "true";
-    } else {
-      return "false";
-    }
-  }
 };
 
-using true_type  = constant_base<bool, true>;
-using false_type = constant_base<bool, false>;
+using true_type  = integral_constant<bool, true>;
+using false_type = integral_constant<bool, false>;
 
 // 这是一个条件模板，根据一个布尔值的真假选择两个不同的类型。在这里，根据第一个参数（布尔值）的真假，选择第二个类型或者第三个类型。
 template <bool c, typename true_, typename false_>
-struct group {
+struct conditional {
   using type = true_;
 };
 template <typename true_, typename false_>
-struct group<false, true_, false_> {
-  typedef false_ type;
+struct conditional<false, true_, false_> {
+  using type = false_;
 };
 
-// not
-template <typename p>
-struct _not_ : public constant_base<bool, !bool(p::value)> {};
-// or
+namespace _not_ {
+template <typename value_>
+struct input {
+  // The typename keyword is used to tell the compiler that
+  // [group<c1::value, c1, c2>::type] is a type and not a static member variable
+  using type                  = typename integral_constant<bool, !bool(value_::value)>::type;
+  static constexpr bool value = type::value;
+};
+}  // namespace _not_
+namespace _or_ {
+// Generic templates
 template <typename...>
-struct _or_;
+struct input;
+// Template specialization: default
 template <>
-struct _or_<> : public false_type {};
+struct input<> {
+  using type                  = integral_constant<bool, false>::type;
+  static constexpr bool value = type::value;
+};
+// Template specialization: one param
 template <typename c1>
-struct _or_<c1> : public c1 {};
+struct input<c1> {
+  using type                  = c1;
+  static constexpr bool value = type::value;
+};
+// Template specialization: double params
 template <typename c1, typename c2>
-struct _or_<c1, c2> : public group<c1::value, c1, c2>::type {};
+struct input<c1, c2> {
+  // The typename keyword is used to tell the compiler that
+  // [group<c1::value, c1, c2>::type] is a type and not a static member variable
+  using type                  = typename conditional<c1::value, c1, c2>::type;
+  static constexpr bool value = type::value;
+};
+// Template specialization: more params
 template <typename c1, typename c2, typename c3, typename... cn>
-struct _or_<c1, c2, c3, cn...> : public group<c1::value, c1, _or_<c2, c3, cn...>>::type {};
-// and
+struct input<c1, c2, c3, cn...> {
+  using type                  = typename conditional<c1::value, c1, input<c2, c3, cn...>>::type;
+  static constexpr bool value = type::value;
+};
+}  // namespace _or_
+namespace _and_ {
+// Generic templates
 template <typename...>
-struct _and_;
+struct input;
+// Template specialization: default
 template <>
-struct _and_<> : public true_type {};
+struct input<> : public true_type {};
+// Template specialization: one param
 template <typename c1>
-struct _and_<c1> : public c1 {};
+struct input<c1> {
+  using type                  = typename c1::type;
+  static constexpr bool value = type::value;
+};
+// Template specialization: double params
 template <typename c1, typename c2>
-struct _and_<c1, c2> : public group<c1::value, c2, c1>::type {};
+struct input<c1, c2> {
+  using type                  = typename conditional<c1::value, c2, c1>::type;
+  static constexpr bool value = type::value;
+};
+// Template specialization: more params
 template <typename c1, typename c2, typename c3, typename... cn>
-struct _and_<c1, c2, c3, cn...> : public group<c1::value, _and_<c2, c3, cn...>, c1>::type {};
+struct input<c1, c2, c3, cn...> {
+  using type                  = typename conditional<c1::value, input<c2, c3, cn...>, c1>::type;
+  static constexpr bool value = type::value;
+};
+}  // namespace _and_
+namespace all_type {
+
+}  // namespace all_type
 }
 
 #endif //SHE_TYPE_TRAITS_H
