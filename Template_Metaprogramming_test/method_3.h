@@ -34,7 +34,6 @@ void main() {
   printN("hello", "world");
 
   auto tuple = std::make_tuple(9, "shecannotsee", 3.2, false);
-  print_tuple(tuple);
 };
 
 };// namespace method_3
