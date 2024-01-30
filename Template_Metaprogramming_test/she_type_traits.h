@@ -94,9 +94,165 @@ struct input<c1, c2, c3, cn...> {
   static constexpr bool value = type::value;
 };
 }  // namespace _and_
-namespace all_type {
+namespace base_type {
+template <typename>
+struct check {
+  using type                  = false_type;
+  static constexpr bool value = type::value;
+};
 
-}  // namespace all_type
+template <>
+struct check<bool> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<unsigned char> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<signed char> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<char> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<unsigned short> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<short> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<unsigned int> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<int> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<unsigned long> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<long> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<unsigned long long> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
+struct check<long long> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <typename>
+struct get_name {
+  using type                      = false_type;
+  inline static const char* value = "unknow";
+};
+
+template <>
+struct get_name<bool> {
+  using type                      = true_type;
+  inline static const char* value = "bool";
+};
+
+template <>
+struct get_name<unsigned char> {
+  using type                      = true_type;
+  inline static const char* value = "unsigned char";
+};
+
+template <>
+struct get_name<signed char> {
+  using type                      = true_type;
+  inline static const char* value = "signed char";
+};
+
+template <>
+struct get_name<char> {
+  using type                      = true_type;
+  inline static const char* value = "char";
+};
+
+template <>
+struct get_name<unsigned short> {
+  using type                      = true_type;
+  inline static const char* value = "unsigned short";
+};
+
+template <>
+struct get_name<short> {
+  using type                      = true_type;
+  inline static const char* value = "short";
+};
+
+template <>
+struct get_name<unsigned int> {
+  using type                      = true_type;
+  inline static const char* value = "unsigned int";
+};
+
+template <>
+struct get_name<int> {
+  using type                      = true_type;
+  inline static const char* value = "int";
+};
+
+template <>
+struct get_name<unsigned long> {
+  using type                      = true_type;
+  inline static const char* value = "unsigned long";
+};
+
+template <>
+struct get_name<long> {
+  using type                      = true_type;
+  inline static const char* value = "long";
+};
+
+template <>
+struct get_name<unsigned long long> {
+  using type                      = true_type;
+  inline static const char* value = "unsigned long long";
+};
+
+template <>
+struct get_name<long long> {
+  using type                      = true_type;
+  inline static const char* value = "long long";
+};
+
+
+}  // namespace base_type
 }
 
 #endif //SHE_TYPE_TRAITS_H
