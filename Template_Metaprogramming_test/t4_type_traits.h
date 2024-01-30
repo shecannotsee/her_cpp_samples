@@ -131,7 +131,7 @@ void run() {
     using t14 = and_test<_1, _1, _1>::p;
     PRINT("1 & 1 & 1", get_value(t14::value));
   }
-  /* type_support */ {
+  /* base_type */ {
     using t1 = she::base_type::check<void>;
     using n1 = she::base_type::get_name<void>;
     PRINT(n1::value, get_value(t1::value));
@@ -195,6 +195,12 @@ void run() {
     using t13      = she::base_type::check<decltype(t_ll)>;
     using n13      = she::base_type::get_name<decltype(t_ll)>;
     PRINT(n13::value, get_value(t13::value));
+  }
+  /* type_operation */ {
+    using c_int = const int;
+    using no_c_int = she::type_operation::remove_const<c_int>::type;
+    no_c_int a = 10;
+    a = 20;
   }
 }
 

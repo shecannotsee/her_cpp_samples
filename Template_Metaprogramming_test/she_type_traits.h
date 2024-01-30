@@ -263,11 +263,47 @@ struct get_name<long long> {
   inline static const char* value = "long long";
 };
 
-
 }  // namespace base_type
 namespace type_operation {
-
-}
+// remove const
+template <typename T>
+struct remove_const {
+  using type = T;
+};
+template <typename T>
+struct remove_const<T const> {
+  using type = T;
+};
+// removce volatile
+template <typename T>
+struct remove_volatile {
+  using type = T;
+};
+template <typename T>
+struct remove_volatile<T volatile> {
+  using type = T;
+};
+// remove_cv
+template <typename T>
+struct remove_cv {
+  using type = typename remove_const<typename remove_volatile<T>::type>::type;
+};
+/// add_const
+template <typename T>
+struct add_const {
+  using type = T const;
+};
+/// add_volatile
+template <typename T>
+struct add_volatile {
+  using type = T volatile;
+};
+/// add_cv
+template <typename T>
+struct add_cv {
+  using type = typename add_const<typename add_volatile<T>::type>::type;
+};
+}  // namespace type_operation
 }
 
 #endif //SHE_TYPE_TRAITS_H
