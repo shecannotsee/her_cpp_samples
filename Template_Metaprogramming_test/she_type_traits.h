@@ -102,6 +102,12 @@ struct check {
 };
 
 template <>
+struct check<void> {
+  using type                  = true_type;
+  static constexpr bool value = type::value;
+};
+
+template <>
 struct check<bool> {
   using type                  = true_type;
   static constexpr bool value = type::value;
@@ -180,6 +186,12 @@ struct get_name {
 };
 
 template <>
+struct get_name<void> {
+  using type                      = true_type;
+  inline static const char* value = "void";
+};
+
+template <>
 struct get_name<bool> {
   using type                      = true_type;
   inline static const char* value = "bool";
@@ -253,6 +265,9 @@ struct get_name<long long> {
 
 
 }  // namespace base_type
+namespace type_operation {
+
+}
 }
 
 #endif //SHE_TYPE_TRAITS_H

@@ -132,8 +132,8 @@ void run() {
     PRINT("1 & 1 & 1", get_value(t14::value));
   }
   /* type_support */ {
-    using t1 = she::base_type::check<_0>;
-    using n1 = she::base_type::get_name<_0>;
+    using t1 = she::base_type::check<void>;
+    using n1 = she::base_type::get_name<void>;
     PRINT(n1::value, get_value(t1::value));
 
     bool t_bool = true;
