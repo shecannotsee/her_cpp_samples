@@ -15,8 +15,15 @@
 
 int main() {
   std::cout << YELLOW_COLOR << "Start test " << RESET_COLOR << std::endl;
-  t1_algorithms::run();
 
+  t1_algorithms::run();
+  t2_assert::run();
+  t3_byte::run();
+  t4_narrow::run();
+  t5_pointers::run();
+  t6_span::run();
+  t7_zstring::run();
+  t8_util::run();
 
   std::cout << GREEN_COLOR << "Pass the test." << RESET_COLOR << std::endl;
   return 0;
