@@ -9,6 +9,10 @@
 
 #include "she_type_traits.h"
 #include "t4_type_traits.h"
+#include <linux/can.h>
+#include <linux/can/raw.h>
+struct can_frame can_msg;
+
 
 template <typename... input>
 struct not_test {
@@ -197,10 +201,11 @@ void run() {
     PRINT(n13::value, get_value(t13::value));
   }
   /* type_operation */ {
-    using c_int = const int;
+    const int a = 10;
+    using c_int = decltype(a);
     using no_c_int = she::type_operation::remove_const<c_int>::type;
-    no_c_int a = 10;
-    a = 20;
+    no_c_int b = 10;
+    b = 20;
   }
 }
 
