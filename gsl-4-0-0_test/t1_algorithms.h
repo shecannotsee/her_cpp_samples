@@ -5,6 +5,8 @@
 #ifndef T1_ALGORITHMS_H
 #define T1_ALGORITHMS_H
 
+#include "global_test_set.h"
+
 namespace t1_algorithms {
 
 void run() noexcept {

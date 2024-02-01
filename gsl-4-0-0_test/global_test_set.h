@@ -2,6 +2,7 @@
 #define GLOBAL_TEST_SET_H
 
 #include <string>
+#include "gsl/gsl"
 
 const std::string RESET_COLOR   = "[0m";
 const std::string RED_COLOR     = "[31m";

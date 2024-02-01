@@ -5,6 +5,8 @@
 #ifndef T5_POINTERS_H
 #define T5_POINTERS_H
 
+#include "global_test_set.h"
+
 namespace t5_pointers {
 
 void run() noexcept {

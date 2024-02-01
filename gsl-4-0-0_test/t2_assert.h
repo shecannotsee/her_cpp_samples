@@ -5,6 +5,8 @@
 #ifndef T2_ASSERT_H
 #define T2_ASSERT_H
 
+#include "global_test_set.h"
+
 namespace t2_assert {
 
 void run() noexcept {

@@ -5,6 +5,8 @@
 #ifndef T3_BYTE_H
 #define T3_BYTE_H
 
+#include "global_test_set.h"
+
 namespace t3_byte {
 
 void run() noexcept {

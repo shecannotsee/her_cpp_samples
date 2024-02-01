@@ -5,6 +5,8 @@
 #ifndef T4_NARROW_H
 #define T4_NARROW_H
 
+#include "global_test_set.h"
+
 namespace t4_narrow {
 
 void run() noexcept {

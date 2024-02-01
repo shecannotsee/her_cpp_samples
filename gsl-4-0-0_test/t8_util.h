@@ -5,6 +5,8 @@
 #ifndef T8_UTIL_H
 #define T8_UTIL_H
 
+#include "global_test_set.h"
+
 namespace t8_util {
 
 void run() noexcept {
