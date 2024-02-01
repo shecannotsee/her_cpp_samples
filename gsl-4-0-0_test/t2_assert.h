@@ -10,6 +10,22 @@
 namespace t2_assert {
 
 void run() noexcept {
+  int height = 1;
+  int width = 1;
+  try {
+    Expects(height > 0 && width > 0);
+    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+  } catch (...) {
+    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+  }
+
+  try {
+    Ensures(height+width == 2);
+    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+  } catch (...) {
+    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+  }
+
 }
 
 }  // namespace t2_assert
