@@ -18,7 +18,7 @@ void run() noexcept {
   try {
     // 128 > (-127~127)
     constexpr int sourceValue  = 128;
-    constexpr char targetValue = gsl::narrow<char>(sourceValue);
+    char targetValue = gsl::narrow<char>(sourceValue);
     // debug
     std::cout << "Source value: " << sourceValue << std::endl;
     std::cout << "Target value (char): " << static_cast<int>(targetValue) << std::endl;
@@ -30,7 +30,7 @@ void run() noexcept {
 
   // Right process
   constexpr int sourceValue  = 127;
-  constexpr char targetValue = gsl::narrow<char>(sourceValue);
+  char targetValue = gsl::narrow<char>(sourceValue);
   // debug
   std::cout << "Source value (int): " << sourceValue << std::endl;
   std::cout << "Target value (char): " << static_cast<int>(targetValue) << std::endl;
