@@ -8,7 +8,6 @@
 #include <functional>
 
 #include "global_test_set.h"
-#include "gsl/gsl"
 
 namespace t8_util {
 
