@@ -10,22 +10,25 @@
 namespace t2_assert {
 
 void run() noexcept {
+  std::cout << YELLOW_COLOR << "[t2_assert::run] >>> start" << RESET_COLOR << std::endl;
+  gsl::final_action<std::function<void()>> _(
+      []() { std::cout << GREEN_COLOR << "[t2_assert::run] >>> done" << RESET_COLOR << "\n\n"; });
+
   int height = 1;
-  int width = 1;
+  int width  = 1;
   try {
     Expects(height > 0 && width > 0);
-    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+    std::cout << "t2_assert:" << __LINE__ << std::endl;
   } catch (...) {
-    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+    std::cout << "t2_assert:" << __LINE__ << std::endl;
   }
 
   try {
-    Ensures(height+width == 2);
-    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+    Ensures(height + width == 2);
+    std::cout << "t2_assert:" << __LINE__ << std::endl;
   } catch (...) {
-    std::cout <<  "t2_assert:" <<__LINE__ << std::endl;
+    std::cout << "t2_assert:" << __LINE__ << std::endl;
   }
-
 }
 
 }  // namespace t2_assert

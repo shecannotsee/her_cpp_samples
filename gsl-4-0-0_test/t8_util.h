@@ -13,10 +13,11 @@
 namespace t8_util {
 
 void run() noexcept {
-  std::cout << PURPLE_COLOR << "t8_util start." << std::endl;
-  gsl::final_action<std::function<void()>> p([]() { std::cout << "t8_util::run: dtor" << RESET_COLOR << std::endl; });
+  std::cout << YELLOW_COLOR << "[t8_util::run] >>> start" << RESET_COLOR << std::endl;
+  gsl::final_action<std::function<void()>> _(
+      []() { std::cout << GREEN_COLOR << "[t8_util::run] >>> done" << RESET_COLOR << "\n\n"; });
   std::cout << __LINE__ << std::endl;
-  std::cout << "t8_util done." << std::endl;
+  std::cout << "t8_util run test." << std::endl;
 }
 
 }  // namespace t8_util

@@ -14,7 +14,7 @@
 #include "t8_util.h"
 
 int main() {
-  std::cout << YELLOW_COLOR << "Start test " << RESET_COLOR << std::endl;
+  std::cout << PURPLE_COLOR << "Start test " << RESET_COLOR << std::endl;
 
   t1_algorithms::run();
   t2_assert::run();
@@ -25,6 +25,6 @@ int main() {
   t7_zstring::run();
   t8_util::run();
 
-  std::cout << GREEN_COLOR << "Pass the test." << RESET_COLOR << std::endl;
+  std::cout << PURPLE_COLOR << "Pass the test." << RESET_COLOR << std::endl;
   return 0;
 }
