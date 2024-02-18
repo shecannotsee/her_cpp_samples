@@ -33,6 +33,12 @@ void run() noexcept {
     std::cout << " " << num;
   }
   std::cout << std::endl;
+
+  std::cout << "Span elements :";
+  for (int i = 0; i < my_span.size(); i++) {
+    std::cout << " " << gsl::at(my_span, i);
+  }
+  std::cout << std::endl;
 }
 
 }  // namespace t6_span
