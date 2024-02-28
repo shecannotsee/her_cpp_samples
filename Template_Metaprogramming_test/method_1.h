@@ -17,7 +17,7 @@ template<typename T>
 struct is_pointer {
   static constexpr bool value = false;
 };
-// 特例化
+// 特例化aa
 template <typename T>
 struct is_pointer<T*> {
   static constexpr bool value = true;
