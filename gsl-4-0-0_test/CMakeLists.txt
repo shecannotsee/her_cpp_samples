@@ -12,7 +12,7 @@ get_filename_component(sheTestcode_path ${CMAKE_SOURCE_DIR} DIRECTORY)
 message(STATUS "sheTestcode_path's path:${sheTestcode_path}")
 
 # include
-include_directories()
+include_directories(${CMAKE_SOURCE_DIR})
 # lib
 link_directories()
 
