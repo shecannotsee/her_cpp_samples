@@ -15,6 +15,17 @@ include_directories()
 # lib
 link_directories()
 
-pybind11_add_module(api_1 api_1.cpp)
+set(api)
+
+pybind11_add_module(double_vector_1D api_1.cpp)
+pybind11_add_module(double_vector_2D api_2.cpp)
+list(APPEND api double_vector_1D double_vector_2D)
+
+set(CMAKE_INSTALL_PREFIX "./")
+install(TARGETS ${api}
+        DESTINATION ${PROJECT_NAME}/
+)
+
+
 
 ########################################################################################################################
