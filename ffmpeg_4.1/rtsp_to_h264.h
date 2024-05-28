@@ -51,6 +51,13 @@ int run() {
     return -1;
   }
 
+  // Get video stream parameters
+  AVCodecParameters* codec_params = format_ctx->streams[videoStream]->codecpar;
+  int width = codec_params->width;
+  int height = codec_params->height;
+
+  std::cout << "Video Resolution: " << width << "x" << height << std::endl;
+
   // Open output file
   FILE* outputFile = fopen(outputFilename, "wb");
   if (!outputFile) {
