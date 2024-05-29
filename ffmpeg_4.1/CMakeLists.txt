@@ -29,7 +29,7 @@ add_executable(${PROJECT_NAME} ${SRC})
 # 链接库
 target_link_libraries(${PROJECT_NAME} "-pthread"
         -Wl,--start-group
-        avcodec avfilter avformat avutil avdevice swresample swscale
+        avcodec avfilter avformat avutil avdevice swresample swscale jpeg
         -Wl,--end-group
         z
         x264
