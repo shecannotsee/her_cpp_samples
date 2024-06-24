@@ -25,3 +25,4 @@ clean:
 
 run: $(TARGET)
 	./$(TARGET)
+	rm -rf $(OBJS) ./gcm.cache
