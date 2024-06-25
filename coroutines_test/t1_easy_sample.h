@@ -3,7 +3,7 @@
 
 #include <coroutine>
 
-namespace easy_sample {
+namespace t1_easy_sample {
 
 struct simple_awaiter {
   constexpr bool await_ready() const noexcept {
@@ -69,11 +69,11 @@ frame my_coroutine() {
 }
 
 inline void run() {
-  printf("run start\n");
+  printf("t1_easy_sample start-------------------------------------------------------------------------------\n");
   frame x = my_coroutine();
-  printf("run done\n");
+  printf("t1_easy_sample done\n");
 }
 
-}  // namespace easy_sample
+}  // namespace t1_easy_sample
 
 #endif  // EASY_SAMPLE_H
