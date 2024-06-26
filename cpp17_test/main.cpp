@@ -3,6 +3,7 @@
 #include "t2_optional.h"
 #include "t3_variant.h"
 #include "t4_byte.h"
+#include "t5_structured_binding.h"
 
 int main() {
   std::cout << "cpp17_test start------------------------------------------------------------------------------------\n";
@@ -11,6 +12,7 @@ int main() {
   t2_optional::run();
   t3_variant::run();
   t4_byte::run();
+  t5_structured_binding::run();
 
   std::cout << "----------------------------------------------------------------------------------------------------\n";
   std::cout << "cpp17_test done\n";
