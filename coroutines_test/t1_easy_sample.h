@@ -6,16 +6,16 @@
 namespace t1_easy_sample {
 
 struct simple_awaiter {
-  constexpr bool await_ready() const noexcept {
+  bool await_ready() const noexcept {
     printf("----simple_awaiter::await_ready\n");
     return true;
   }
 
-  constexpr void await_suspend(std::coroutine_handle<>) const noexcept {
+  void await_suspend(std::coroutine_handle<>) const noexcept {
     printf("----simple_awaiter::await_suspend\n");
   }
 
-  constexpr void await_resume() const noexcept {
+  void await_resume() const noexcept {
     printf("----simple_awaiter::await_resume\n");
   }
 };
