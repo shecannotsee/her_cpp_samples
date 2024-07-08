@@ -5,6 +5,7 @@
 #include "t4_jthread.h"
 #include "t5_chrono.h"
 #include "t6_endian.h"
+#include "t7_source_location.h"
 
 int main() {
   std::cout << "cpp20_test start------------------------------------------------------------------------------------\n";
@@ -15,6 +16,7 @@ int main() {
   t4_jthread::run();
   t5_chrono::run();
   t6_endian::run();
+  t7_source_location::main();
 
   std::cout << "cpp20_test done\n";
   return 0;
