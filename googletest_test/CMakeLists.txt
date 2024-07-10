@@ -33,9 +33,6 @@ link_directories(
 
 file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/main.cpp"
         "${CMAKE_SOURCE_DIR}/stackoverflow_mock_code.cpp"
-        "${CMAKE_SOURCE_DIR}/t1_gtest_basic.cpp"
-        "${CMAKE_SOURCE_DIR}/t2_gmock_easy.cpp"
-        "${CMAKE_SOURCE_DIR}/t3_gmock_complex.cpp"
         "${CMAKE_SOURCE_DIR}/t4_system_interface_mock.cpp"
         "${CMAKE_SOURCE_DIR}/t5_std_func_mock.cpp"
         "${CMAKE_SOURCE_DIR}/t6_cpp_stub.cpp"
