@@ -1,7 +1,9 @@
-#ifndef CPP_STANDARD_H
-#define CPP_STANDARD_H
+#ifndef T3_CPP_STANDARD_H
+#define T3_CPP_STANDARD_H
 
-static void cpp_standard_display() {
+#include <iostream>
+
+static void t3_cpp_standard() {
   std::cout << "c++ standrard is        :";
 #if __cplusplus >= 202002L
   std::cout << "c++20 implementation" << std::endl;
@@ -16,4 +18,4 @@ static void cpp_standard_display() {
 #endif
 }
 
-#endif // CPP_STANDARD_H
+#endif //T3_CPP_STANDARD_H
