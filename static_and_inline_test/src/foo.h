@@ -3,8 +3,16 @@
 
 #include <iostream>
 
-inline void foo() {
-  std::cout << "foo" << std::endl;
+inline void foo_inline() {
+  static int _ = 0;
+  _++;
+  std::cout << "foo_inline: " << _ << std::endl;
 }
 
-#endif //FOO_H
+static void foo_static() {
+  static int _ = 0;
+  _++;
+  std::cout << "foo_static:" << _ << std::endl;
+}
+
+#endif  // FOO_H

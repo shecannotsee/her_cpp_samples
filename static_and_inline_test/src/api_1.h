@@ -1,13 +1,10 @@
 #ifndef API_1_H
 #define API_1_H
 
-#include "foo.h"
-
 class api_1 {
-  public:
-   static void print();
+ public:
+  static void print();
+  static void print_s();
 };
 
-
-
-#endif //API_1_H
+#endif  // API_1_H
